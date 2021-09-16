@@ -1,0 +1,1322 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="CDA.xsl"?>
+<!--
+Title: QuestionnaireAssessmentSampleFile
+Original Filename: QuestionnaireAssessmentSampleFile.xml
+Version: 2.0
+Created by:  Lantana Consulting Group, LLC
+Revision History:
+9/2012: Submitted for ballot 
+12/2012: Updated for publication
+Released for HL7 Publication: 1/2013
+
+	
+--><!--
+********************************************************
+Disclaimer:  This file contains a sample of items from the LTCH CARE TOOL v1.01 and does not represent the entire tool. 
+This sample provides examples of patterns used in the Questionnaire Assessment Framework and CARE Questionnaire Assesment Tool.
+The sample document depicts a fictional character's health data. Any resemblance to a real person is coincidental. 
+To illustrate a variety of pattern expressions, the clinical scenario may not be entirely plausible.  
+There is one example using another CMS Assessment Tool - MDS 3.0.  
+********************************************************
+	-->
+<ClinicalDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="urn:hl7-org:v3 file:/C:/Users/Zabrina/Documents/Lantana/Projects/CDA%20Resources/CDAR2Normative/infrastructure/cda/CDA_SDTC.xsd"
+ xmlns="urn:hl7-org:v3"
+ xmlns:cda="urn:hl7-org:v3"
+ xmlns:sdtc="urn:hl7-org:sdtc">
+    <!--
+********************************************************
+  CDA Header
+********************************************************
+	-->
+    <realmCode code="US"/>
+    <typeId root="2.16.840.1.113883.1.3" extension="POCD_HD000040"/>
+    <!-- US General Header Template -->
+    <templateId root="2.16.840.1.113883.10.20.22.1.1"/>
+    <!-- *** Note:  The next templateId, code and title will differ depending on what type of document is being sent. *** -->
+    <!-- Indicates conformance to the Questionnaire Assessment Framework -->
+    <templateId root="2.16.840.1.113883.10.20.25.1.3"/>
+    <!-- Indicates conformance to the Questionnaire Assessment CARE Tool - LTCH – Admission -->
+    <templateId root="2.16.840.1.113883.10.20.25.1.5"/>
+    <id root="d43cbdd0-d8e0-11e1-9b23-0800200c9a66"/>
+    <code code="69416-6" codeSystem="2.16.840.1.113883.6.1"
+        displayName="CARE Tool - LTCH – Admission"/>
+    <title>Continuity assessment record and evaluation (CARE) tool - Long term care hospital (LTCH)
+        - Admission - version 1.0</title>
+    <effectiveTime value="201207271630"/>
+    <confidentialityCode code="N" codeSystem="2.16.840.1.113883.5.25"/>
+    <languageCode code="en-US"/>
+    <recordTarget>
+
+        <!--
+********************************************************
+ Section A:  Adminstrative Information
+********************************************************
+	-->
+        <patientRole>
+            <!-- CARE A0600 Social Security Number using SSN OID. -->
+            <id extension="222-11-2112" root="2.16.840.1.113883.4.1"/>
+            <!--CARE A0600 B Medicare Number and Railroad Insurance Number -->
+            <id extension="1222367" root="2.16.840.1.113883.4.338"/>
+            <id extension="1234567" root="2.16.840.1.113883.4.339"/>
+            <!--CARE A0700 Medicaid Number -->
+            <id extension="9999999999" root="2.16.840.1.113883.4.290"/>
+            <addr use="HP">
+                <streetAddressLine>2222 Home Street</streetAddressLine>
+                <city>Ann Arbor</city>
+                <state>MI</state>
+                <postalCode>48105</postalCode>
+                <country>US</country>
+            </addr>
+            <telecom value="tel:(555)555-2003" use="HP"/>           
+            <patient>
+                <!-- CARE question A0500 Name of Resident -->
+                <name use="L">
+                    <given>Adam</given>
+                    <given qualifier="IN">A</given>
+                    <family>Everyman</family>
+                    <suffix>Jr</suffix>
+                </name>
+                <!--CARE A0800 Gender -->
+                <administrativeGenderCode code="M" codeSystem="2.16.840.1.113883.5.1"
+                    displayName="Male"/>
+                <!--CARE A0900 Birthdate -->
+                <birthTime value="19340923"/>
+                <!--CARE A1200 Marital Status -->
+                <maritalStatusCode code="W" codeSystem="2.16.840.1.113883.5.2"/>
+                <!--CARE A1000 Race and Ethnicity -->
+                <raceCode code="2106-3" displayName="White" codeSystem="2.16.840.1.113883.6.238"
+                    codeSystemName="Race &amp; Ethnicity - CDC"/>
+                <ethnicGroupCode code="2186-5" displayName="Not Hispanic or Latino"
+                    codeSystem="2.16.840.1.113883.6.238" codeSystemName="Race &amp; Ethnicity - CDC"
+                />
+                <guardian>
+                    <code code="PRN" displayName="Parent" codeSystem="2.16.840.1.113883.5.111"
+                        codeSystemName="HL7 Role code"/>
+                    <addr use="HP">
+                        <!-- HP is "primary home" from codeSystem 2.16.840.1.113883.5.1119 -->
+                        <streetAddressLine>4444 Home Street</streetAddressLine>
+                        <city>Ann Arbor</city>
+                        <state>MI</state>
+                        <postalCode>48105</postalCode>
+                        <country>US</country>
+                        <!-- US is "United States" from ISO 3166-1 Country Codes: 1.0.3166.1 -->
+                    </addr>
+                    <telecom value="tel:(444)666-6666" use="HP"/>
+                    <guardianPerson>
+                        <name>
+                            <given>Martha</given>
+                            <family>Mum</family>
+                        </name>
+                    </guardianPerson>
+                </guardian>
+                <languageCommunication>
+                    <languageCode code="en"/>
+                    <!-- EN is "English" as in the IG -->
+                    <modeCode code="ESP" displayName="Expressed spoken"
+                        codeSystem="2.16.840.1.113883.5.60" codeSystemName="LanguageAbilityMode"/>
+                    <proficiencyLevelCode code="G" displayName="Good"
+                        codeSystem="2.16.840.1.113883.5.61"
+                        codeSystemName="LanguageAbilityProficiency"/>
+                    <preferenceInd value="true"/>
+                </languageCommunication>                
+            </patient>
+            <providerOrganization>
+                <id root="2.16.840.1.113883.4.6"/>
+                <name>Good Health Hospital</name>
+                <telecom use="WP" value="tel: 555-555-5000"/>
+                <addr>
+                    <streetAddressLine>1000 Health Drive</streetAddressLine>
+                    <city>Ann Arbor</city>
+                    <state>MI</state>
+                    <postalCode>48105</postalCode>
+                    <country>US</country>
+                </addr>
+            </providerOrganization>
+        </patientRole>
+    </recordTarget>
+    <!--
+********************************************************
+The CARE tool does not identify an overall author of the tool.  CDA requires an author.
+The Z0500 Care element captures the name of the person verifying the assessment completion.
+This maps to the clinicalDocument/legalAuthenticator.  In the CARE QA CDA the name identified in Z0500 will also default as ClinicalDocument/author.
+******************************************************** -->
+
+    <author>
+        <time value="200803010830+0500"/>
+        <assignedAuthor>
+            <!--this id may be unique -->           
+            <id extension="99999999" root="2.16.840.1.113883.4.6"/>
+            <code code="200000000X" codeSystem="2.16.840.1.113883.6.101"
+                displayName="Allopathic &amp; Osteopathic Physicians"/>
+            <addr>
+                <streetAddressLine>1002 Health Drive</streetAddressLine>
+                <city>Ann Arbor</city>
+                <state>MI</state>
+                <postalCode>48105</postalCode>
+                <country>US</country>
+            </addr>
+            <telecom use="WP" value="tel:(555)555-1002"/>
+            <assignedPerson>
+                <name>
+                    <given>Harold</given>
+                    <family>Hippocrates</family>
+                    <suffix>MD</suffix>
+                </name>
+            </assignedPerson>
+        </assignedAuthor>
+    </author>
+    <custodian>
+        <!--
+********************************************************
+A100:  Facility and Provider IDENTIFICATION
+********************************************************
+	-->
+        <assignedCustodian>
+            <representedCustodianOrganization>
+                <!--CARE A0100A Facility NPI -->
+                <id extension="99999999" root="2.16.840.1.113883.4.6"/>
+                <!--CARE A0100B Facility CMS Certification Number CCN -->
+                <id extension="99999999" root="2.16.840.1.113883.4.336"/>
+                <!--CARE A0100C State Provider Number -->
+                <id extension="99999999" root="2.16.840.1.113883.4.337"/>
+                <name>Good Health Hospital</name>
+                <telecom value="tel:(555)555-1002" use="WP"/>
+                <addr use="WP">
+                    <streetAddressLine>104 Health Drive</streetAddressLine>
+                    <city>Ann Arbor</city>
+                    <state>MI</state>
+                    <postalCode>48105</postalCode>
+                    <country>US</country>
+                </addr>
+            </representedCustodianOrganization>
+        </assignedCustodian>
+    </custodian>
+    <!--
+********************************************************
+ Z500A:  INDIVIDUAL ASSESSMENT COMPLETION OF ASSESSMENT
+********************************************************
+	-->
+
+    <!--Z500:  Person Verifying Assessment Completion -->
+    <legalAuthenticator>
+        <time value="20120329130000+0500"/>
+        <signatureCode code="S"/>
+        <assignedEntity>
+            <!--This ID may be any unique ID such as NPI or employee ID -->
+            <id extension="33333333" root="2.16.840.1.113883.4.6.9999999999"/>
+            <addr>
+                <streetAddressLine>103 Health Drive</streetAddressLine>
+                <city>Ann Arbor</city>
+                <state>MI</state>
+                <postalCode>48105</postalCode>
+                <country>US</country>
+            </addr>
+            <telecom use="WP" value="tel:(555)555-1052"/>
+            <assignedPerson>
+                <name>
+                    <given>Nancy</given>
+                    <family>Nightingale</family>
+                    <!--This Suffix is the Title (RN, MD, LPN)-->
+                    <suffix>RN</suffix>
+                </name>
+            </assignedPerson>
+        </assignedEntity>
+    </legalAuthenticator>
+    <authenticator>
+        <time value="20090227130000+0500"/>
+        <signatureCode code="S"/>
+        <assignedEntity>
+            <id extension="12345678" root="2.16.840.1.113883.4.6"/>
+            <addr>
+                <streetAddressLine>1003 Health Drive</streetAddressLine>
+                <city>Ann Arbor</city>
+                <state>MI</state>
+                <postalCode>48105</postalCode>
+                <country>US</country>
+            </addr>
+            <telecom use="WP" value="tel:555-555-1003"/>
+            <assignedPerson>
+                <name>
+                    <given>Primary</given>
+                    <family>Patricia</family>
+                </name>
+            </assignedPerson>
+        </assignedEntity>
+    </authenticator>
+    <componentOf>
+        <!--
+********************************************************
+ADMISSION and DISCHARGE/DEATH DATE
+********************************************************
+	-->
+        <encompassingEncounter>
+            <id extension="99999999" root="2.16.840.1.113883.19.9999999"/>
+            <effectiveTime>
+                <!-- CARE A0220 Admission Date -->
+                <low value="20050329"/>
+                <!-- CARE A0270 Discharge Date/Death Date-->
+                <high value="20120329"/>
+            </effectiveTime>
+        </encompassingEncounter>
+    </componentOf>
+
+    <!-- *****************************************************************************************************************
+        STRUCTURED BODY
+        **************************************************************************************************************************-->
+    <component>
+        <structuredBody>
+            <component>
+                <!-- *****************************************************************************************************************
+                    CDA:  CARE SECTION 
+                    **************************************************************************************************************************-->
+
+                <!-- *****************************************************************************************************************
+             CARE QUESTIONNAIRE ASSESSMENT TOOL  
+        **********************************************************************************************************************
+    
+    
+   *****************************************************************************************************************
+          The CARE Questionnaire Assessment Tool contains a Generic Section which contains:  
+                        
+                        1.  Typical Response Pattern and Other Response Patterns which conform to the Question Answer Pattern.
+                        2.  Assertion Pattern
+                        3.  Question Answer Pattern Organizer                    
+      ************************************************************************************************************************** -->
+
+                <section>
+                    <!--Generic Section TemplateID -->
+                    <templateId root="2.16.840.1.113883.10.20.25.2.1"/>
+                    <!--CARE Section TemplateID -->
+                    <templateId root="2.16.840.1.113883.10.20.25.2.11"/>
+                    <!--CARE Specific Section -->
+                    <code code="52452-0" codeSystem="2.16.840.1.113883.6.1"/>
+                    <title>Section A- Administrative Information(CARE)</title>
+                    <text>
+                        <list>
+                            <item ID="A0055"><content styleCode="Bold">A0055</content> Correction
+                                Number: <content styleCode="Bold"/>1</item>
+                            <item ID="A1400"><content styleCode="Bold">A1400</content> Payer
+                                Information:  <content styleCode="Bold">A1400I</content> Private Managed
+                                Care <content styleCode="Bold">A1400J </content> Self-Pay</item>
+                        </list>
+                    </text>
+
+                    <!-- ************************************************************************************
+                       Z400A: SECTION AUTHOR 
+                     *****************************************************************************************-->
+
+                    <author>
+                        <time value="200803010830"/>
+                        <assignedAuthor>
+                            <id extension="33333" root="2.16.840.1.113883.4.6.9999999999"/>
+                            <assignedPerson>
+                                <name>
+                                    <given>Nancy</given>
+                                    <family>Nightingale</family>
+                                    <suffix>RN</suffix>
+                                </name>
+                            </assignedPerson>
+                        </assignedAuthor>
+                    </author>
+
+
+                    <entry typeCode="DRIV">
+                        <observation classCode="OBS" moodCode="EVN">
+                            <templateId root="2.16.840.1.113883.10.20.25.4.6"/>
+                            <templateId root="2.16.840.1.113883.10.20.25.4.2"/>
+                            <code code="58200-7" codeSystem="2.16.840.1.113883.6.1"
+                                displayName="Correction NumberMDSv3">
+                                <translation code="A0055" codeSystem="2.16.840.1.113883.4.340"
+                                    displayName="Correction Number"/>
+                            </code>
+                            <statusCode code="completed"/>
+                            <value xsi:type="INT" value="1"/>
+                        </observation>
+                    </entry>
+
+                    <!--  ****************************************************************************************
+             CARE Question Answer Organizer
+             *****************************************************************************************
+                    -->
+
+                    <!-- Example 9: CARE Question Answer Pattern Organizer -->
+                    <entry typeCode="DRIV">
+                        <organizer classCode="CLUSTER" moodCode="EVN">
+                            <!-- Question/Answer Pattern Organizer -->
+                            <templateId root="2.16.840.1.113883.10.20.25.4.9"/>
+                            <!-- CARE Question Answer Pattern Organizer -->
+                            <templateId root="2.16.840.1.113883.10.20.25.4.10"/>
+                            <code code="52556-8" displayName="Current payment sources CARE"
+                                codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC">
+                                <translation code="A1400" codeSystem="2.16.840.1.113883.4.340"
+                                    displayName="Payer Information"/>
+                            </code>
+                            <statusCode code="completed"/>
+                            <!-- "Check all that apply" -->
+                            <!-- MAY contain 1..* ASSERTION pattern templates-->
+                            <component>
+                                <!-- Example 13:  CARE Assertion Pattern -->
+                                <observation classCode="OBS" moodCode="EVN">
+                                    <!-- Assertion Pattern ID -->
+                                    <templateId root="2.16.840.1.113883.10.20.25.4.7"/>
+                                    <!-- CARE Assertion Pattern ID -->
+                                    <templateId root="2.16.840.1.113883.10.20.25.4.3"/>
+                                    
+                                    <code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"/>
+                                    <statusCode code="completed"/>
+                                    <value xsi:type="CD" code="LA6349-0"
+                                        displayName=" Private managed care" codeSystem="LOINC"
+                                        codeSystemName="2.16.840.1.113883.6.1">
+                                        <translation code="A1400I"
+                                            codeSystem="2.16.840.1.113883.4.340"
+                                            codeSystemName="CARE TOOL"
+                                            displayName="Private managed care"/>
+                                    </value>
+                                </observation>
+                            </component>
+                            <component>
+                                <!-- Example 13:  CARE Assertion Pattern -->
+                                <observation classCode="OBS" moodCode="EVN">
+                                    <!-- Assertion Pattern ID -->
+                                    <templateId root="2.16.840.1.113883.10.20.25.4.7"/>
+                                    <!-- CARE Assertion Pattern ID -->
+                                    <templateId root="2.16.840.1.113883.10.20.25.4.3"/>
+                                    <code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"/>
+                                    <statusCode code="completed"/>
+                                    <value xsi:type="CD" code="LA6369-8" displayName="Self-pay"
+                                        codeSystem="LOINC" codeSystemName="2.16.840.1.113883.6.1">
+                                        <translation code="A1400J"
+                                            codeSystem="2.16.840.1.113883.4.340"
+                                            codeSystemName="CARE TOOL" displayName="Self-pay"/>
+                                    </value>
+                                </observation>
+                            </component>
+                            <!-- Etc -->
+                        </organizer>
+                    </entry>
+
+
+
+                    <!-- CARE Question Answer Pattern Organizer – Questions not applicable -->
+                    <entry typeCode="DRIV">
+                        <organizer classCode="CLUSTER" moodCode="EVN" nullFlavor="NA">
+                            <!-- Question Answer Pattern Organizer -->
+                            <templateId root="2.16.840.1.113883.10.20.25.4.9"/>
+                            <!-- CARE Question Answer Pattern Organizer -->
+                            <templateId root="2.16.840.1.113883.10.20.25.4.10"/>
+                            <code code="52556-8" displayName="Current payment sources CARE"
+                                codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC">
+                                <translation code="A1400" codeSystem="2.16.840.1.113883.4.340"
+                                    displayName="Payer Information"/>
+                            </code>
+                            <statusCode code="completed"/>                           
+                           
+                        </organizer>
+                    </entry>
+
+
+                    <!-- CARE Question Answer Pattern Organizer – Questions no information -->
+                    <entry typeCode="DRIV">
+                        <organizer classCode="CLUSTER" moodCode="EVN" nullFlavor="NI">
+                            <!-- Question Answer Pattern Organizer -->
+                            <templateId root="2.16.840.1.113883.10.20.25.4.9"/>
+                            <!-- CARE Question Answer Pattern Organizer -->
+                            <templateId root="2.16.840.1.113883.10.20.25.4.10"/>
+                            <code code="52556-8" displayName="Current payment sources CARE"
+                                codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC">
+                                <translation code="A1400" codeSystem="2.16.840.1.113883.4.340"
+                                    displayName="Payer Information"/>
+                            </code>
+                            <statusCode code="completed"/>
+
+                        </organizer>
+                    </entry>
+
+
+
+                    <!-- CARE Question Answer Pattern Organizer – Unknown -->
+                    <entry typeCode="DRIV">
+                        <organizer classCode="CLUSTER" moodCode="EVN" nullFlavor="UNK">
+                            <!-- Question Answer Pattern Organizer -->
+                            <templateId root="2.16.840.1.113883.10.20.25.4.9"/>
+                            <!-- CARE Question Answer Pattern Organizer -->
+                            <templateId root="2.16.840.1.113883.10.20.25.4.10"/>
+                            <code code="52556-8" displayName="Current payment sources CARE"
+                                codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC">
+                                <translation code="A1400" codeSystem="2.16.840.1.113883.4.340"
+                                    displayName="Payer Information"/>
+                            </code>
+                            <statusCode code="completed"/>
+                        </organizer>
+                    </entry>
+
+                </section>
+            </component>
+
+                   
+
+
+
+                    <!--  ****************************************************************************************
+             CARE Typical Response Pattern
+             *****************************************************************************************
+                    -->
+                    <component>
+                        <section>
+
+                            <!--Generic Section TemplateID -->
+                            <templateId root="2.16.840.1.113883.10.20.25.2.1"/>
+                            <!--CARE Section TemplateID -->
+                            <templateId root="2.16.840.1.113883.10.20.25.2.11"/>
+                            <!--CARE Specific Section  -->
+                            <code code="70118-5" codeSystem="2.16.840.1.113883.6.1"/>
+                            <title>Section B - Hearing, Speech, and Vision (CARE)</title>
+                            <text>
+                                <list>
+                                    <item ID="B0100"><content styleCode="Bold">B0100</content>
+                                        Comatose: <content styleCode="Bold"> 0 </content>(No)</item>
+                                </list>
+                            </text>
+                            <!-- ***************************************************************************
+                       Z400B: SECTION AUTHOR 
+                        **************************************************************************-->
+                            <author>
+                                <time value="200803010830"/>
+                                <assignedAuthor>
+                                    <id extension="33333" root="2.16.840.1.113883.4.6.9999999999"/>
+                                    <assignedPerson>
+                                        <name>
+                                            <given>Nancy</given>
+                                            <family>Nightingale</family>
+                                            <suffix>RN</suffix>
+                                        </name>
+                                    </assignedPerson>
+                                </assignedAuthor>
+                            </author>
+
+                            <!--CARE Typical Response and CARE Other Response conform to Question Answer Pattern Example-->
+                            <!--This is an example using the CARE Typical Response Pattern -->
+                            <entry typeCode="DRIV">
+                                <observation classCode="OBS" moodCode="EVN">
+                                    <!--Typical Response Pattern Template ID -->
+                                    <templateId root="2.16.840.1.113883.10.20.25.4.8"/>
+                                    <!--CARE Typical Response Pattern Template ID -->
+                                    <templateId root="2.16.840.1.113883.10.20.25.4.1"/>
+                                    <code code="45482-7" displayName="Comatose Minimum Data Set"
+                                        codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC">
+                                        <translation code="B0100"
+                                            displayName="Comatose. Persistent vegetative state/no discernible consciousness at time of assessment"
+                                            codeSystem="2.16.840.1.113883.4.340"
+                                            codeSystemName="CARE TOOL"/>
+                                    </code>
+                                    <statusCode code="completed"/>
+                                    <value xsi:type="CD" code="LA32-8"
+                                        codeSystem="2.16.840.1.113883.6.1">
+                                        <translation code="0" codeSystem="2.16.840.1.113883.4.340"
+                                            displayName=" No" codeSystemName="CARE TOOL"/>
+                                    </value>
+                                </observation>
+                            </entry>
+
+                        </section>
+                    </component>
+
+                    <!-- *****************************************************************************************************************
+                    CARE TYPICAL RESPONSE PATTERNS
+                    **************************************************************************************************************************-->
+                    <component>
+                        <section>
+                            <!--Generic Section TemplateID -->
+                            <templateId root="2.16.840.1.113883.10.20.25.2.1"/>
+                            <!--CARE Section TemplateID -->
+                            <templateId root="2.16.840.1.113883.10.20.25.2.11"/>
+                            <!--CARE Specific Section -->
+                            <code code="70116-9" codeSystem="2.16.840.1.113883.6.1"/>
+                            <title>Section H- Bowel Continence (CARE)</title>
+                            <text>
+                                <list>
+                                    <item ID="H0400"><content styleCode="Bold">H0400</content>
+                                        (Bowel Continence): <content styleCode="Bold">3</content>
+                                        (Always incontinent).</item>
+                                </list>
+                            </text>
+                            <!-- *****************************************************************************************************************
+                       Z400C: SECTION AUTHOR 
+        **************************************************************************************************************************-->
+                            <author>
+                                <time value="2008022810430"/>
+                                <assignedAuthor>
+                                    <id extension="33331" root="2.16.840.1.113883.4.6.9999999999"/>
+                                    <assignedPerson>
+                                        <name>
+                                            <given>Sage</given>
+                                            <family>Stanley</family>
+                                            <suffix>MD</suffix>
+                                        </name>
+                                    </assignedPerson>
+                                </assignedAuthor>
+                            </author>
+
+                            <!--CARE Typical Response Pattern -->
+                            <entry typeCode="DRIV">
+                                <observation classCode="OBS" moodCode="EVN">
+                                    <!--CARE Typical Response Pattern Template ID -->
+                                    <templateId root="2.16.840.1.113883.10.20.25.4.8"/>
+                                    <!--CARE Typical Response Pattern Template ID -->
+                                    <templateId root="2.16.840.1.113883.10.20.25.4.1"/>
+                                    <code code="69667-4" codeSystem="2.16.840.1.113883.6.1"
+                                        displayName="Bowel - frequency of incontinence during 2 day assessment period CARE">
+                                        <translation code="H0400"
+                                            codeSystem="2.16.840.1.113883.4.340"
+                                            displayName="Bowel incontinence"/>
+                                    </code>
+                                    <statusCode code="completed"/>
+                                    <value xsi:type="CD" code="LA11049-6"
+                                        codeSystem="2.16.840.1.113883.6.1">
+                                        <translation code="2" codeSystem="2.16.840.1.113883.4.340"
+                                            displayName=" Frequently incontinent (one episode of bowel incontinence)"
+                                        />
+                                    </value>
+                                </observation>
+                            </entry>
+                        </section>
+                    </component>
+
+                    <!-- *****************************************************************************************************************
+                           CARE Assertion Base Pattern
+    **************************************************************************************************************************-->
+                    <component>
+                        <section>
+
+                            <!--Generic Section TemplateID -->
+                            <templateId root="2.16.840.1.113883.10.20.25.2.1"/>
+                            <!--CARE Section TemplateID -->
+                            <templateId root="2.16.840.1.113883.10.20.25.2.11"/>
+                            <!--CARE Specific Section  -->
+                            <code code="52464-5" codeSystem="2.16.840.1.113883.6.1"/>
+                            <title>Section I - Active Diagnoses (CARE)</title>
+                            <text>
+                                <list>
+                                    <item ID="I0900"><content styleCode="Bold">I0900</content>
+                                        Active Diagnosis: <content styleCode="Bold"/>Peripheral
+                                        vascular disease (PVD) or Peripheral Arterial Disease
+                                        (PAD)</item>
+                                    <item ID="I2900"><content styleCode="Bold">I2900</content>
+                                        Active Diagnosis: <content styleCode="Bold"/>Diabetes
+                                        mellitus (DM)</item>
+                                    <item ID="I5600"><content styleCode="Bold">I5600</content>
+                                        Active Diagnosis: <content styleCode="Bold"/>No Malnutrition ot risk for malnutrition</item>
+                                </list>
+                            </text>
+                            <!-- *****************************************************************************************************************
+                       Z400D: SECTION AUTHOR 
+        **************************************************************************************************************************-->
+                            <author>
+                                <time value="2008022810530"/>
+                                <assignedAuthor>
+                                    <id extension="33332" root="2.16.840.1.113883.4.6.9999999999"/>
+                                    <assignedPerson>
+                                        <name>
+                                            <given>Family</given>
+                                            <family>Fay</family>
+                                            <suffix>MD</suffix>
+                                        </name>
+                                    </assignedPerson>
+                                </assignedAuthor>
+                            </author>
+
+                            <!--CARE Assertion Pattern -->
+                            <entry typeCode="DRIV">
+                                <observation classCode="OBS" moodCode="EVN">
+                                    <!--Assertion Pattern Template ID-->
+                                    <templateId root="2.16.840.1.113883.10.20.25.4.7"/>
+                                    <!--CARE Assertion Pattern Template ID-->
+                                    <templateId root="2.16.840.1.113883.10.20.25.4.3"/>
+                                    <code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"
+                                        codeSystemName="HL7ActCode"/>
+                                    <statusCode code="completed"/>                                    
+                                    <value xsi:type="CD" code="LA18399-8"
+                                        codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"
+                                        displayName="Peripheral vascular disease
+                                (PVD) or Peripheral Arterial Disease (PAD)">
+                                        <translation code="I0900"
+                                            codeSystem="2.16.840.1.113883.4.340"
+                                            displayName=" Active Diagnosis: Peripheral vascular disease
+                                    (PVD) or Peripheral Arterial Disease (PAD)"
+                                        />
+                                    </value>
+                                </observation>
+                            </entry>
+                            <entry typeCode="DRIV">
+                                <observation classCode="OBS" moodCode="EVN">
+                                    <!--Assertion Pattern Template ID-->
+                                    <templateId root="2.16.840.1.113883.10.20.25.4.7"/>
+                                    <!--CARE Assertion Pattern Template ID-->
+                                    <templateId root="2.16.840.1.113883.10.20.25.4.3"/>
+                                    <code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"
+                                        codeSystemName="HL7ActCode"/>
+                                    <statusCode code="completed"/>
+                                    <value xsi:type="CD" code="LA14291-1"
+                                        codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"
+                                        displayName="Diabetes mellitus (DM)">
+                                        <translation code="I2900"
+                                            codeSystem="2.16.840.1.113883.4.340"
+                                            displayName=" Active diagnosis: Diabetes mellitus (DM)"
+                                        />
+                                    </value>
+                                </observation>
+                            </entry>
+
+
+                            <entry typeCode="DRIV">
+                                <!--CARE Assertion Pattern – asserting patient does not have the problem -->
+                                <observation classCode="OBS" moodCode="EVN" negationInd="true">
+                                    <!--Assertion Pattern Template ID-->
+                                    <templateId root="2.16.840.1.113883.10.20.25.4.7"/>
+                                    <!--CARE Assertion Pattern Template ID-->
+                                    <templateId root="2.16.840.1.113883.10.20.25.4.3"/>
+                                    <code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"
+                                        codeSystemName="HL7ActCode"/>
+                                    <statusCode code="completed"/>
+                                    <value xsi:type="CD" code="LA18401-2"
+                                        codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"
+                                        displayName="Malnutrition (protein or calorie) or at risk of malnutrition">
+                                        <translation code="I5600"
+                                            codeSystem="2.16.840.1.113883.4.340"
+                                            displayName="Active diagnosis: Malnutrition (protein or calorie) or at risk for malnutrition"
+                                        />
+                                    </value>
+                                </observation>
+                            </entry>
+
+                            <entry typeCode="DRIV">
+                                <!--CARE Assertion Pattern – specific problem not observed -->
+                                <observation classCode="OBS" moodCode="EVN" nullFlavor="NI">
+                                    <!--Assertion Pattern Template ID-->
+                                    <templateId root="2.16.840.1.113883.10.20.25.4.7"/>
+                                    <!--CARE Assertion Pattern Template ID-->
+                                    <templateId root="2.16.840.1.113883.10.20.25.4.3"/>
+                                    <code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"
+                                        codeSystemName="HL7ActCode"/>
+                                    <statusCode code="completed"/>
+                                    <value xsi:type="CD" code="LA18401-2"
+                                        codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"
+                                        displayName="Malnutrition (protein or calorie) or at risk of malnutrition">
+                                        <translation code="I5600"
+                                            codeSystem="2.16.840.1.113883.4.340"
+                                            displayName="Active diagnosis: Malnutrition (protein or calorie) or at risk for malnutrition"
+                                        />
+                                    </value>
+                                </observation>
+                            </entry>
+                        </section>
+                    </component>
+
+
+                    <!-- *****************************************************************************************************************
+                           CARE OTHER PATTERNS
+                    **************************************************************************************************************************-->
+                    <component>
+                        <section>
+                            <!--Generic Section TemplateID -->
+                            <templateId root="2.16.840.1.113883.10.20.25.2.1"/>
+                            <!--CARE Section TemplateID -->
+                            <templateId root="2.16.840.1.113883.10.20.25.2.11"/>
+                            <!--CARE Specific Section  -->
+                            <code code="70115-1" codeSystem="2.16.840.1.113883.6.1"/>
+                            <title>Section K- Swallowing/Nutritional Status(CARE)</title>
+                            <text>
+                                <list>
+                                    <item ID="K0200A"><content styleCode="Bold">K0200A</content>
+                                        Height (in inches): <content styleCode="Bold"/>64 in.</item>
+                                    <item ID="K0200B"><content styleCode="Bold">K0200B</content>
+                                        Weight (in pounds): <content styleCode="Bold"/>145
+                                        lbs.</item>
+                                </list>
+                            </text>
+
+
+                            <!-- *****************************************************************************************************************
+                       Z400E: SECTION AUTHOR 
+        **************************************************************************************************************************-->
+                            <author>
+                                <time value="2008022810420"/>
+                                <assignedAuthor>
+                                    <id extension="333355" root="2.16.840.1.113883.4.6.9999999999"/>
+                                    <assignedPerson>
+                                        <name>
+                                            <given>Specialize</given>
+                                            <family>Sara</family>
+                                            <suffix>OT</suffix>
+                                        </name>
+                                    </assignedPerson>
+                                </assignedAuthor>
+                            </author>
+
+
+                            <!--CARE Other Response Pattern -->
+                            <entry typeCode="DRIV">
+                                <observation classCode="OBS" moodCode="EVN">
+                                    <!--Other Response Pattern Template ID-->
+                                    <templateId root="2.16.840.1.113883.10.20.25.4.6"/>
+                                    <!--CARE Other Response Pattern Template ID-->
+                                    <templateId root="2.16.840.1.113883.10.20.25.4.2"/>
+                                    <code code="3137-7" codeSystem="2.16.840.1.113883.6.1"
+                                        displayName="Bdy height Measured">
+                                        <translation code="K0200A"
+                                            codeSystem="2.16.840.1.113883.4.340"
+                                            displayName="Height (in inches)"/>
+                                    </code>
+                                    <statusCode code="completed"/>
+                                    <value xsi:type="PQ" value="64" unit="[in_i]"/>
+                                </observation>
+                            </entry>
+                            <entry typeCode="DRIV">
+                                <observation classCode="OBS" moodCode="EVN">
+                                    <templateId root="2.16.840.1.113883.10.20.25.4.6"/>
+                                    <templateId root="2.16.840.1.113883.10.20.25.4.2"/>
+                                    <code code="3141-9" codeSystem="2.16.840.1.113883.6.1"
+                                        displayName="Weight Measured">
+                                        <translation code="K0200B"
+                                            codeSystem="2.16.840.1.113883.4.340"
+                                            displayName="Weight (in pounds)"/>
+                                    </code>
+                                    <statusCode code="completed"/>
+                                    <value xsi:type="PQ" value="145" unit="[lb_av]"/>
+                                </observation>
+                            </entry>
+                        </section>
+                    </component>
+
+
+
+
+                    <component>
+                        <section>
+                            <!--Generic Section TemplateID -->
+                            <templateId root="2.16.840.1.113883.10.20.25.2.1"/>
+                            <!--CARE Section TemplateID -->
+                            <templateId root="2.16.840.1.113883.10.20.25.2.11"/>
+                            <!--CARE Specific Section  -->
+                            <code code="70120-1" codeSystem="2.16.840.1.113883.6.1"/>
+                            <title>Section M - Skin Conditions (CARE)</title>
+                            <text>
+                                <list>
+                                    <item ID="M0300F2"><content styleCode="Bold">M0300F2</content>
+                                        Unstageable - Slough and/or eschar: Number of these
+                                        unstageable pressure ulcers that were present upon
+                                        admission: <content styleCode="Bold"/>2</item>
+                                </list>
+                            </text>
+
+                            <!-- ****************************************************************************************************
+                       Z400F: SECTION AUTHOR 
+        *****************************************************************************************************-->
+                            <author>
+                                <time value="2008022810320"/>
+                                <assignedAuthor>
+                                    <id extension="333365" root="2.16.840.1.113883.4.6.9999999999"/>
+                                    <assignedPerson>
+                                        <name>
+                                            <given>Verify</given>
+                                            <family>Virgil</family>
+                                            <suffix>RN</suffix>
+                                        </name>
+                                    </assignedPerson>
+                                </assignedAuthor>
+                            </author>
+                            <!--CARE Other Response Pattern -->
+                            <entry typeCode="DRIV">
+                                <observation classCode="OBS" moodCode="EVN">
+                                    <templateId root="2.16.840.1.113883.10.20.25.4.6"/>
+                                    <templateId root="2.16.840.1.113883.10.20.25.4.2"/>
+                                    <code code="54947-7" codeSystem="2.16.840.1.113883.6.1"
+                                        displayName="Number of pressure ulcers present upon admission/reentry - unstageable due to coverage of wound bed by slough/eschar MDSv3">
+                                        <translation code="M0300F2"
+                                            codeSystem="2.16.840.1.113883.4.340"
+                                            displayName="Unstageable - Slough and/or eschar: Number of these unstageable pressure ulcers that were present upon admission"
+                                        />
+                                    </code>
+                                    <statusCode code="completed"/>
+                                    <value xsi:type="INT" value="2"/>
+                                </observation>
+                            </entry>
+                            <entry typeCode="DRIV">
+                                <observation classCode="OBS" moodCode="EVN">
+                                    <templateId root="2.16.840.1.113883.10.20.25.4.6"/>
+                                    <templateId root="2.16.840.1.113883.10.20.25.4.2"/>
+                                    <code code="3141-9" codeSystem="2.16.840.1.113883.6.1"
+                                        displayName="Weight Measured">
+                                        <translation code="K0200B"
+                                            codeSystem="2.16.840.1.113883.4.340"
+                                            displayName="Weight (in pounds)"/>
+                                    </code>
+                                    <statusCode code="completed"/>
+                                    <value xsi:type="PQ" value="145" unit="[lb_av]"/>
+                                </observation>
+                            </entry>
+                        </section>
+                    </component>
+
+
+
+
+                    <!-- *****************************************************************************************************************
+                         QUESTIONNAIRE ASSESSMENT FRAMEWORK
+                    **************************************************************************************************************************-->
+
+
+                    <!-- *****************************************************************************************************************
+                        Patterns include:
+                        1.  Typical Response Pattern and Other Response Patterns which conform to the Question Answer Pattern.
+                        2.  Assertion Pattern
+                        3.  Question Answer Pattern Organizer
+                    **************************************************************************************************************************-->
+                    <component>
+                        <section>
+                            <!--Generic Section TemplateID -->
+                            <templateId root="2.16.840.1.113883.10.20.25.2.1"/>
+                            <code code="sectionCode" codeSystem="LocalizedCodeSystem"/>
+                            <title>Section Title B (GENERIC Universal)</title>
+                            <text>
+                                <list>
+                                    <item ID="B100"><content styleCode="Bold">B0100</content>
+                                        Comatose: <content styleCode="Bold"/>No</item>
+                                    <item ID="B0600"><content styleCode="Bold">B0600</content>
+                                        Speech Clarity: <content styleCode="Bold"/>UNCLEAR SPEECH -
+                                        slurred or mumbled words</item>
+                                </list>
+                            </text>
+                            <author>
+                                <time value="2008022810320"/>
+                                <assignedAuthor>
+                                    <id extension="333365" root="2.16.840.1.113883.4.6.9999999999"/>
+                                    <assignedPerson>
+                                        <name>
+                                            <given>Barton</given>
+                                            <family>Clarence</family>
+                                            <suffix>NA</suffix>
+                                        </name>
+                                    </assignedPerson>
+                                </assignedAuthor>
+                            </author>
+
+                            <entry typeCode="DRIV">
+                                <!-- Example 1:  Question Answer Pattern Example  -->
+                                <!-- Typical or Other Response Pattern conform to this pattern.  -->
+                                <observation classCode="OBS" moodCode="EVN">
+                                    <templateId root="2.16.840.1.113883.10.20.25.4.5"/>
+                                    <id nullFlavor="NI"/>
+                                    <code code="54597-0" displayName="Comatose in last 7 days MDSv3"
+                                        codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC">
+                                        <translation code="B0100" displayName="Comatose"
+                                            codeSystem="2.16.840.1.113883.4.340"
+                                            codeSystemName="MDSv3"/>
+                                    </code>
+                                    <statusCode code="completed"/>
+                                    <!--The VALUE ANSWER representation will change depending on the Pattern Type:
+                                Typical Response or Other Response. 
+                                This example uses a Typical Response Pattern -->
+                                    <value xsi:type="CD" code="LA32-8"
+                                        codeSystem="2.16.840.1.113883.4.340">
+                                        <translation code="0" codeSystem="MDSv3"/>
+                                    </value>
+
+                                </observation>
+                            </entry>
+                            
+                            <entry typeCode="DRIV">
+                                <!--Typical Response Pattern Example using MDS3.0 -->
+                                <observation classCode="OBS" moodCode="EVN">
+                                    <!--Question Answer Pattern Template ID -->
+                                    <templateId root="2.16.840.1.113883.10.20.25.4.5"/>
+                                    <!--Typical Response Pattern Template ID -->
+                                    <templateId root="2.16.840.1.113883.10.20.25.4.8"/>
+                                    <code code="54600-2"
+                                        displayName="Speech clarity in last 7 days MDSv3"
+                                        codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC">
+                                        <translation code="B0600"
+                                            displayName="Speech Clarity in last 7 Days: Select best description of
+                                            speech pattern"
+                                            codeSystem="2.16.840.1.113883.4.340"
+                                            codeSystemName="MDSv3.0"/>
+                                    </code>
+                                    <statusCode code="completed"/>
+                                    <value xsi:type="CD" code="LA10946-4"
+                                        codeSystem="2.16.840.1.113883.6.1">
+                                        <translation code="3" codeSystem="2.16.840.1.113883.4.340"
+                                            displayName=" UNCLEAR SPEECH - slurred or mumbled words"
+                                            codeSystemName="MDS 3.0"/>
+                                    </value>
+                                </observation>
+                            </entry>
+                        </section>
+                    </component>
+                    
+                    <!-- *****************************************************************************************************************
+                         Question Answer Pattern Organizer
+                    **************************************************************************************************************************-->
+                    <component>
+                        
+                        <section>
+                            
+                            <!--Generic Section TemplateID -->
+                            <templateId root="2.16.840.1.113883.10.20.25.2.1"/>
+                            <!-- insert a Local Tool Section TemplateID -->
+                            <!--Insert a Local Tool Code -->
+                            <code code="54895-8" codeSystem="2.16.840.1.113883.6.1"/>
+                            <title>Section Title C (GENERIC Universal)</title>
+                            <text>
+                                <list>
+                                    <item ID="C0900"><content styleCode="Bold">C0900</content> Staff
+                                        Assessment Mental Status:Recall current season, Recall
+                                        location of room</item>
+                                </list>
+                            </text>
+                            <!-- *****************************************************************************************************************
+                       Z400B: SECTION AUTHOR 
+        **************************************************************************************************************************-->
+                            <author>
+                                <time value="200803010830"/>
+                                <assignedAuthor>
+                                    <id extension="33333" root="2.16.840.1.113883.4.6.9999999999"/>
+                                    <assignedPerson>
+                                        <name>
+                                            <given>Nancy</given>
+                                            <family>Nightingale</family>
+                                            <suffix>RN</suffix>
+                                        </name>
+                                    </assignedPerson>
+                                </assignedAuthor>
+                            </author>
+                            
+                            <!-- Example 14:  Question Answer Pattern Organizer Example -->
+                            <entry typeCode="DRIV">
+                                <organizer classCode="CLUSTER" moodCode="EVN">
+                                    <!-- Question Answer Pattern Organizer templateID -->
+                                    <templateId root="2.16.840.1.113883.10.20.25.4.9"/>
+                                    <code code="54895-8"
+                                        displayName="Staff Assessment of Mental Status MDSv3"
+                                        codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC">
+                                        <translation code="C0900"
+                                            codeSystem="2.16.840.1.113883.4.340"
+                                            displayName="Staff Assesmement of Mental Status"/>
+                                    </code>
+                                    <statusCode code="completed"/>
+                                    <!-- "Check all that apply" -->
+                                    <!-- MAY contain 1..* ASSERTION pattern templates-->
+                                    <component>
+                                        <!-- Assertion pattern -->
+                                        <observation classCode="OBS" moodCode="EVN">
+                                            <templateId root="2.16.840.1.113883.10.20.25.4.7"/>
+                                            <code code="ASSERTION"
+                                                codeSystem="2.16.840.1.113883.5.4"/>
+                                            <statusCode code="completed"/>
+                                            <value xsi:type="CD" code="54619-2"
+                                                displayName=" Can recall current season in last 7 days MDSv3"
+                                                codeSystem="LOINC"
+                                                codeSystemName="2.16.840.1.113883.6.1">
+                                                <translation code="C0900A"
+                                                    codeSystem="2.16.840.1.113883.4.340"
+                                                    codeSystemName="MDSv3"
+                                                    displayName="Staff asmt mental status: recall current season"
+                                                />
+                                            </value>
+                                        </observation>
+                                    </component>
+                                    <component>
+                                        <!--Assertion Pattern -->
+                                        <observation classCode="OBS" moodCode="EVN">
+                                            <templateId root="2.16.840.1.113883.10.20.25.4.7"/>
+                                            <code code="ASSERTION"
+                                                codeSystem="2.16.840.1.113883.5.4"/>
+                                            <statusCode code="completed"/>
+                                            <value xsi:type="CD" code="54619-2"
+                                                displayName=" Can recall current season in last 7 days MDSv3"
+                                                codeSystem="LOINC"
+                                                codeSystemName="2.16.840.1.113883.6.1">
+                                                <translation code="C0900A"
+                                                    codeSystem="2.16.840.1.113883.4.340"
+                                                    codeSystemName="MDSv3"
+                                                    displayName="Staff asmt mental status: recall current season"
+                                                />
+                                            </value>
+                                        </observation>
+                                    </component>
+                                    <component>
+                                        <!--Assertion Pattern -->
+                                        <observation classCode="OBS" moodCode="EVN">
+                                            <templateId root="2.16.840.1.113883.10.20.25.4.7"/>
+                                            <code code="ASSERTION"
+                                                codeSystem="2.16.840.1.113883.5.4"/>
+                                            <statusCode code="completed"/>
+                                            <value xsi:type="CD" code="54620-0"
+                                                displayName=" Can recall location of room in last 7 days MDSv3"
+                                                codeSystem="LOINC"
+                                                codeSystemName="2.16.840.1.113883.6.1">
+                                                <translation code="C0900B"
+                                                    codeSystem="2.16.840.1.113883.4.340"
+                                                    codeSystemName="MDSv3"
+                                                    displayName="Staff asmt mental status: recall location of room"
+                                                />
+                                            </value>
+                                        </observation>
+                                    </component>
+                                </organizer>
+                                
+                                
+                                
+                                <!--Example 10: Question Answer Pattern Organizer- question not applicable -->
+                            </entry>
+                            <entry typeCode="DRIV">
+                                <organizer classCode="CLUSTER" moodCode="EVN" nullFlavor="NA">
+                                    <!-- Question Answer Pattern Organizer templateID -->
+                                    <templateId root="2.16.840.1.113883.10.20.25.4.9"/>
+                                    <code code="54895-8"
+                                        displayName="Staff Assessment of Mental Status MDSv3"
+                                        codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC">
+                                        <translation code="C0900"
+                                            codeSystem="2.16.840.1.113883.4.340"
+                                            displayName="Staff Assesmement of Mental Status"/>
+                                    </code>
+                                    <statusCode code="completed"/>
+                                </organizer>
+                            </entry>
+                            
+                            
+                            <!-- Example 11:  MDS Question Answer Pattern Organizer - no information -->
+                            <entry typeCode="DRIV">
+                                <organizer classCode="CLUSTER" moodCode="EVN" nullFlavor="NI">
+                                    <!-- Question Answer Pattern Organizer templateID -->
+                                    <templateId root="2.16.840.1.113883.10.20.25.4.9"/>
+                                    <code code="54895-8"
+                                        displayName="Staff Assessment of Mental Status MDSv3"
+                                        codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC">
+                                        <translation code="C0900"
+                                            codeSystem="2.16.840.1.113883.4.340"
+                                            displayName="Staff Assesmement of Mental Status"/>
+                                    </code>
+                                    <statusCode code="completed"/>
+                                </organizer>
+                            </entry>
+                            
+                            <!-- Example 11:  MDS Question Answer Pattern Organizer - unknown-->
+                            <entry typeCode="DRIV">
+                                <organizer classCode="CLUSTER" moodCode="EVN" nullFlavor="UNK">
+                                    <!-- Question Answer Pattern Organizer templateID -->
+                                    <templateId root="2.16.840.1.113883.10.20.25.4.9"/>
+                                    <code code="54895-8"
+                                        displayName="Staff Assessment of Mental Status MDSv3"
+                                        codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC">
+                                        <translation code="C0900"
+                                            codeSystem="2.16.840.1.113883.4.340"
+                                            displayName="Staff Assesmement of Mental Status"/>
+                                    </code>
+                                    <statusCode code="completed"/>
+                                </organizer>
+                            </entry>
+                            
+                        </section>
+                    </component>
+
+                    <!-- ***************************************************************************************
+                          ASSERTION PATTERN
+                 ************************************************************************************-->
+                    <component>
+                        <section>
+                            <!--Generic Section TemplateID -->
+                            <templateId root="2.16.840.1.113883.10.20.25.2.1"/>
+                            <code code="sectionCode" codeSystem="LocalizedCodeSystem"/>
+                            <title>Section Title D (GENERIC Universal)</title>
+                            <text>
+                                <list>
+                                    <item ID="D1"><content styleCode="Bold">D1</content> Diabetes
+                                        Mellitus <content styleCode="Bold"/></item>
+                                    <item ID="D2"><content styleCode="Bold">D2</content> Does not
+                                        have Congestive Heart Failure<content styleCode="Bold"
+                                        /></item>                                  
+                                        
+                                    <item ID="D3"><content styleCode="Bold">D3</content> Asthma, no
+                                        information <content styleCode="Bold"/></item>
+                                    <item ID="D4"><content styleCode="Bold">D4</content> Emphysema,
+                                        unknown <content styleCode="Bold"/></item>
+                                    <item ID="D5"><content styleCode="Bold">D5</content> Anemia, not
+                                        applicable <content styleCode="Bold"/></item>
+                                </list>
+                            </text>
+                            <author>
+                                <time value="2008022810420"/>
+                                <assignedAuthor>
+                                    <id extension="333300" root="2.16.840.1.113883.4.6.9999999999"/>
+                                    <assignedPerson>
+                                        <name>
+                                            <given>Osler</given>
+                                            <family>Otto</family>
+                                            <suffix>MD</suffix>
+                                        </name>
+                                    </assignedPerson>
+                                </assignedAuthor>
+                            </author>
+
+
+
+                            <entry typeCode="DRIV">
+                                <!-- Example 3:  Assertion Pattern  -->
+                                <observation classCode="OBS" moodCode="EVN">
+                                    <!--Assertion Pattern Template ID  -->
+                                    <templateId root="2.16.840.1.113883.10.20.25.4.7"/>
+                                    <code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"
+                                        codeSystemName="HL7ActCode"/>
+                                    <statusCode code="completed"/>
+                                    <value xsi:type="CD" code="LocalizedAnswerValueCode"
+                                        displayName="Diabetes Mellitus"
+                                        codeSystem="LocalizedSystemCode">
+                                        <translation code="D1" displayName="Diabetes Mellitus"/>
+                                    </value>
+                                </observation>
+                            </entry>
+
+
+                            <entry typeCode="DRIV">
+                                <!-- Example 8: Assertion Pattern - Patient does not have problem/need  -->
+                                <observation classCode="OBS" moodCode="EVN" negationInd="true">
+                                    <!--Assertion Pattern Template ID  -->
+                                    <templateId root="2.16.840.1.113883.10.20.25.4.7"/>
+                                    <code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"
+                                        codeSystemName="HL7ActCode"/>
+                                    <statusCode code="completed"/>
+                                    <value xsi:type="CD" code="LocalizedAnswerValueCode"
+                                        displayName="Congestive Heart Failure"
+                                        codeSystem="LocalizedSystemCode">
+                                        <translation code="D2"
+                                            displayName="Congestive Heart Failure"
+                                            codeSystem="LocalizedAnswerValueSetOID"/>
+                                    </value>
+                                </observation>
+                            </entry>
+
+                            <entry typeCode="DRIV">
+                                <!-- Example 4: nullFlavor “OTH” for stating patient has some other problem/need  -->
+                                <observation classCode="OBS" moodCode="EVN">
+                                    <!--Assertion Pattern Template ID  -->
+                                    <templateId root="2.16.840.1.113883.10.20.25.4.7"/>
+                                    <code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"
+                                        codeSystemName="HL7ActCode"/>
+                                    <statusCode code="completed"/>
+                                    <value xsi:type="CD" nullFlavor="OTH">
+                                        <translation code="G0650Y" displayName="Other"
+                                            codeSystem="LocalizedAnswerValueSetOID"/>
+                                    </value>
+                                </observation>
+                            </entry>
+
+                            <entry typeCode="DRIV">
+                                <!--Example 5:  Assertion Pattern - indicates no information  -->
+                                <observation classCode="OBS" moodCode="EVN" nullFlavor="NI">
+                                    <templateId root="2.16.840.1.113883.10.20.25.4.7"/>
+                                    <code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"
+                                        codeSystemName="HL7ActCode"/>
+                                    <statusCode code="completed"/>
+                                    <value xsi:type="CD" code="LocalizedAnswerValueCode"
+                                        displayName="Asthma"
+                                        codeSystem="LocalizedSystemCode">
+                                        <translation code="D3" displayName="Asthma"
+                                            codeSystem="LocalizedAnswerValueSetOID"/>
+                                    </value>
+                                </observation>
+                            </entry>
+
+                            <entry typeCode="DRIV">
+                                <!--Example 6:  Assertion Pattern - category problem/need unknown  -->
+                                <observation classCode="OBS" moodCode="EVN" nullFlavor="UNK">
+                                    <templateId root="2.16.840.1.113883.10.20.25.4.7"/>
+                                    <code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"
+                                        codeSystemName="HL7ActCode"/>
+                                    <statusCode code="completed"/>
+                                    <value xsi:type="CD" code="LocalizedAnswerValueCode"
+                                        displayName="Emphysema"
+                                        codeSystem="LocalizedSystemCode">
+                                        <translation code="D4" displayName="Emphysema"
+                                            codeSystem="LocalizedAnswerValueSetOID"/>
+                                    </value>
+                                </observation>
+                            </entry>
+
+                            <entry typeCode="DRIV">
+                                <!--Example 7:  Assertion Pattern - question not applicable  -->
+                                <observation classCode="OBS" moodCode="EVN" nullFlavor="NA">
+                                    <templateId root="2.16.840.1.113883.10.20.25.4.7"/>
+                                    <code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"
+                                        codeSystemName="HL7ActCode"/>
+                                    <statusCode code="completed"/>
+                                    <value xsi:type="CD" code="LocalizedAnswerValueCode"
+                                        displayName="Anemia"
+                                        codeSystem="LocalizedSystemCode">
+                                        <translation code="D5" displayName="Anemia"
+                                            codeSystem="LocalizedAnswerValueSetOID"/>
+                                    </value>
+                                </observation>
+                            </entry>
+                        </section>
+                    </component>
+
+                    <!-- *****************************************************************************************************************
+                           OTHER RESPONSE PATTERN
+                    **************************************************************************************************************************-->
+                    <component>
+                        <section>
+                            <!--Generic Section TemplateID -->
+                            <templateId root="2.16.840.1.113883.10.20.25.2.1"/>
+                            <code code="sectionCode" codeSystem="LocalizedCodeSystem"/>
+                            <title>Section Title E (GENERIC Universal)</title>
+
+                            <text>
+                                <list>
+                                    <item ID="K1"><content styleCode="Bold">E1</content> Weight (in
+                                        kilos): <content styleCode="Bold"/>80 kgs</item>
+                                </list>
+                            </text>
+                            <author>
+                                <time value="2008022810620"/>
+                                <assignedAuthor>
+                                    <id extension="332200" root="2.16.840.1.113883.4.6.9999999999"/>
+                                    <assignedPerson>
+                                        <name>
+                                            <given>Bunion</given>
+                                            <family>Paul</family>
+                                            <suffix>MD</suffix>
+                                        </name>
+                                    </assignedPerson>
+                                </assignedAuthor>
+                            </author>
+
+                            <!--Other Response Pattern  -->
+                            <entry typeCode="DRIV">
+                                <observation classCode="OBS" moodCode="EVN">
+                                    <templateId root="2.16.840.1.113883.10.20.25.4.5"/>
+                                    <templateId root="2.16.840.1.113883.10.20.25.4.6"/>
+                                    <code code="LocalizedCode" codeSystem="LocalizedCodeSystem">
+                                        <translation code="E1" displayName="Weight (in kilos)"
+                                            codeSystem="ToolCodeSystemOID"/>
+                                    </code>
+                                    <statusCode code="completed"/>
+                                    <value xsi:type="PQ" value="80" unit="[kg]"/>
+                                </observation>
+                            </entry>
+                        </section>
+                    </component>
+
+
+                   
+
+                    
+
+
+            
+        </structuredBody>
+
+    </component>
+
+</ClinicalDocument>
