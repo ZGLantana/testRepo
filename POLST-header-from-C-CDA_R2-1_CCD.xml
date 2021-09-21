@@ -7,6 +7,7 @@
  Created by:   Lantana Consulting Group, Inc.
  Updated by:   Lantana Consulting Group, Inc. 
  
+ ZG:  We will want to up date the change date here
  $LastChangedDate: 2015-8-11 11:25:09 -0400 (Wed, 11 Aug 2015) $
   
  ********************************************************
@@ -20,7 +21,8 @@
  xsi:schemaLocation="urn:hl7-org:v3 ../cda_r2_normativewebedition2010/infrastructure/cda/CDA.xsd"
  xmlns="urn:hl7-org:v3" xmlns:sdtc="urn:hl7-org:sdtc" xmlns:voc="urn:hl7-org:v3/voc">
 	<realmCode code="US"/>
-	<!-- update for POLST?-->
+	<!-- update for POLST? ZG:  Not the realm code.  Will still be US.
+	      ZG:  Yes, we will want to update the templateID and extension date-->
 	<typeId extension="POCD_HD000040" root="2.16.840.1.113883.1.3"/>
 	<!-- CCD template ID; needs updating for POLST-->
 	<templateId root="2.16.840.1.113883.10.20.22.1.2" extension="2015-08-01"/>
@@ -34,14 +36,20 @@
 	<confidentialityCode code="N" displayName="normal" codeSystem="2.16.840.1.113883.5.25" codeSystemName="Confidentiality"/>
 	<languageCode code="en-US"/>
 	<setId extension="sTT988" root="2.16.840.1.113883.19.5.99999.19"/>
-	<!-- Version of this document -->
+	<!-- Version of this document
+	     ZG: Make a note here that we will address versioning in Volume 1.  
+	     We can put some guidance in a comment here too-->
 	<versionNumber value="1"/>
 	<recordTarget>
 		<patientRole>
 			<id extension="444222222" root="2.16.840.1.113883.4.1"/>
 			<!-- Example Social Security Number using the actual SSN OID; needs updating for POLST; see Lisa Nelson's "Masked SSN" example--> -->
 			<addr use="HP">
-				<!-- Address in NOT on the National POLST Form -->
+				<!-- Address in NOT on the National POLST Form
+						ZG:  Take a look at the use of US Realm Address template 
+						(https://trifolia.lantanagroup.com/TemplateManagement/View/OID/2.16.840.1.113883.10.20.22.5.2).  
+						You can use an @nullFlavor.  At minimum, looks like we need City and Street but POLST only has state.  S
+						So, we'll want to discuss this with Amy. -->
 				<!-- HP is "primary home" from codeSystem 2.16.840.1.113883.5.1119 -->
 				<streetAddressLine>2222 Home Street</streetAddressLine>
 				<city>Beaverton</city>
@@ -50,7 +58,8 @@
 				<country>US</country>
 				<!-- US is "United States" from ISO 3166-1 Country Codes: 1.0.3166.1 -->
 			</addr>
-			<!-- Tel in NOT on the National POLST Form -->
+			<!-- Tel in NOT on the National POLST Form 
+				ZG:  Mark as "Question for Amy".  We should ask her about this.-->
 			<telecom value="tel:+1(555)555-2003" use="HP"/>
 			<!-- HP is "primary home" from HL7 AddressUse 2.16.840.1.113883.5.1119 -->
 			<patient>
@@ -63,14 +72,17 @@
 				<!-- Date of birth need only be precise to the day -->
 				<birthTime value="19750501"/>
 				
-				<!-- Race in NOT on the National POLST Form -->
+				<!-- Race in NOT on the National POLST Form 
+				ZG:  Let's check, I think they can send a null value. "NI" -->
 				<!-- CDC Race and Ethnicity code set contains the five minimum race and ethnicity categories defined by OMB Standards -->
 				<raceCode code="2106-3" displayName="White" codeSystem="2.16.840.1.113883.6.238" codeSystemName="Race &amp; Ethnicity - CDC"/>
 				<!-- The raceCode extension is only used if raceCode is valued -->
 				<sdtc:raceCode code="2076-8" displayName="Hawaiian or Other Pacific Islander" codeSystem="2.16.840.1.113883.6.238" codeSystemName="Race &amp; Ethnicity - CDC"/>
 				<ethnicGroupCode code="2186-5" displayName="Not Hispanic or Latino" codeSystem="2.16.840.1.113883.6.238" codeSystemName="Race &amp; Ethnicity - CDC"/>
 				
-				<!-- Use this for "Patient Representative" p1,E. on National POLST Form ? -->
+				<!-- Use this for "Patient Representative" p1,E. on National POLST Form ? 
+				ZG:  Yes, we will want to describe here in the XML and in Volume 1 that the patient representative would be found in the guardian element. 
+				I  would include in your comment the reference in POLST to  "Section E. Patient or Patient Representative" to help with the mapping. -->
 				<guardian>
 					<code code="POWATT" displayName="Power of Attorney" codeSystem="2.16.840.1.113883.1.11.19830" codeSystemName="ResponsibleParty"/>
 					<addr use="HP">
@@ -90,7 +102,8 @@
 					</guardianPerson>
 				</guardian>
 		
-				<!-- Language in NOT on the National POLST Form. Is National POLST considering adding this ? -->		
+				<!-- Language in NOT on the National POLST Form. Is National POLST considering adding this ?
+				ZG:  Let's check, I think they can send a null value. "NI",  It says, The language, if present ...-->		
 				<languageCommunication>
 					<languageCode code="en"/>
 					<!-- "en" is ISO 639-1 alpha-2 code for "English" -->
@@ -103,7 +116,10 @@
 		</patientRole>
 	</recordTarget>
 	<!-- The author represents the person who provides the content in the document -->
-	<!-- For POLST, this is the Health Care Provider, p1,F. -->
+	<!-- For POLST, this is the Health Care Provider, p1,F. 
+	ZG: This could be the health care provider or it could be the scribe or nurse who fills it out.  Just depends on the
+	practice workflow.  This is the person who actually fills out the form (not the one who signs it).  It might be the same person.  
+	The author and legal authenticator could be the same or different.-->
 	<author>
 		<time value="201308151030-0800"/>
 		<assignedAuthor>
@@ -131,7 +147,15 @@
 	<!-- The dataEnterer transferred the content created by the author into the document -->
 	<!-- Should we use dataEnterer for p2 Form Completion Information, Professional Assisting Health Care Provider w/ Form Completion?
 		If so, need: Full Name; Date (mm/dd/yyyy); Phone #: (This individual is the patient’s:	Social Worker	Nurse	Clergy	Other:)  
-		Address is NOT on the National POLST Form for this person, but is SHALL in US Realm Header dataEnterer-->
+		Address is NOT on the National POLST Form for this person, but is SHALL in US Realm Header dataEnterer
+	-->
+	<!-- ZG: Yes, I agree. I think this is so close in meaning to the author, too. We can add the information above as futher constraints 
+	in the US Realm header as part of this POLST form - they would be new constraints.  We'd copy the US realm header. We can review existing value sets
+	to see if we can point to ealthcare Provider Taxonomy urn:oid:2.16.840.1.114222.4.11.1066 DYNAMIC 
+	codes that exist in this value set are: 
+	101YP1600X  Behavioral Health & Social Service Providers; Counselor, Pastoral
+	104100000X  Behavioral Health & Social Service Providers; Social Worker
+	163W00000X  Nursing Service Providers; Registered Nurse	-->
 	<dataEnterer>
 		<assignedEntity>
 			<id extension="333777777" root="2.16.840.1.113883.4.6"/>
@@ -154,9 +178,20 @@
 	<!-- The informant represents any sources of information for document content -->
 	<!-- Is this informant a person? -->
 	<!-- Should we use informant(s) for p2 Form Completion Information, Check everyone who participated in discussion?
-		If so, need: "Patient with decision-making capacity", "Court Appointed Guardian", "Parent of Minor", "Legal Surrogate / Health Care Agent", "Other: " 
+		ZG: agree, this would be would add anyone who participated in the discussion. -->
+	<!-- If so, need: "Patient with decision-making capacity", "Court Appointed Guardian", "Parent of Minor", "Legal Surrogate / Health Care Agent", "Other: " 
 		Note that these choices may be specified differently in each state.
-		Address is NOT on the National POLST Form for this person, but is SHALL in US Realm Header informat-->
+		ZG:  I think  these would need to map to different places:
+		"Patient with decision making capaicity" = Legal Representative - guardian
+		"Court Appointed Guardian" - would be under guardian
+		"Legal Surrogate / Health Care Agent" - 
+		How is this done in PACP?  We could see how they handled the different types of legal representatives in their header and copy this.	-->
+		
+		
+	<!--Address is NOT on the National POLST Form for this person, but is SHALL in US Realm Header informat\ 
+	ZG: Since this is a "MAY" constraint.  We could change this to a "SHOULD" and update the constraints for the informant in OUR header to require t.  
+	-->
+	   -->
 	<informant>
 		<assignedEntity>
 			<id extension="888888888" root="2.16.840.1.113883.4.6"/>
@@ -310,6 +345,8 @@
 	</custodian>
 
 	<!-- The legalAuthenticator represents the individual who is responsible for the document -->
+	<!-- ZG:  This is section "Section F. Signature: Health Care Provider".  Note, the POLST only allows for ONE legal person to sign. So we will want
+	to note this and make this constraint stronger [1...1].-->
 	<!-- The document can have only 1 legalAuthenticator, so this should be the authoring provider, right? 
 	Address is NOT on the National POLST Form for this person, but is SHALL in US Realm Header legalAuthenticator-->
 	<legalAuthenticator>
@@ -340,7 +377,8 @@
 	<!-- The document can have 0..* authenticator(s). Is this useful instead of informant for p2 Form Completion Information, Check everyone who participated in discussion?
 		If so, need: "Patient with decision-making capacity", "Court Appointed Guardian", "Parent of Minor", "Legal Surrogate / Health Care Agent", "Other: " 
 		Note that these choices may be specified differently in each state.
-		Address is NOT on the National POLST Form for this person, but is SHALL in US Realm Header authenticator-->
+		Address is NOT on the National POLST Form for this person, but is SHALL in US Realm Header authenticator
+	ZG: Another one that we will need to address with our generic question to Rick about Nulls-->
 	<authenticator>
 		<time value="20130815221545-0800"/>
 		<signatureCode code="S"/>
@@ -366,7 +404,9 @@
 		</assignedEntity>
 	</authenticator>
 	
-	<!-- The participant represents supporting entities -->
+	<!-- The participant represents supporting entities
+	ZG:  Here is where we coud try and use Participant VS. Informant since the contraints are looser.  This doesn't require all the information of an informant.  
+	Let's discuss who might fall under this category.-->
 	<!-- Is this useful for POLST?-->
 	<participant typeCode="IND">
 		<!-- typeCode "IND" represents an individual -->
