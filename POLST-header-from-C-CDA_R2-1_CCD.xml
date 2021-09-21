@@ -18,7 +18,7 @@
  ********************************************************
  -->
 <ClinicalDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:schemaLocation="urn:hl7-org:v3 ../cda_r2_normativewebedition2010/infrastructure/cda/CDA.xsd"
+ xsi:schemaLocation="urn:hl7-org:v3 ../CDA/CDA%20Core%202.0%20GIT/schema/extensions/SDTC/infrastructure/cda/CDA_SDTC.xsd"
  xmlns="urn:hl7-org:v3" xmlns:sdtc="urn:hl7-org:sdtc" xmlns:voc="urn:hl7-org:v3/voc">
 	<realmCode code="US"/>
 	<!-- update for POLST? ZG:  Not the realm code.  Will still be US.
@@ -30,7 +30,7 @@
 	<!-- Globally unique identifier for the document; needs updating for POLST-->
 	<id extension="TT988" root="2.16.840.1.113883.19.5.99999.1"/>
 	<code code="34133-9" displayName="Summarization of Episode Note" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
-	<!-- Title of this document; needs updating for POLST--> -->
+	<!-- Title of this document; needs updating for POLST-->
 	<title>ePOLST: Resuscitation and Treatment Portable Medical Orders</title>
 	<effectiveTime value="201308151030-0800"/>
 	<confidentialityCode code="N" displayName="normal" codeSystem="2.16.840.1.113883.5.25" codeSystemName="Confidentiality"/>
@@ -41,23 +41,23 @@
 	     We can put some guidance in a comment here too-->
 	<versionNumber value="1"/>
 	<recordTarget>
-		<patientRole>
+		<patientRole>			
 			<id extension="444222222" root="2.16.840.1.113883.4.1"/>
-			<!-- Example Social Security Number using the actual SSN OID; needs updating for POLST; see Lisa Nelson's "Masked SSN" example--> -->
-			<addr use="HP">
+			<!-- Example Social Security Number using the actual SSN OID; needs updating for POLST; see Lisa Nelson's "Masked SSN" example-->
 				<!-- Address in NOT on the National POLST Form
 						ZG:  Take a look at the use of US Realm Address template 
 						(https://trifolia.lantanagroup.com/TemplateManagement/View/OID/2.16.840.1.113883.10.20.22.5.2).  
 						You can use an @nullFlavor.  At minimum, looks like we need City and Street but POLST only has state.  S
 						So, we'll want to discuss this with Amy. -->
 				<!-- HP is "primary home" from codeSystem 2.16.840.1.113883.5.1119 -->
+			<addr use="HP">
 				<streetAddressLine>2222 Home Street</streetAddressLine>
 				<city>Beaverton</city>
 				<state>OR</state>
 				<postalCode>97867</postalCode>
 				<country>US</country>
 				<!-- US is "United States" from ISO 3166-1 Country Codes: 1.0.3166.1 -->
-			</addr>
+				</addr>
 			<!-- Tel in NOT on the National POLST Form 
 				ZG:  Mark as "Question for Amy".  We should ask her about this.-->
 			<telecom value="tel:+1(555)555-2003" use="HP"/>
@@ -191,7 +191,7 @@
 	<!--Address is NOT on the National POLST Form for this person, but is SHALL in US Realm Header informat\ 
 	ZG: Since this is a "MAY" constraint.  We could change this to a "SHOULD" and update the constraints for the informant in OUR header to require t.  
 	-->
-	   -->
+	
 	<informant>
 		<assignedEntity>
 			<id extension="888888888" root="2.16.840.1.113883.4.6"/>
@@ -450,8 +450,1609 @@
 			</associatedPerson>
 		</associatedEntity>
 	</participant>
-	
+ 	
+	<component>
+		<!--
+             ********************************************************
+             structuredBody
+             ********************************************************
+         -->
+		<structuredBody>
 	<!--Do we need to add in authorization xml? -->
 	
 	<!-- ******************************************************** CDA Body ******************************************************** -->
+	<!-- ********************************************************
+                 Interventions Section (Pharmacist Care Plan)
+                 ********************************************************
+            -->
+      <component>
+        <section>
+          <!-- [C-CDA R2.1] Interventions Section (V3) -->
+          <templateId root="2.16.840.1.113883.10.20.21.2.3" extension="2015-08-01" />
+          <!-- [PCP R1 STU1] Interventions Section (Pharmacist Care Plan) -->
+          <templateId root="2.16.840.1.113883.10.20.37.2.4" extension="2019-04-01" />
+          <code code="62387-6" displayName="Interventions Provided" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" />
+          <title>Interventions Section</title>
+          <text>
+            <table>
+              <col width="10%" />
+              <col width="10%" />
+              <col width="10%" />
+              <col width="10%" />
+              <col width="10%" />
+              <col width="10%" />
+              <col width="10%" />
+              <col width="10%" />
+              <col width="10%" />
+              <thead>
+                <tr>
+                  <th>Intervention</th>
+                  <th>Date(s)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ID="id_1040f76d-d877-4f0a-8564-c0b508c57088_ref">
+                  <td>Procedure/intervention</td>
+                  <td />
+                </tr>
+                <tr>
+                  <td colspan="20">
+                    <list styleCode="none">
+                      <item>
+                        <table>
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <thead>
+                            <tr>
+                              <th>Medication (Prescription)</th>
+                              <th>Dose</th>
+                              <th>Frequency</th>
+                              <th>Duration</th>
+                              <th>Repeat Number</th>
+                              <th>Route</th>
+                              <th>Rate</th>
+                              <th>Author</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td ID="id_example-rx-number-id_1_ref">oxyCODONE Hydrochloride 10 MG Oral Tablet</td>
+                              <td>2</td>
+                              <td>6 h</td>
+                              <td>NOV 25, 2016 to NOV 28, 2016</td>
+                              <td>1</td>
+                              <td>ORAL</td>
+                              <td>24 1</td>
+                              <td>
+                                <list styleCode="none">
+                                  <item>
+                                    <content styleCode="Italics">General Practice</content>: John Middle Doe</item>
+                                  <item>
+                                    <content styleCode="Italics">Date: </content>NOV 25, 2016</item>
+                                </list>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td colspan="20">
+                                <list styleCode="none">
+                                  <item>
+                                    <table>
+                                      <col width="10%" />
+                                      <col width="10%" />
+                                      <col width="10%" />
+                                      <col width="10%" />
+                                      <col width="10%" />
+                                      <col width="10%" />
+                                      <col width="10%" />
+                                      <col width="10%" />
+                                      <col width="10%" />
+                                      <thead>
+                                        <tr>
+                                          <th>Reason for action</th>
+                                          <th>Value</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr ID="id_d22d33d1-185e-4fcd-babc-e1d39bd496f1_ref">
+                                          <td>Complaint</td>
+                                          <td>Chronic Low Back Pain</td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                    <table>
+                                      <col width="10%" />
+                                      <col width="10%" />
+                                      <col width="10%" />
+                                      <col width="10%" />
+                                      <col width="10%" />
+                                      <col width="10%" />
+                                      <col width="10%" />
+                                      <col width="10%" />
+                                      <col width="10%" />
+                                      <thead>
+                                        <tr>
+                                          <th>Medication Supplied</th>
+                                          <th>Status</th>
+                                          <th>Other timing</th>
+                                          <th>Repeat Number</th>
+                                          <th>Quantity</th>
+                                          <th>Performer</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr ID="id_3358ad78-31f2-4756-abad-32cbb155a6ee_ref">
+                                          <td>oxyCODONE Hydrochloride 10 MG Oral Tablet</td>
+                                          <td>completed</td>
+                                          <td>NOV 28, 2016</td>
+                                          <td>1</td>
+                                          <td>24 1</td>
+                                          <td>
+                                            <list styleCode="none">
+                                              <item>
+                                                <content styleCode="Italics">Pharmacy</content>: </item>
+                                            </list>
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </item>
+                                </list>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </item>
+                    </list>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <table>
+              <col width="10%" />
+              <col width="10%" />
+              <col width="10%" />
+              <col width="10%" />
+              <col width="10%" />
+              <col width="10%" />
+              <col width="10%" />
+              <col width="10%" />
+              <col width="10%" />
+              <thead>
+                <tr>
+                  <th>Intervention</th>
+                  <th>Date(s)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ID="id_1040f76d-d877-4f0a-8564-c0b508c57086_ref">
+                  <td>Procedure/intervention</td>
+                  <td />
+                </tr>
+                <tr>
+                  <td colspan="20">
+                    <list styleCode="none">
+                      <item>
+                        <table>
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <thead>
+                            <tr>
+                              <th>Medication (Prescription)</th>
+                              <th>Dose</th>
+                              <th>Frequency</th>
+                              <th>Duration</th>
+                              <th>Repeat Number</th>
+                              <th>Route</th>
+                              <th>Rate</th>
+                              <th>Author</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>oxyCODONE Hydrochloride 10 MG Oral Tablet</td>
+                              <td>2</td>
+                              <td>6 h</td>
+                              <td>NOV 25, 2016 to NOV 28, 2016</td>
+                              <td>0</td>
+                              <td>ORAL</td>
+                              <td>24 1</td>
+                              <td>
+                                <list styleCode="none">
+                                  <item>
+                                    <content styleCode="Italics">Nurse Practitioner</content>: Mary Middle Jane</item>
+                                  <item>
+                                    <content styleCode="Italics">Date: </content>NOV 25, 2016</item>
+                                </list>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td colspan="20">
+                                <list styleCode="none">
+                                  <item>
+                                    <table>
+                                      <col width="10%" />
+                                      <col width="10%" />
+                                      <col width="10%" />
+                                      <col width="10%" />
+                                      <col width="10%" />
+                                      <col width="10%" />
+                                      <col width="10%" />
+                                      <col width="10%" />
+                                      <col width="10%" />
+                                      <thead>
+                                        <tr>
+                                          <th>Reason for action</th>
+                                          <th>Value</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr ID="id_98d68eac-5a16-463e-ba5c-c0fbb13d7586_ref">
+                                          <td>Complaint</td>
+                                          <td>Chronic Low Back Pain</td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                    <table>
+                                      <col width="10%" />
+                                      <col width="10%" />
+                                      <col width="10%" />
+                                      <col width="10%" />
+                                      <col width="10%" />
+                                      <col width="10%" />
+                                      <col width="10%" />
+                                      <col width="10%" />
+                                      <col width="10%" />
+                                      <thead>
+                                        <tr>
+                                          <th>Medication Supplied</th>
+                                          <th>Status</th>
+                                          <th>Description</th>
+                                          <th>Other timing</th>
+                                          <th>Repeat Number</th>
+                                          <th>Quantity</th>
+                                          <th>Performer</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr ID="id_023f3f0f-afff-4705-965f-d21caec96103_ref">
+                                          <td>oxyCODONE Hydrochloride 10 MG Oral Tablet</td>
+                                          <td>aborted</td>
+                                          <td>Refused to dispense - drug denied.</td>
+                                          <td>NOV 25, 2016</td>
+                                          <td>1</td>
+                                          <td>0</td>
+                                          <td>
+                                            <list styleCode="none">
+                                              <item>
+                                                <content styleCode="Italics">Pharmacy</content>: </item>
+                                            </list>
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </item>
+                                </list>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </item>
+                    </list>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <table>
+              <col width="10%" />
+              <col width="10%" />
+              <col width="10%" />
+              <col width="10%" />
+              <col width="10%" />
+              <col width="10%" />
+              <col width="10%" />
+              <col width="10%" />
+              <col width="10%" />
+              <thead>
+                <tr>
+                  <th>Intervention</th>
+                  <th>Date(s)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ID="id_1040f76d-d877-4f0a-8564-c0b508c57085_ref">
+                  <td>Procedure/intervention</td>
+                  <td />
+                </tr>
+                <tr>
+                  <td colspan="20">
+                    <list styleCode="none">
+                      <item>
+                        <table>
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <thead>
+                            <tr>
+                              <th>Act</th>
+                              <th>Date(s)</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr ID="id_0bc79f35-1431-42b5-881a-974d1fd28430_ref">
+                              <td>Monitoring adherence to medication regime</td>
+                              <td>November 25, 2016</td>
+                            </tr>
+                          </tbody>                          
+                        </table>
+                        <table>
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <thead>
+                            <tr>
+                              <th>Reference to</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>
+                                <linkHtml href="#id_1a673d3c-0a8a-4c79-974e-83aa84df1b2b_ref"
+                                  >Problem of "Suspected noncompliance with therapeutic regimen" in the Health Concern Section </linkHtml>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </item>
+                    </list>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <table>
+              <col width="10%" />
+              <col width="10%" />
+              <col width="10%" />
+              <col width="10%" />
+              <col width="10%" />
+              <col width="10%" />
+              <col width="10%" />
+              <col width="10%" />
+              <col width="10%" />
+              <thead>
+                <tr>
+                  <th>Planned Intervention</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ID="id_85fa4b62-e3a9-4385-b064-fe04cca35adb_ref">
+                  <td>Intervention</td>
+                </tr>
+                <tr>
+                  <td colspan="20">
+                    <list styleCode="none">
+                      <item>
+                        <table>
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <thead>
+                            <tr>
+                              <th>Reference to</th>
+                              <th>Description</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>
+                                <linkHtml href="#id_a1a4f2bd-7e28-408e-aacf-da27d00fd792_ref"
+                                  >Goal of "Prevention of opioid abuse" in the Goals
+                                  Section</linkHtml>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <table>
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <thead>
+                            <tr>
+                              <th>Patient Referral</th>
+                              <th>Date(s)</th>
+                              <th>Priority</th>
+                              <th>Author</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr ID="id_70bdd7db-e02d-4eff-9829-35e3b7d9e154_ref">
+                              <td>Referral to self-managment support service</td>
+                              <td>DEC 1, 2016</td>
+                              <td />
+                              <td>
+                                <list styleCode="none">
+                                  <item>
+                                    <content styleCode="Italics"
+                                    >Pharmacist</content>: Registered Pharmacist, The Pharmacy Alliance Health Group</item>
+                                  <item>
+                                    <content styleCode="Italics">Date: </content>DEC 1, 2016</item>
+                                </list>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td colspan="20">
+                                <list styleCode="none">
+                                  <item>
+                                    <table>
+                                      <col width="10%" />
+                                      <col width="10%" />
+                                      <col width="10%" />
+                                      <col width="10%" />
+                                      <col width="10%" />
+                                      <col width="10%" />
+                                      <col width="10%" />
+                                      <col width="10%" />
+                                      <col width="10%" />
+                                      <thead>
+                                        <tr>
+                                          <th>Reason for action</th>
+                                          <th>Value</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr ID="id_e83a4863-190e-4559-952d-c0d46d2b5dcc_ref">
+                                          <td>Problem</td>
+                                          <td>Opioid abuse (disorder)</td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </item>
+                                </list>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <table>
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <thead>
+                            <tr>
+                              <th>Planned Encounter</th>
+                              <th>Date(s)</th>
+                              <th>Performer</th>
+                              <th>Location</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr ID="id_c1d7f692-444c-4e5f-9c3f-fce19413e3b2_ref">
+                              <td>Office outpatient visit 15 minutes</td>
+                              <td>DEC 15, 2016 13:00</td>
+                              <td>
+                                <list styleCode="none">
+                                  <item>
+                                    <content styleCode="Italics">Clinical Pharmacist</content>: Claude Pharma Pharmacist</item>
+                                </list>
+                              </td>
+                              <td>
+                                <list styleCode="none">
+                                  <item>
+                                    <content styleCode="Italics">Urgent Care Center</content>
+                                  </item>
+                                </list>
+                              </td>
+                            </tr>
+                            <tr ID="id_c4177b05-906f-4b38-aba5-330f2520db27_ref">
+                              <td>Office outpatient visit 15 minutes</td>
+                              <td>DEC 25, 2016 13:00</td>
+                              <td>
+                                <list styleCode="none">
+                                  <item>
+                                    <content styleCode="Italics"> Clinical Pharmacist</content>: Claude Pharma Pharmacist</item>
+                                </list>
+                              </td>
+                              <td>
+                                <list styleCode="none">
+                                  <item>
+                                    <content styleCode="Italics">Urgent Care Center</content>
+                                  </item>
+                                </list>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <table>
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <col width="10%" />
+                          <thead>
+                            <tr>
+                              <th>Act</th>
+                              <th>Description</th>
+                              <th>Date(s)</th>
+                              <th>Priority</th>
+                              <th>Participant</th>
+                              <th>Author</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr ID="id_d839038b-2456-AABD-1c6a-467925b43857_ref">
+                              <td>handoff communication (procedure)</td>
+                              <td />
+                              <td>DEC 1, 2016</td>
+                              <td />
+                              <td>
+                                <list styleCode="none">
+                                  <item>
+                                    <content styleCode="Italics">Registered Nurse</content>: Nightingale Nancy</item>
+                                </list>
+                              </td>
+                              <td>
+                                <list styleCode="none">
+                                  <item>
+                                    <content styleCode="Italics">Registered nurse</content>: Nurse Florence</item>
+                                  <item>
+                                    <content styleCode="Italics">Date: </content>DEC 1, 2016</item>
+                                </list>
+                              </td>
+                            </tr>                            
+                          </tbody> 
+                          <tbody>
+                            <tr ID="id_0bc79f35-1431-42b5-881a-974d1fd28999_ref">                             
+                              <td>Diet Education</td>
+                              <td></td>
+                              <td>November 24, 2016</td>
+                            </tr>
+                          </tbody>
+                          <tbody>
+                            <tr ID="id_0bc79f35-1431-42b5-881a-974d1fd29999_ref">
+                              <td>Counseling about nutrition (procedure)</td>
+                              <td></td>
+                              <td>November 24, 2016</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        
+                      </item>
+                    </list>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </text>
+          <!-- ******************************************* -->
+          <!-- Intervention 1: Prescriptions-->
+          <entry typeCode="DRIV">
+            <act classCode="ACT" moodCode="EVN">
+              <!-- [C-CDA R2.1] Intervention Act (V2) -->
+              <templateId extension="2015-08-01" root="2.16.840.1.113883.10.20.22.4.131" />
+              <!-- [PCP R1 STU1] Intervention Act (Pharmacist Care Plan) -->
+              <templateId extension="2019-04-01" root="2.16.840.1.113883.10.20.37.3.15" />
+              <id root="01b8f453-5016-4e41-b60b-beaf3cb2418d" />
+              <code code="362956003" displayName="Procedure/intervention" codeSystemName="SNOMED" codeSystem="2.16.840.1.113883.6.96" />
+              <!-- DataElement: Intervention Status -->
+              <statusCode code="completed" />
+              <!-- DataElement: Intervention DateTime -->
+              <effectiveTime>
+                <high value="20161125" />
+              </effectiveTime>
+              
+              <entryRelationship typeCode="REFR">
+                <substanceAdministration classCode="SBADM" moodCode="EVN" negationInd="false">
+                  <!-- ** Immunization Activity (V3) ** -->
+                  <templateId root="2.16.840.1.113883.10.20.22.4.52" extension="2015-08-01"/>
+                  <templateId root="2.16.840.1.113883.10.20.22.4.52"/>
+                  <id root="e6f1ba43-c0ed-4b9b-9f12-f435d8ad8f92"/>
+                  <text>Influenza, seasonal, IM</text>
+                  <statusCode code="completed"/>
+                  <effectiveTime value="20161125"/>
+                  <routeCode code="C28161" codeSystem="2.16.840.1.113883.3.26.1.1" codeSystemName="National Cancer Institute (NCI) Thesaurus" displayName="Intramuscular injection"/>
+                  <doseQuantity value="50" unit="ug"/>
+                  <consumable>
+                    <manufacturedProduct classCode="MANU">
+                      <!-- ** Immunization Medication Information (V2) ** -->
+                      <templateId root="2.16.840.1.113883.10.20.22.4.54" extension="2014-06-09"/>
+                      <templateId root="2.16.840.1.113883.10.20.22.4.54"/>
+                      <manufacturedMaterial>
+                        <code code="88" codeSystem="2.16.840.1.113883.6.59" displayName="Influenza virus vaccine" codeSystemName="CVX"/>
+                        <lotNumberText>1</lotNumberText>
+                      </manufacturedMaterial>
+                      <manufacturerOrganization>
+                        <name>Health LS - Immuno Inc.</name>
+                      </manufacturerOrganization>
+                    </manufacturedProduct>
+                  </consumable>
+                  <performer>
+                    <assignedEntity>
+                      <id root="2.16.840.1.113883.19.5.9999.456" extension="2981824"/>
+                      <addr>
+                        <streetAddressLine>1007 Health Drive</streetAddressLine>
+                        <city>Portland</city>
+                        <state>OR</state>
+                        <postalCode>99123</postalCode>
+                        <country>US</country>
+                      </addr>
+                      <telecom use="WP" value="tel: +1(555)555-1030"/>
+                      <assignedPerson>
+                        <name>
+                          <given>Harold</given>
+                          <family>Hippocrates</family>
+                        </name>
+                      </assignedPerson>
+                      <representedOrganization>
+                        <id root="2.16.840.1.113883.19.5.9999.1394"/>
+                        <name>Good Health Clinic</name>
+                        <telecom use="WP" value="tel: +1(555)555-1030"/>
+                        <addr>
+                          <streetAddressLine>1007 Health Drive</streetAddressLine>
+                          <city>Portland</city>
+                          <state>OR</state>
+                          <postalCode>99123</postalCode>
+                          <country>US</country>
+                        </addr>
+                      </representedOrganization>
+                    </assignedEntity>
+                  </performer>
+                  <entryRelationship typeCode="SUBJ" inversionInd="false">
+                    <act classCode="ACT" moodCode="INT">
+                      <!-- C-CDA R2.1] Instruction (V2) -->
+                      <templateId root="2.16.840.1.113883.10.20.22.4.20" extension="2014-06-09"/>
+                      <!-- [PCP R1 STU1] Instruction (Pharmacist Care Plan)-->
+                      <templateId root="2.16.840.1.113883.10.20.37.3.20" extension="2019-04-01"/>
+                      <id root="1040f76d-d877-4f0a-8564-c0b508c57022" />
+                      <code code="171044003" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="immunization education"/>
+                      <text>
+                        <reference value="#immunSect"/> Possible flu-like symptoms for three days. </text>
+                      <!-- DataElement: Education Status -->
+                      <statusCode code="completed"/>
+                    </act>
+                  </entryRelationship>
+                </substanceAdministration>
+              </entryRelationship>
+            </act>
+          </entry>
+          <!-- Prescription 1-->
+          <!-- Interventions Act - This is where past interventions will be held --> 
+          <entry typeCode="DRIV">
+            <act classCode="ACT" moodCode="EVN">
+              <!-- [C-CDA R2.1] Intervention Act (V2) -->
+              <templateId extension="2015-08-01" root="2.16.840.1.113883.10.20.22.4.131" />
+              <!-- [PCP R1 STU1] Intervention Act (Pharmacist Care Plan) -->
+              <templateId extension="2019-04-01" root="2.16.840.1.113883.10.20.37.3.15" />
+              <id root="1040f76d-d877-4f0a-8564-c0b508c57086" />
+              <code code="362956003" displayName="Procedure/intervention" codeSystemName="SNOMED" codeSystem="2.16.840.1.113883.6.96" />
+              <!-- DataElement: Intervention Status -->
+              <statusCode code="completed" />
+              <!-- DataElement: Intervention DateTime -->
+              <effectiveTime>
+                <high value="20161125" />
+              </effectiveTime>
+
+              <!-- Prescription 1 -->
+              <entryRelationship typeCode="REFR">
+                <substanceAdministration classCode="SBADM" moodCode="INT">
+                  <!-- [PCP R1 STU1] Medication Activity (Pharmacist Care Plan)-->
+                  <templateId root="2.16.840.1.113883.10.20.37.3.10" extension="2019-04-01" />
+                  <!-- [C-CDA R2.0] Medication Activity(V2)-->
+                  <templateId root="2.16.840.1.113883.10.20.22.4.16" extension="2014-06-09" />
+                  <!-- DataElement: RxNumber -->
+                  <id root="2.16.840.1.113883.19" extension="example-rx-number-id_1" />
+                  <code code="16076005" displayName="Prescription" codeSystemName="SNOMEDCT" codeSystem="2.16.840.1.113883.6.96" />
+                  <!-- DataElement: Prescription Status -->
+                  <statusCode code="active" />
+                  <!-- This effective time means: Take medication for 3 days - sets the start and stop -->
+                  <!-- DataElement: Days Supply -->
+                  <effectiveTime xsi:type="IVL_TS">
+                    <low value="20161125" />
+                    <high value="20161128" />
+                  </effectiveTime>
+                  <!-- This effective time means: Take Every 6 hours-->
+                  <effectiveTime xsi:type="PIVL_TS" operator="A">
+                    <period xsi:type="PQ" value="6" unit="h" />
+                  </effectiveTime>
+                  <!-- Note: repeatNumber in this context means indicates "refills" or "dispenses"  -->
+                  <!-- Refills - this is the max number of refills in the prescription. 
+                                        To find the amount remaining, calculate the difference between the repeatNumber  -->
+                  <repeatNumber value="1" />
+                  <routeCode code="C38288" codeSystem="2.16.840.1.113883.3.26.1.1" codeSystemName="NCI Thesaurus" displayName="ORAL" />
+                  <!-- Note: doseQuantity in this context means take 2 pills -->
+                  <doseQuantity value="2" />
+                  <!-- Note: rateQuantity in this context means Quantity of Pills Given -->
+                  <rateQuantity value="24" unit="1" />
+
+                  <!-- Note: This consumable describes the medication being prescribed -->
+                  <consumable>
+                    <manufacturedProduct classCode="MANU">
+                      <!-- [C-CDA R2.0] Medication information (V2) -->
+                      <templateId root="2.16.840.1.113883.10.20.22.4.23" extension="2014-06-09" />
+                      <id root="4b355395-790c-405d-826f-f5a8e242db89" />
+                      <manufacturedMaterial>
+                        <!-- Note: The following code is the medication that was prescribed, expressed using RxNorm -->
+                        <!-- DataElement: Activity or RxNorm Code Associated with Intervention
+                             DataElement: Activity or RxNorm Display Associated with Intervention -->
+                        <!-- DataElement: Medication(s) Associated with MTP RxNorm Code
+                             DataElement: Medication(s) Associated with MTP RxNorm Display -->
+                        <code code="1049683" displayName="oxyCODONE Hydrochloride 10 MG Oral Tablet" codeSystem="2.16.840.1.113883.6.88"
+                          codeSystemName="RxNorm">
+                          <originalText>Oxycodone Hydrochloride 10 MG Oral Tablet</originalText>
+                          <!-- Note: The following translation can be used to express the prescribed medication using NDC -->
+                          <!--  Drug NDC -->
+                          <!--  Drug Description - This can be found in the @displayName for the corresponding NDC value -->
+                          <!-- DataElement: Activity or NDC Associated with Intervention
+                               DataElement: Activity or NDC Display Associated with Intervention -->
+                          <!-- DataElement: Medication(s) Associated with MTP NDC
+                               DataElement: Medication(s) Associated with MTP NDC Display -->
+                          <translation code="35356083930" codeSystem="2.16.840.1.113883.6.69" displayName="oxyCODONE Hydrochloride 10 MG Oral Tablet"
+                            codeSystemName="NDC" />
+                        </code>
+                      </manufacturedMaterial>
+                    </manufacturedProduct>
+                  </consumable>
+                  <!-- Note: Person responsible for writing the prescription -->
+                  <author>
+                    <!-- [C-CDA R2.0] Author Participation -->
+                    <templateId root="2.16.840.1.113883.10.20.22.4.119" />
+                    <!-- [PCP R1 STU1] Prescriber -->
+                    <templateId root="2.16.840.1.113883.10.20.37.4.2" extension="2017-08-01" />
+                    <time value="20161125" />
+                    <assignedAuthor>
+                      <!-- DataElement: Prescriber NPI Number (extension)
+                           DataElement: Prescriber NPI Number Type (root) -->
+                      <id extension="219BX" root="2.16.840.1.113883.4.6" />
+                      <!-- DataElement: Prescriber Type Code -->
+                      <code code="208D00000X" codeSystem="2.16.840.1.113883.6.101" codeSystemName="Healthcare Provider Taxonomy (HIPAA)"
+                        displayName="General Practice" />
+                      <addr>
+                        <!-- DataElement: Prescriber Street Address1 -->
+                        <streetAddressLine>1004 Clinical Drive </streetAddressLine>
+                        <!-- DataElement: Prescriber City -->
+                        <city>Portland</city>
+                        <!-- DataElement: Prescriber State -->
+                        <state>OR</state>
+                        <!-- DataElement: Prescriber Zip -->
+                        <postalCode>99123</postalCode>
+                        <country>US</country>
+                      </addr>
+                      <!-- DataElement: Prescriber Telephone -->
+                      <telecom use="WP" value="tel:+1(555)555-1004" />
+                      <!-- DataElement: Prescriber Fax -->
+                      <telecom use="WP" value="fax:+1(555)555-5050" />
+                      <!-- DataElement: Prescriber  Email-->
+                      <telecom use="WP" value="mailto:doctor@provider.com" />
+                      <assignedPerson>
+                        <name>
+                          <!-- DataElement: Prescriber First Name -->
+                          <given>John</given>
+                          <!-- DataElement: Prescriber Middle Name -->
+                          <given>Middle</given>
+                          <!-- DataElement: Prescriber Last Name -->
+                          <family>Doe</family>
+                          <suffix>MD</suffix>
+                        </name>
+                      </assignedPerson>
+                    </assignedAuthor>
+                  </author>
+                  <!-- This was prescribed due to chronic back pain -->
+                  <!-- DataElement: Reason for Intervention -->
+                  <entryRelationship typeCode="RSON">
+                    <observation classCode="OBS" moodCode="EVN">
+                      <!-- [C-CDA R2.0] Indication (V2) -->
+                      <templateId root="2.16.840.1.113883.10.20.22.4.19" extension="2014-06-09" />
+                      <!-- [PCP R1 STU1] Indication (Pharmacist Care Plan) -->
+                      <templateId root="2.16.840.1.113883.10.20.37.3.19" extension="2019-04-01" />
+                      <id root="d22d33d1-185e-4fcd-babc-e1d39bd496f1" />
+                      <code code="29308-4" codeSystem="2.16.840.1.113883.6.1" displayName="Complaint" codeSystemName="LOINC" />
+                      <statusCode code="completed" />
+                      <value xsi:type="CD" code="278860009" codeSystem="2.16.840.1.113883.6.96" displayName="Chronic Low Back Pain"
+                        codeSystemName="SNOMED CT" />
+                    </observation>
+                  </entryRelationship>
+
+                  <!-- Note: The first successful dispense of opioids -->
+                  <entryRelationship typeCode="REFR">
+                    <supply classCode="SPLY" moodCode="EVN">
+                      <!-- [C-CDA R2.0] Medication Dispense (V2) -->
+                      <templateId root="2.16.840.1.113883.10.20.22.4.18" extension="2014-06-09" />
+                      <!-- [PCP R1 STU1] Medication Dispensed History (Pharmacist Care Plan) -->
+                      <templateId root="2.16.840.1.113883.10.20.37.3.11" extension="2017-08-01" />
+
+                      <id root="3358ad78-31f2-4756-abad-32cbb155a6ee" />
+
+                      <!-- Drugs were dispensed, if the pharmacist chooses to not dispense, set @code="aborted -->
+                      <statusCode code="completed" />
+                      <!-- DataElement: FillDate -->
+                      <effectiveTime value="20161128" />
+                      <!-- DataElement: Refill Number -->
+                      <!-- Note: The number of remaining refills would have to be calculated by getting the difference between the most recent
+                                                       Medication Dispensed repeatNumber, and the repeatNumber of the Prescription Entry -->
+                      <repeatNumber value="1" />
+                      <!-- DataElement: Quantity (metric)
+                           DataElement: Quantity Unit -->
+                      <quantity unit="1" value="24" />
+                      <product>
+                        <manufacturedProduct classCode="MANU">
+                          <!-- [C-CDA R2.0] Medication information (V2) -->
+                          <templateId root="2.16.840.1.113883.10.20.22.4.23" extension="2014-06-09" />
+                          <id root="afcdd008-1cb3-4fb9-9eb7-bd22e01bcf5c" />
+                          <manufacturedMaterial>
+                            <!-- DataElement: RX Norm Code -->
+                            <code code="1049683" displayName="oxyCODONE Hydrochloride 10 MG Oral Tablet" codeSystem="2.16.840.1.113883.6.88"
+                              codeSystemName="RxNorm">
+                              <!-- DataElement: Drug Description -->
+                              <originalText>oxyCODONE Hydrochloride 10 MG Oral Tablet</originalText>
+                              <!-- DataElement: NDC -->
+                              <translation code="35356083930" codeSystem="2.16.840.1.113883.6.69"
+                                displayName="oxyCODONE Hydrochloride 10 MG Oral Tablet" codeSystemName="NDC" />
+                            </code>
+                          </manufacturedMaterial>
+                        </manufacturedProduct>
+                      </product>
+
+                      <!-- Pharmacy Information - Indicates which pharmacist dispensed the medication -->
+                      <performer typeCode="PRF">
+                        <!-- [PCP R1 STU1] Pharmacy -->
+                        <templateId root="2.16.840.1.113883.10.20.37.4.1" extension="2017-08-01" />
+                        <assignedEntity>
+                          <!-- DataElement: Prescriber Number -->
+                          <id root="e03cb300-98b1-4769-acee-f6e9e25493cf" />
+                          <id root="2.16.840.1.113883.4.6" extension="1245319599" />
+                          
+                          <!-- DataElement: Prescriber Type Code and Prescriber Type Code Display -->
+                          <code code="264372000" displayName="Pharmacy" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED" />
+                          <addr>
+                            <!-- DataElement: Prescriber Address Line(s) -->
+                            <streetAddressLine>1004 Pharmacy Drive </streetAddressLine>
+                            <!-- DataElement: Prescriber Address City -->
+                            <city>Portland</city>
+                            <!-- DataElement: Prescriber Address State -->
+                            <state>OR</state>
+                            <!-- DataElement: Prescriber Address Postal Code -->
+                            <postalCode>99123</postalCode>
+                            <country>US</country>
+                          </addr>
+                          <telecom use="WP" value="tel:+1(555)555-1004" />
+                          <assignedPerson>
+                            
+                            <name>
+                              <!-- DataElement: Prescriber First Name -->
+                              <given>Registered</given>
+                              <!-- DataElement: Prescriber Middle Name(s) -->
+                              <given>Middle</given>
+                              <!-- DataElement: Prescriber Last Name -->
+                              <family>Pharmacist</family>
+                              <!-- DataElement: Prescriber Suffix(es) -->
+                              <suffix>RPh</suffix>
+                            </name>
+                            
+                          </assignedPerson>
+                          <representedOrganization>
+                            <!-- DataElement: Pharmacy Number (extension)
+                                 DataElement: Pharmacy Number Code (root) -->
+                            <id extension="219BX" root="2.16.840.1.113883.4.6" />
+                            <!-- DataElement: Pharmacy Name -->
+                            <name>The Pharmacy Alliance Health Group</name>
+                            <!-- DataElement: Pharmacy Phone Number -->
+                            <telecom use="WP" value="tel:+1-555-555-5000" />
+                            <!-- DataElement: Pharmacy Fax Number -->
+                            <telecom use="WP" value="fax:+1-555-555-5050" />
+                            
+                            <addr>
+                              <!-- DataElement: Pharmacy Address Line(s) -->
+                              <streetAddressLine>1007 Pharmacy
+                                                  Drive</streetAddressLine>
+                              <!-- DataElement: Pharmacy Address City -->
+                              <city>Portland</city>
+                              <!-- DataElement: Pharmacy Address State -->
+                              <state>OR</state>
+                              <!-- DataElement: Pharmacy Address Postal Code -->
+                              <postalCode>99123</postalCode>
+                              <country>US</country>
+                            </addr>
+                          </representedOrganization>
+                        </assignedEntity>
+                      </performer>
+                    </supply>
+                  </entryRelationship>
+                </substanceAdministration>
+              </entryRelationship>
+
+            </act>
+          </entry>
+          <!-- Prescription 2-->
+          <entry>
+            <act classCode="ACT" moodCode="EVN">
+              <!-- [C-CDA R2.1] Intervention Act (V2) -->
+              <templateId extension="2015-08-01" root="2.16.840.1.113883.10.20.22.4.131" />
+              <!-- [PCP R1 STU1] Intervention Act (Pharmacist Care Plan) -->
+              <templateId extension="2019-04-01" root="2.16.840.1.113883.10.20.37.3.15" />
+              <id root="1040f76d-d877-4f0a-8564-c0b508c57088" />
+              <code code="362956003" displayName="Procedure/intervention" codeSystemName="SNOMED" codeSystem="2.16.840.1.113883.6.96" />
+              <statusCode code="completed" />
+              <effectiveTime>
+                <high value="20161125" />
+              </effectiveTime>
+              <!-- Prescription 2 -->
+              <entryRelationship typeCode="REFR">
+                <substanceAdministration classCode="SBADM" moodCode="INT">
+                  <!-- [PCP R1 STU1] Medication Activity (Pharmacist Care Plan) -->
+                  <templateId root="2.16.840.1.113883.10.20.37.3.10" extension="2019-04-01" />
+                  <!-- [C-CDA R2.0] Medication Activity (V2) -->
+                  <templateId root="2.16.840.1.113883.10.20.22.4.16" extension="2014-06-09" />
+                  <!-- DataElement: Prescription Number -->
+                  <id root="2.16.840.1.113883.19" extension="example-rx-number-id_2" />
+                  <code code="16076005" displayName="Prescription" codeSystemName="SNOMEDCT" codeSystem="2.16.840.1.113883.6.96" />
+                  <!-- DataElement: Prescription Status -->
+                  <statusCode code="active" />
+                  <!-- Take medication for 3 days - sets the start and stop -->
+                  <effectiveTime xsi:type="IVL_TS">
+                    <low value="20161125" />
+                    <high value="20161128" />
+                  </effectiveTime>
+                  <!-- Take Every 6 hours-->
+                  <effectiveTime xsi:type="PIVL_TS" operator="A">
+                    <period xsi:type="PQ" value="6" unit="h" />
+                  </effectiveTime>
+                  <repeatNumber value="0" />
+                  <routeCode code="C38288" codeSystem="2.16.840.1.113883.3.26.1.1" codeSystemName="NCI Thesaurus" displayName="ORAL" />
+                  <!-- Take 2 pills -->
+                  <doseQuantity value="2" />
+                  <!-- Amount Given -->
+                  <rateQuantity value="24" unit="1" />
+                  <consumable>
+                    <manufacturedProduct classCode="MANU">
+                      <!-- [C-CDA R2.0] Medication information (V2) -->
+                      <templateId root="2.16.840.1.113883.10.20.22.4.23" extension="2014-06-09" />
+                      <id root="2a620155-9d11-439e-92b3-5d9815ff4ee8" />
+                      <manufacturedMaterial>
+                        <code code="1049683" displayName="oxyCODONE Hydrochloride 10 MG Oral Tablet" codeSystem="2.16.840.1.113883.6.88"
+                          codeSystemName="RxNorm">
+                          <translation code="35356083930" codeSystem="2.16.840.1.113883.6.69" displayName="oxyCODONE Hydrochloride 10 MG Oral Tablet"
+                            codeSystemName="NDC" />
+                        </code>
+                      </manufacturedMaterial>
+                    </manufacturedProduct>
+                  </consumable>
+                  <!-- This records who wrote the prescription -->
+                  <author>
+                    <!-- [C-CDA R2.0] Author Participation -->
+                    <templateId root="2.16.840.1.113883.10.20.22.4.119" />
+                    <!-- [PCP R1 STU1] Prescriber -->
+                    <templateId root="2.16.840.1.113883.10.20.37.4.2" extension="2017-08-01" />
+                    <time value="20161125" />
+                    <assignedAuthor>
+                      <!-- DataElement: Prescriber Number -->
+                      <id extension="219BX" root="2.16.840.1.113883.4.6" />
+                      <!-- DataElement: Prescriber Type Code
+                           DataElement: Prescriber Type Code  -->
+                      <code code="363L00000X" codeSystem="2.16.840.1.113883.6.101" codeSystemName="Healthcare Provider Taxonomy (HIPAA)"
+                        displayName="Nurse Practitioner" />
+                      <addr>
+                        <!-- DataElement: Prescriber Address Line(s) -->
+                        <streetAddressLine>1004 Clinical Drive </streetAddressLine>
+                        <!-- DataElement: Prescriber Address City -->
+                        <city>Portland</city>
+                        <!-- DataElement: Prescriber Address State -->
+                        <state>OR</state>
+                        <!-- DataElement: Prescriber Postal Code -->
+                        <postalCode>99123</postalCode>
+                        <country>US</country>
+                      </addr>
+                      <!-- DataElement: Prescriber Telephone -->
+                      <telecom use="WP" value="tel:+1(555)555-1004" />
+                      <!-- DataElement: Prescriber Fax -->
+                      <telecom use="WP" value="fax:+1(555)555-5050" />
+                      <!-- DataElement: Prescriber  Email-->
+                      <telecom use="WP" value="mailto:pharmacist@pharmacy.com" />
+                      <assignedPerson>
+                        <name>
+                          <!-- DataElement: Prescriber First Name -->
+                          <given>Mary</given>
+                          <!-- DataElement: Prescriber Middle Name(s) -->
+                          <given>Middle</given>
+                          <!-- DataElement: Prescriber Last Name -->
+                          <family>Jane</family>
+                          <!-- DataElement: Prescriber Suffix(es) -->
+                          <suffix>NP</suffix>
+                        </name>
+                      </assignedPerson>
+                    </assignedAuthor>
+                  </author>
+                  <!-- Prescribed due to chronic back pain -->
+                  <entryRelationship typeCode="RSON">
+                    <observation classCode="OBS" moodCode="EVN">
+                      <!-- [C-CDA R2.0] Indication (V2) -->
+                      <templateId root="2.16.840.1.113883.10.20.22.4.19" extension="2014-06-09" />
+                      <id root="98d68eac-5a16-463e-ba5c-c0fbb13d7586" />
+                      <code code="29308-4" codeSystem="2.16.840.1.113883.6.1" displayName="Complaint" codeSystemName="LOINC" />
+                      <statusCode code="completed" />
+                      <value xsi:type="CD" code="278860009" codeSystem="2.16.840.1.113883.6.96" displayName="Chronic Low Back Pain"
+                        codeSystemName="SNOMED CT" />
+                    </observation>
+                  </entryRelationship>
+
+                  <entryRelationship typeCode="REFR">
+                    <supply classCode="SPLY" moodCode="EVN">
+                      <!-- [C-CDA R2.0] Medication Dispense (V2) -->
+                      <templateId root="2.16.840.1.113883.10.20.22.4.18" extension="2014-06-09" />
+                      <!-- [PCP R1 STU1] Medication Dispensed History (Pharmacist Care Plan) -->
+                      <templateId root="2.16.840.1.113883.10.20.37.3.11" extension="2017-08-01" />
+
+                      <id root="023f3f0f-afff-4705-965f-d21caec96103" /> 
+                      <text>Refused to dispense - drug denied.</text>
+                      <!-- statusCode indicates whether or not the drugs are dispensed. 
+                                                 Dispensed: @code="completed"
+                                                 Not Dispensed: @code="aborted -->
+                      <statusCode code="aborted" />
+
+                      <!-- Note: Same Day -->
+                      <!-- DataElement: FillDate -->
+                      <effectiveTime value="20161125" />
+
+                      <!-- DataElement: Refill Number -->
+                      <repeatNumber value="1" />
+                      <!-- DataElement: Quantity Dispensed -->
+                      <quantity value="0" />
+
+                      <product>
+                        <manufacturedProduct classCode="MANU">
+                          <!-- [C-CDA R2.0] Medication information (V2) -->
+                          <templateId root="2.16.840.1.113883.10.20.22.4.23" extension="2014-06-09" />
+                          <id root="255fa555-43a3-4186-96c4-c75e72796f0f" />
+                          <manufacturedMaterial>
+                            <code code="1049683" displayName="oxyCODONE Hydrochloride 10 MG Oral Tablet" codeSystem="2.16.840.1.113883.6.88"
+                              codeSystemName="RxNorm">
+
+                              <translation code="35356083930" codeSystem="2.16.840.1.113883.6.69"
+                                displayName="oxyCODONE Hydrochloride 10 MG Oral Tablet" codeSystemName="NDC" />
+                            </code>
+                          </manufacturedMaterial>
+                        </manufacturedProduct>
+                      </product>
+
+                      <!-- Pharmacy Information - Indicates which pharmacy dispensed the medication -->
+                      <performer typeCode="PRF">
+                        <!-- [PCP R1 STU1] Pharmacy -->
+                        <templateId root="2.16.840.1.113883.10.20.37.4.1" extension="2017-08-01" />
+                        <assignedEntity>
+                          <id root="7e921a03-69fb-4f39-ac22-758b32efcbf3" />
+                          <code code="264372000" displayName="Pharmacy" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED" />
+                          <representedOrganization>
+                            <!-- DataElement: Pharmacy NPI Number -->
+                            <id extension="219BX" root="2.16.840.1.113883.4.6" />
+
+                            <!-- Note: Different Pharmacy -->
+                            <name>Competitor Pharmacy</name>
+                            <!-- DataElement: Pharmacy Phone Number -->
+                            <telecom use="WP" value="tel:+1-555-555-5055" />
+                            <!-- DataElement: Pharmacy Fax Number -->
+                            <telecom use="WP" value="fax:+1-555-555-5555" />
+
+                            <addr>
+                              <!-- Competitor Pharmacy, 10 Blocks down the road from the first -->
+                              <streetAddressLine>1017 Pharmacy
+                                                            Drive</streetAddressLine>
+                              <city>Portland</city>
+                              <state>OR</state>
+                              <postalCode>99123</postalCode>
+                              <country>US</country>
+                            </addr>
+                          </representedOrganization>
+                        </assignedEntity>
+                      </performer>
+                    </supply>
+                  </entryRelationship>
+                </substanceAdministration>
+
+              </entryRelationship>
+            </act>
+          </entry>
+          <!-- Intervention 2: Adherence Education-->
+          <entry typeCode="DRIV">
+            <act classCode="ACT" moodCode="EVN">
+              <!-- [C-CDA R2.1] Intervention Act (V2) -->
+              <templateId extension="2015-08-01" root="2.16.840.1.113883.10.20.22.4.131" />
+              <!-- [PCP R1 STU1] Intervention Act (Pharmacist Care Plan) -->
+              <templateId extension="2019-04-01" root="2.16.840.1.113883.10.20.37.3.15" />
+              <id root="1040f76d-d877-4f0a-8564-c0b508c57085" />
+              <code code="362956003" displayName="Procedure/intervention" codeSystemName="SNOMED" codeSystem="2.16.840.1.113883.6.96" />
+              <statusCode code="completed" />
+              <effectiveTime>
+                <high value="20161125" />
+              </effectiveTime>
+              <entryRelationship typeCode="REFR">
+                <act classCode="ACT" moodCode="EVN">
+                  <!-- [C-CDA R2.0 Procedure Activity Act (V2) -->
+                  <templateId root="2.16.840.1.113883.10.20.22.4.12" extension="2014-06-09"/>
+                  <!-- [PCP R1 STU1] Procedure Activity Act (Pharmacist Care Plan)  -->
+                  <templateId root="2.16.840.1.113883.10.21.37.3.21" extension="2014-06-09" />
+                  <!-- DataElement: Intervention ID 
+                       DataElement: Education ID (when used as an education intervention)-->
+                  <id root="0bc79f35-1431-42b5-881a-974d1fd28430" />
+                  <!-- DataElement: Activity Associated with Intervention
+                       SNOMED code for adherence education -->
+                  <code code="410123007" displayName="Medication regimen compliance education" codeSystem="2.16.840.1.113883.6.96"
+                    codeSystemName="SNOMED" />
+                  <!-- DataElement: Intervention Status
+                       DataElement: Education Status (when used as an education intervention) -->
+                  <statusCode code="completed" />
+                  <!-- DataElement: Intervention Date/Time
+                       DataElement: Education DateTime (when used as an education intervention)-->
+                  <effectiveTime value="20160122" />
+                </act>
+              </entryRelationship>
+              <!-- DataElement: Reason for Intervention  -->
+              <!-- This entry reference can point to problems, or other issues. In this example
+                   it points to the Medication Therapy Problem-->
+              <entryRelationship typeCode="REFR">
+                <act classCode="ACT" moodCode="EVN">
+                  <!-- [C-CDA R2.0] Entry Reference -->
+                  <templateId root="2.16.840.1.113883.10.20.22.4.122" />
+                  <!--  The ID must equal another entry/id in the same document instance. 
+                            Application Software must be responsible for resolving the identifier back 
+                            to its original object and then rendering the information in the correct place 
+                            in the containing section's narrative text. 
+                            The ID cannot have Null value (e.g., nullFlavor is not allowed).
+                  -->
+                  <!-- This ID has the same value as the Medication Therapy Problem  -->
+                  <id root="1a673d3c-0a8a-4c79-974e-83aa84df1b2b" />
+                  <!--  Code is not present because it is a reference -->
+                  <code nullFlavor="NP" />
+                  <statusCode code="completed" />                  
+                </act>                
+              </entryRelationship>             
+            </act>
+          </entry>       
+                    
+          <!-- Intervention 3: Monitoring Adherence to Medication Regime-->
+          <entry typeCode="DRIV">
+            <observation classCode="OBS" moodCode="EVN">
+              <!-- [C-CDA R2.1] Procedure Activity Observation (V2) -->
+              <templateId extension="2014-06-09" root="2.16.840.1.113883.10.20.22.4.13" />
+              <!-- [PCP R1 STU1] Procedure Activity Observation (Pharmacist Care Plan)-->
+              <templateId extension="2019-04-01" root="2.16.840.1.113883.10.20.37.3.18" />
+              <id root="0bc79f35-1431-42b5-881a-974d1fd28444"/>   
+              <!-- Data Element: Activity Associated with Intervention -->
+              <code code="2713116003" codeSystem="2.16.840.1.113883.6.96" displayName="Monitoring adherence to medication regime (regime/therapy)" codeSystemName="SNOMED CT"/>              
+              <statusCode code="completed"/>
+              <effectiveTime value="20161125"/>                 
+              <value xsi:type="CD" nullFlavor="NI"/>               
+              <performer>
+                <assignedEntity>
+                  <id root="2.16.840.1.113883.4.6" extension="6666666666666"/>
+                  <addr>
+                    <streetAddressLine>2100 North Ave</streetAddressLine>
+                    <city>Burlington</city>
+                    <state>MA</state>
+                    <postalCode>02368</postalCode>
+                    <country>US</country>
+                  </addr>
+                  <telecom use="WP" value="tel:+1(555)555-1003" />
+                  <representedOrganization>
+                    <id root="2.16.840.1.113883.19.5"/>
+                    <name>Greater Area Pharmacy</name> 
+                    <telecom use="WP" value="tel:+1(555)555-1003" />
+                    <addr>
+                      <streetAddressLine>2100 North Ave</streetAddressLine>
+                      <city>Burlington</city>
+                      <state>MA</state>
+                      <postalCode>02368</postalCode>
+                      <country>US</country>
+                    </addr>
+                  </representedOrganization>
+                </assignedEntity>
+              </performer> 
+              <entryRelationship typeCode="RSON">
+                <observation classCode="OBS" moodCode="EVN">
+                  <!-- [C-CDA R2.0] Indication (V2) -->
+                  <templateId root="2.16.840.1.113883.10.20.22.4.19" extension="2014-06-09" />
+                  <!-- [PCP R1 STU1] Indication (Pharmacist Care Plan)-->
+                  <templateId root="2.16.840.1.113883.10.20.37.3.19" extension="2019-04-01" />
+                  <id root="d22d33d1-185e-4fcd-babc-e1d39bd496k1" />
+                  <code code="404684003" codeSystem="2.16.840.1.113883.6.96" displayName="Finding" codeSystemName="SNOMED CT" />
+                  <statusCode code="completed" />
+                  <value xsi:type="CD" code="129866007" codeSystem="2.16.840.1.113883.6.96" displayName="Deficient knowledge of medication regimen"
+                    codeSystemName="SNOMED CT" />
+                </observation>
+              </entryRelationship>
+                               
+            </observation>
+          </entry> 
+          
+         
+        
+          <!--  Active Medications -->
+          <entry typeCode="DRIV">
+            <act classCode="ACT" moodCode="EVN">
+              <!-- [C-CDA R2.1] Intervention Act (V2) -->
+              <templateId extension="2015-08-01" root="2.16.840.1.113883.10.20.22.4.131" />
+              <!-- [PCP R1 STU1] Intervention Act (Pharmacist Care Plan) -->
+              <templateId extension="2019-04-01" root="2.16.840.1.113883.10.20.37.3.15" />
+              <id root="1040f76d-d877-4f0a-8564-c0b508c57088" />
+              <code code="362956003" displayName="Procedure/intervention" codeSystemName="SNOMED" codeSystem="2.16.840.1.113883.6.96" />
+              <statusCode code="completed" />
+              <effectiveTime>
+                <high value="20161125" />
+              </effectiveTime>
+              <!-- ActiveMed: Only use the medication activity -->
+              <entryRelationship typeCode="REFR">
+                <substanceAdministration moodCode="EVN" classCode="SBADM">
+                  <!-- [C-CDA R2.0] Medication Activity(V2) -->
+                  <templateId root="2.16.840.1.113883.10.20.22.4.16" extension="2014-06-09"/>
+                  <id root="7f42e67b-f3f8-44dd-95e8-df0ff6d65000"/>
+                  <!-- ActiveMed: No code is needed here, which is different from the requirement for a prescription -->
+                  <!-- <code/> -->
+                  <!-- ActiveMed: set the status code to "active"  -->
+                  <!-- DataElement: Active Medication Status -->
+                  <statusCode code="active"/>
+                  <!-- ActiveMed: This effectiveTime represents either the medication duration 
+                    (i.e., the time the medication was started and stopped) 
+                    or the single-administration timestamp. -->
+                  <!-- DataElement: Active Medication Effective Date -->
+                  <effectiveTime xsi:type="IVL_TS">
+                    <low value="20170801"/>
+                  </effectiveTime>
+                  <!-- DataElement: Active Medication Quantity (metric) -->
+                  <!-- DataElement: Active Medication Quantity Unit. Note, unit is "1" which in UCUM is basically just a countable thing, like a tablet -->
+                  <doseQuantity value="2" unit="1" />
+                  <consumable>
+                    <manufacturedProduct classCode="MANU">
+                      <!-- [C-CDA R2.0] Medication Information -->
+                      <templateId root="2.16.840.1.113883.10.20.22.4.23" extension="2014-06-09"/>
+                      <manufacturedMaterial>
+                        <!-- DataElement: Active Medication RX Norm code -->
+                        <!-- DataElement: Active Medication Drug Description -->
+                        <code code="313820" 
+                          codeSystem="2.16.840.1.113883.6.88" 
+                          codeSystemName="RxNorm" 
+                          displayName="Acetaminophen 160 MG Chewable Tablet"/>
+                      </manufacturedMaterial>
+                    </manufacturedProduct>
+                  </consumable>
+                </substanceAdministration>
+              </entryRelationship>
+            </act>
+          </entry>        
+                   
+          <!-- Planned Encounters: Future Appointments, Follow-up Appointments (these first two seem the same) and referrals -->
+          <!-- Planned Intervention - This is where future interventions will be held -->
+          <entry typeCode="DRIV">
+            <act classCode="ACT" moodCode="INT">
+              <!-- [C-CDA R2.1] Planned Intervention Act (V2) -->
+              <templateId root="2.16.840.1.113883.10.20.22.4.146" extension="2015-08-01" />
+              <!-- [PCP R1 STU1] Planned Intervention Act (Pharmacist Care Plan) -->
+              <templateId root="2.16.840.1.113883.10.20.37.3.12" extension="2019-04-01" />
+              <id root="85fa4b62-e3a9-4385-b064-fe04cca35adb" />
+              <code code="362956003" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Intervention" />
+              <statusCode code="active" />
+              <!-- Reference to Goal of Prevention of opioid abuse in the Health Concerns Section -->
+              <entryRelationship typeCode="RSON">
+                <act classCode="ACT" moodCode="EVN">
+                  <!-- [C-CDA R2.0] Entry Reference -->
+                  <templateId root="2.16.840.1.113883.10.20.22.4.122" />
+                  <!-- This ID Matches the GUID for the ID in the existing entry for the Goal of Prevention of opioid abuse  -->
+                  <id root="a1a4f2bd-7e28-408e-aacf-da27d00fd792" />
+                  <code nullFlavor="NP" />
+                  <text>Reference to Goal of Prevention of opioid abuse in the
+                    Goals Section</text>
+                  <statusCode code="completed" />
+                </act>
+              </entryRelationship>
+              
+              <!-- Patient Referral Act: Referral To -->
+              <entryRelationship typeCode="REFR">
+                <act classCode="PCPR" moodCode="INT">
+                  <!-- [C-CDA R2.0] Patient Referral Act -->
+                  <templateId root="2.16.840.1.113883.10.20.22.4.140" />
+                  <id root="70bdd7db-e02d-4eff-9829-35e3b7d9e154" />
+                  <!-- DataElement: Referral Type Code
+                       DataElement: Referral Type Code Display -->
+                  <code code="733901008" displayName="Referral to self-management support service" codeSystemName="SNOMED" codeSystem="2.16.840.1.113883.6.96" />
+                  <!-- DataElement: Referral To Status Code -->
+                  <statusCode code="active" />
+                  <!-- DataElement: Referral To Effective Time -->
+                  <effectiveTime value="20161201" />
+                  <priorityCode code="A" codeSystem="2.16.840.1.113883.5.7" codeSystemName="ActPriority" displayName="ASAP" />
+                  <!-- Author Participation: Pharmacist -->
+                  <author>
+                    <!-- [C-CDA R2.0] Author Participation -->
+                    <templateId root="2.16.840.1.113883.10.20.22.4.119" />
+                    <time value="20161201" />
+                    <assignedAuthor>
+                      <id root="ec399842-7c0d-4cfc-ada3-f11a799d0460" />
+                      <!-- DataElement: Kind of provider who wrote the referral-->                          
+                      <code code="183500000X" codeSystem="2.16.840.1.113883.6.101" codeSystemName="Healthcare Provider Taxonomy (HIPAA)"
+                        displayName="Pharmacist" />
+                      <addr>
+                        <streetAddressLine>1004 Pharmacy Drive </streetAddressLine>
+                        <city>Portland</city>
+                        <state>OR</state>
+                        <postalCode>99123</postalCode>
+                        <country>US</country>
+                      </addr>
+                      <telecom use="WP" value="tel:+1(555)555-1004" />
+                      <assignedPerson>
+                        <name>
+                          <given>Registered</given>
+                          <family>Pharmacist</family>
+                          <suffix>RPh</suffix>
+                        </name>
+                      </assignedPerson>
+                      <representedOrganization>
+                        <id root="2.16.840.1.113883.19.5" />
+                        <name>The Pharmacy Alliance Health Group</name>
+                      </representedOrganization>
+                    </assignedAuthor>
+                  </author>
+                  <!-- Clinical reason for referral -->
+                  <entryRelationship typeCode="RSON">
+                    <observation classCode="OBS" moodCode="EVN">
+                      <!-- [C-CDA R2.0] Indication (V2) -->
+                      <templateId root="2.16.840.1.113883.10.20.22.4.19" extension="2014-06-09" />
+                      <id root="e83a4863-190e-4559-952d-c0d46d2b5dcc" />
+                      <code code="55607006" codeSystem="2.16.840.1.113883.6.1" displayName="Problem" codeSystemName="LOINC" />
+                      <statusCode code="completed" />
+                      <!-- Reason for referral to GP is due to a suspected opioid abuse problem -->
+                      <value xsi:type="CD" code="5602001" codeSystem="2.16.840.1.113883.6.96" displayName="Opioid abuse (disorder)"
+                        codeSystemName="SNOMED CT">
+                        <qualifier>
+                          <value code="415684004" codeSystem="2.16.840.1.113883.6.96" displayName="Suspected (qualifier)" codeSystemName="SNOMED CT"
+                          />
+                        </qualifier>
+                      </value>
+                    </observation>
+                  </entryRelationship>
+                </act>
+              </entryRelationship>
+              
+              <!--Planned Encounter : Follow up Appointemnt-->
+              <entryRelationship typeCode="REFR">
+                <encounter classCode="ENC" moodCode="RQO">
+                  <!-- [C-CDA R2.0] Planned Encounter(V2)-->
+                  <templateId root="2.16.840.1.113883.10.20.22.4.40" extension="2014-06-09" />
+                  <id root="c4177b05-906f-4b38-aba5-330f2520db27" />
+                  <!-- DataElement: Follow-Up Appointment -->
+                  <code code="99213" displayName="Office outpatient visit 15 minutes" codeSystemName="CPT-4" codeSystem="2.16.840.1.113883.6.12">
+                    <translation code="AMB" codeSystem="2.16.840.1.113883.5.4" displayName="Ambulatory" codeSystemName="HL7 ActEncounterCode" />
+                  </code>
+                  <statusCode code="active" />
+                  <effectiveTime value="201612251300+0500" />
+                  <performer typeCode="PRF">
+                    <assignedEntity>
+                      <id extension="5555555555" root="2.16.840.1.113883.4.6" />
+                      <code code="1835P0018X" displayName="Clinical Pharmacist" codeSystem="2.16.840.1.113883.6.101"
+                        codeSystemName="Healthcare Provider Taxonomy (HIPAA)" />
+                      <addr>
+                        <streetAddressLine>1004 Pharmaceutical Drive </streetAddressLine>
+                        <city>Portland</city>
+                        <state>OR</state>
+                        <postalCode>99123</postalCode>
+                        <country>US</country>
+                      </addr>
+                      <telecom use="WP" value="tel:+1(555)555-1004" />
+                      <assignedPerson>
+                        <name>
+                          <given>Claude</given>
+                          <given qualifier="CL">Pharma</given>
+                          <family>Pharmacist</family>
+                          <suffix qualifier="AC">CPh</suffix>
+                        </name>
+                      </assignedPerson>
+                      <representedOrganization>
+                        <!--  Place of Service for Planned Encounter -->
+                        <standardIndustryClassCode code="22232009" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED"
+                          displayName="Hospital (environment)" />
+                      </representedOrganization>
+                    </assignedEntity>
+                  </performer>
+                  <participant typeCode="LOC">
+                    <participantRole classCode="SDLOC">
+                      <templateId root="2.16.840.1.113883.10.20.22.4.32" />
+                      <code code="1160-1" codeSystem="2.16.840.1.113883.6.259" codeSystemName="HealthcareServiceLocation"
+                        displayName="Urgent Care Center" />
+                      <addr>
+                        <streetAddressLine>17 Daws Rd.</streetAddressLine>
+                        <city>Blue Bell</city>
+                        <state>MA</state>
+                        <postalCode>02368</postalCode>
+                        <country>US</country>
+                      </addr>
+                      <telecom use="WP" value="tel:+1(555)555-5000" />
+                      <playingEntity classCode="PLC">
+                        <name>Community Health and Hospitals</name>
+                      </playingEntity>
+                    </participantRole>
+                  </participant>
+                  
+                </encounter>
+              </entryRelationship>
+              
+              <!-- Planned Instruction: Diet Education -->
+              <entryRelationship typeCode="REFR">               
+                <act classCode="ACT" moodCode="INT">                 
+                  <!-- [C-CDA R2.0] Instruction (V2) -->
+                  <templateId root="2.16.840.1.113883.10.20.22.4.20" extension="2014-06-09"/>
+                  <!-- [PCP R1 STU1] Instruction (Pharmacist Care Plan) -->
+                  <templateId root="2.16.840.1.113883.10.20.37.3.20" extension="2019-04-01"/>
+                  <id root="c4177b05-906f-4b38-aba5-330f2520db30"/>
+                  <code code="11816003" codeSystem="2.16.840.1.113883.6.96" displayName="diet education" />
+                  <statusCode code="completed" />
+                  <effectiveTime value="20161124"/> 
+                </act>
+                </entryRelationship>
+                           
+              <!-- Planned Handoff Communication Participants -->              
+              <entryRelationship typeCode="REFR">
+                <act classCode="ACT" moodCode="EVN">
+                  <!-- [C-CDA R2.0] Handoff Communication Participants -->
+                  <templateId root="2.16.840.1.113883.10.20.22.4.141" />
+                  <!-- DataElement: Hand off ID-->
+                  <id root="d839038b-2456-AABD-1c6a-467925b43857" />
+                  <!-- DataElement: Care Coordination -->
+                  <code code="432138007" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT"
+                    displayName="handoff communication (procedure)" />
+                  <statusCode code="completed" />
+                  <!-- DataElement: DateTime of Handoff -->
+                  <effectiveTime value="20161201" />
+                  <!-- DataElement: Care Coordination Author Participation -->
+                  <author typeCode="AUT">
+                    <!-- [C-CDA R2.0] Author Participation -->
+                    <templateId root="2.16.840.1.113883.10.20.22.4.119" />
+                    <time value="20161201" />
+                    <assignedAuthor>
+                      <!-- DataElement: Sender NPI -->
+                      <id root="d839038b-7171-4165-a760-467925b43857" />
+                      <code code="163W00000X" codeSystem="2.16.840.1.113883.6.101" codeSystemName="Healthcare Provider Taxonomy (HIPAA)"
+                        displayName="Registered nurse" />
+                      <assignedPerson>
+                        <name>
+                          <!-- DataElement: Sender First Name -->
+                          <given>Nurse</given>
+                          <!-- DataElement: Sender Middle Name(s) -->
+                          <given>Middle</given>
+                          <!-- DataElement: Sender Last Name -->
+                          <family>Florence</family>
+                          <!-- DataElement: Sender Suffix(es) -->
+                          <suffix>RN</suffix>
+                        </name>
+                      </assignedPerson>
+                    </assignedAuthor>
+                  </author>
+                  <!-- DataElement: Participant -->
+                  <participant typeCode="IRCP">
+                    <participantRole>
+                      <!-- DataElement: Recipient NPI -->
+                      <id extension="1138345" root="2.16.840.1.113883.19" />
+                      <!-- DataElement: Recipient Role -->
+                      <code code="163W00000X" codeSystem="2.16.840.1.113883.6.101" codeSystemName="NUCC Health Care Provider Taxonomy"
+                        displayName="Registered Nurse" />
+                      <addr>
+                        <!-- DataElement: Recipient Address Line(s)-->
+                        <streetAddressLine>1006 Health
+                          Drive</streetAddressLine>
+                        <!-- DataElement: Recipient Address City -->
+                        <city>Ann Arbor</city>
+                        <!-- DataElement: Recipient Address State -->
+                        <state>MI</state>
+                        <!-- DataElement: Recipient Address Postal Code -->
+                        <postalCode>97867</postalCode>
+                        <country>US</country>
+                      </addr>
+                      <telecom value="tel:+1(555)555-1014" use="WP" />
+                      <playingEntity>
+                        <!-- DataElement: Participant Name -->
+                        <name>
+                          <!-- DataElement: Recipient First Name -->
+                          <given>Nancy</given>
+                          <!-- DataElement: Recipient Middle Name -->
+                          <given>Middle</given>
+                          <!-- DataElement: Recipient Last Name -->
+                          <family>Nightingale</family>
+                          <!-- DataElement: Recipient Suffix(es) -->
+                          <suffix>RN</suffix>
+                        </name>
+                      </playingEntity>
+                    </participantRole>
+                  </participant>
+                </act>
+              </entryRelationship>
+              
+              <!-- Planned Procedure Activity Observation -->  
+              <entryRelationship typeCode="REFR">
+                <observation classCode="OBS" moodCode="EVN">
+                  <!-- [C-CDA R2.1] Procedure Activity Observation (V2) -->
+                  <templateId extension="2014-06-09" root="2.16.840.1.113883.10.20.22.4.13" />
+                  <!-- [PCP R1 STU1] Procedure Activity Observation (Pharmacist Care Plan)-->
+                  <templateId extension="2019-04-01" root="2.16.840.1.113883.10.20.37.3.18" />
+                  <id root="0bc79f35-1431-42b5-881a-974d1fd28444"/>   
+                  <!-- Data Element: Activity Associated with Intervention -->
+                  <code code="441041000124100" codeSystem="2.16.840.1.113883.6.96" displayName="Counseling about nutrition (procedure)" codeSystemName="SNOMED CT"/>              
+                  <statusCode code="completed"/>
+                  <effectiveTime value="20161125"/>                 
+                  <value xsi:type="CD" nullFlavor="NI"/>               
+                  <performer>
+                    <assignedEntity>
+                      <id root="2.16.840.1.113883.4.6" extension="6666666666666"/>
+                      <addr>
+                        <streetAddressLine>2100 North Ave</streetAddressLine>
+                        <city>Burlington</city>
+                        <state>MA</state>
+                        <postalCode>02368</postalCode>
+                        <country>US</country>
+                      </addr>
+                      <telecom use="WP" value="tel:+1(555)555-1004" />
+                      <representedOrganization>
+                        <id root="2.16.840.1.113883.19.9"/>
+                        <name>Local Nutrition Specialist</name> 
+                        <telecom use="WP" value="tel:+1(555)555-1004" />
+                        <addr>
+                          <streetAddressLine>2102 North Ave</streetAddressLine>
+                          <city>Burlington</city>
+                          <state>MA</state>
+                          <postalCode>02368</postalCode>
+                          <country>US</country>
+                        </addr>
+                      </representedOrganization>
+                    </assignedEntity>
+                  </performer>                
+                 </observation>
+            </entryRelationship>
+            
+            </act>
+          </entry>
+        </section>
+      </component>
+		</structuredBody>
+	</component>
 </ClinicalDocument>
+ 
+
+
