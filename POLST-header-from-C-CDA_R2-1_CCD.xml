@@ -471,62 +471,33 @@
 		              <text>
 		              </text>
 		              <entry>
-		                <!-- ZG Note: Use the ACT to bind to Planned Act for the Order -->	
-		                <act classCode="ACT" moodCode="INT">
-		                  <templateId/>
-		                  <id/>
-		                  <code></code>
-		                  <text></text>
-		                  <statusCode></statusCode>
-		                  <!-- ** ZG: Selected type code COMP for "has component" to represent the act is a component of the source act ** --> 
-		                  <entryRelationship typeCode="COMP">
-		                    <!-- ZG Note: Organizer groups the different orders on the form A,B,C,D.*** -->	
-		                    <organizer classCode="CLUSTER" moodCode="EVN">
-		                      <templateId root="2.16.840.1.113883.10.20.22.4.108.999999999" extension="2021-12-01"/>
-		                      <templateId root="2.16.840.1.113883.10.20.22.4.108.99999999999"/>
-		                      <id root="af6ebdf2-d996-11e2-a5b8-f23c91aec05e"/>
-		                      <code code="TEMP-POLST-ORDERS" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" 
-		                        displayName="National POLST Form: A Portable Medical Order"/>
-		                      <statusCode code="completed"/>
-		                      <!-- ZG Note:  This could be the person completing the form -->	
-		                      <author>		            
-		                        <templateId root="2.16.840.1.113883.10.20.22.4.119.999999999"/>
-		                        <time value="201308011235-0800"/>		             
-		                        <assignedAuthor>
-		                          <id root="20cf14fb-b65c-4c8c-a54d-b0cca834c18c"/>
-		                          <code code="163W00000X" displayName="Registered nurse" codeSystem="2.16.840.1.113883.6.101" 
-		                            codeSystemName="Healthcare Provider Taxonomy (HIPAA)"/>
-		                          <assignedPerson>
-		                            <name>
-		                              <given>Nurse</given>
-		                              <family>Nightingale</family>
-		                              <suffix>RN</suffix>
-		                            </name>
-		                          </assignedPerson>
-		                          <representedOrganization classCode="ORG">
-		                            <id root="2.16.840.1.113883.19.5"/>
-		                            <name>Good Health Hospital</name>
-		                          </representedOrganization>
-		                        </assignedAuthor>
-		                      </author>
-		                      <!-- ZG Note: Create a component that each order on the from.   -->		          
-		                      <!-- A. Cardiopulmonary Resuscitation Orders --> 
-		                      <component typeCode="COMP">
-		                        <templateId/>		                       	                        
-		                        <act classCode="ACT" moodCode="INT">
+		                <!-- ZG Note: Organizer groups the different orders on the form A,B,C,D.*** -->
+		                <!-- ZG Note: Organizer will be a SHALL*** -->
+		                <organizer classCode="CLUSTER" moodCode="EVN">
+		                  <templateId root="2.16.840.1.113883.10.20.22.4.108.999999999" extension="2021-12-01"/>
+		                  <templateId root="2.16.840.1.113883.10.20.22.4.108.99999999999"/>
+		                  <statusCode code="completed"/>		                               
+		                
+		                  <!-- ZG Note: Each component will be a SHALL*** -->
+		                  <!--The components will be SHOULD and there willbe an additional primitive that will tell them to select only one of the
+		                  two observations--> 
+		                  <!-- A. Cardiopulmonary Resuscitation Orders -->
+		                  <component typeCode="COMP"> 		                    		                    
+		                      <templateId root="2.16.840.1.113883.10.20.22.4.108.999" extension="2021-12-01"/> 		                            		                   	                       	                        
+		                    <!-- ZG Note: Use the ACT to bind to Planned Act for the Order -->	
+		                    <act classCode="ACT" moodCode="INT">
 		                          <templateId/>
 		                          <id root="af6ebdf2-d996-11e2-a5b8-f23c91aec05e"/>	
-		                          <code></code>
-		                          
+		                      <code code="TEMP-POLST-CPR" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" 
+		                        displayName="Cardiopulmonary Resuscitation Orders.  Follow these orders if patient has no pulse and is not breathing.">		                                  
+		                      </code>		                          
 		                          <!-- CPR: YES -->
 		                          <entryRelationship typeCode="COMP">
 		                            <observation classCode="OBS" moodCode="EVN">
 		                              <templateId root="2.16.840.1.113883.10.20.22.4.48.999999999" extension="2021-12-01"/>
 		                              <templateId root="2.16.840.1.113883.10.20.22.4.48.999999999"/>
 		                              <id root="af6ebdf2-d996-11e2-a5b8-f23c91lec05e"/>
-		                              <code code="TEMP-POLST-CPR" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" 
-		                                displayName="Cardiopulmonary Resuscitation Orders.  Follow these orders if patient has no pulse and is not breathing.">		                                  
-		                              </code>
+		                              <code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"/>
 		                              <statusCode code="completed"/>
 		                              <effectiveTime>
 		                                <low value="20110219"/>
@@ -597,17 +568,14 @@
 		                                </externalDocument>
 		                              </reference>
 		                            </observation>
-		                          </entryRelationship>
-		                          
+		                          </entryRelationship>		                          
 		                          <!-- CPR: NO --> 		                          
 		                          <entryRelationship typeCode="COMP">
 		                            <observation classCode="OBS" moodCode="EVN">
 		                              <templateId root="2.16.840.1.113883.10.20.22.4.48.999999999" extension="2021-12-01"/>
 		                              <templateId root="2.16.840.1.113883.10.20.22.4.48.999999999"/>
-		                              <id root="af6ebdf2-d996-11e2-a5b8-f23c91lec05e"/>
-		                              <code code="TEMP-POLST-CPR" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" 
-		                                displayName="Cardiopulmonary Resuscitation Orders.  Follow these orders if patient has no pulse and is not breathing.">		                                  
-		                              </code>
+		                              <id root="af6ebdf2-d996-11e2-a5b8-f23c91lec05e"/>		                              
+		                                <code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"/>
 		                              <statusCode code="completed"/>
 		                              <effectiveTime>
 		                                <low value="20110219"/>
@@ -636,27 +604,28 @@
 		                            </observation>
 		                          </entryRelationship>
 		                        </act>
-		                      </component>
+		                  </component>
+		                  
 		                      
 		                      <!-- B.  Initial Treatment Orders. 
-		                      The intent is that the user will select only one of the options in part B. This is an example of how each
-		                      will display. --> 
+		                      The contraints will be SHOULD with a primitive of PICK 1 of the 3 with the instructions
+		                      on the form that will guide the user on what to select. --> 
 		                      
 		                      <component typeCode="COMP">
 		                        <templateId/>		                       	                        
 		                        <act classCode="ACT" moodCode="INT">
 		                          <templateId/>
 		                          <id root="af6ebdf2-d996-11e2-a5b8-f23c91aec05e"/>	
-		                          <code></code>
+		                          <code code="TEMP-POLST-Treat" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" 
+		                            displayName="Initial Treatment Orders.  Follow these orders if patient has a pulse and/or is breathing">		                                  
+		                          </code>
 		                          <entryRelationship typeCode="COMP">
 		                            <!-- FULL Treatement --> 
 		                            <observation classCode="OBS" moodCode="EVN">
 		                              <templateId root="2.16.840.1.113883.10.20.22.4.48.8888888" extension="2021-12-01"/>
 		                              <templateId root="2.16.840.1.113883.10.20.22.4.48.8888888"/>
 		                              <id root="af6ebdf2-d996-11e2-a5b8-f23c91lec05e"/>
-		                              <code code="TEMP-POLST-Treat" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" 
-		                                displayName="Initial Treatment Orders.  Follow these orders if patient has a pulse and/or is breathing">		                                  
-		                              </code>
+		                              <code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"/>
 		                              <statusCode code="completed"/>
 		                              <effectiveTime>
 		                                <low value="20110219"/>
@@ -701,6 +670,57 @@
 		                            </observation>
 		                          </entryRelationship>
 		                          
+		                          <!-- Selective Treatement --> 
+		                          <entryRelationship typeCode="COMP">		                            		                           
+		                            <observation classCode="OBS" moodCode="EVN">
+		                              <templateId root="2.16.840.1.113883.10.20.22.4.48.8888888" extension="2021-12-01"/>
+		                              <templateId root="2.16.840.1.113883.10.20.22.4.48.8888888"/>
+		                              <id root="af6ebdf2-d996-11e2-a5b8-f23c91lec05e"/>
+		                              <code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"/>
+		                              <statusCode code="completed"/>
+		                              <effectiveTime>
+		                                <low value="20110219"/>
+		                                <high nullFlavor="NA"/>
+		                              </effectiveTime>
+		                              <value xsi:type="CD" code="TEMP-POLST-Treat-Select" displayName=" Selective Treatments. Goal: Attempt to restore function while avoiding intensive care and resuscitation efforts (ventilator,  
+		                                defibrillation and cardioversion). May use non-invasive positive airway pressure, antibiotics and IV fluids as indicated. Avoid intensive 
+		                                care. Transfer to hospital if treatment needs cannot be met in current location" codeSystem="2.16.840.1.113883.6.96" codeSystemName="LOINC" />
+		                              <author>
+		                                <templateId root="2.16.840.1.113883.10.20.22.4.119"/>
+		                                <time value="201308011235-0800"/>
+		                                <assignedAuthor>
+		                                  <id root="20cf14fb-b65c-4c8c-a54d-b0cca834c18c"/>
+		                                  <code code="163W00000X" displayName="Registered nurse" codeSystem="2.16.840.1.113883.6.101" codeSystemName="Healthcare Provider Taxonomy (HIPAA)"/>
+		                                  <assignedPerson>
+		                                    <name>
+		                                      <given>Nurse</given>
+		                                      <family>Nightingale</family>
+		                                      <suffix>RN</suffix>
+		                                    </name>
+		                                  </assignedPerson>
+		                                  <representedOrganization classCode="ORG">
+		                                    <id root="2.16.840.1.113883.19.5"/>
+		                                    <name>Good Health Hospital</name>
+		                                  </representedOrganization>
+		                                </assignedAuthor>
+		                              </author>
+		                              <participant typeCode="VRF">
+		                                <templateId root="2.16.840.1.113883.10.20.1.58"/>
+		                                <time value="201102019"/>
+		                                <participantRole>
+		                                  <id root="20cf14fb-b65c-4c8c-a54d-b0cca834c18c"/>
+		                                  <code code="207QA0505X" displayName="Adult Medicine" codeSystem="2.16.840.1.113883.6.101" codeSystemName="Healthcare Provider Taxonomy (HIPAA)"/>
+		                                  <playingEntity>
+		                                    <name>
+		                                      <prefix>Dr.</prefix>
+		                                      <family>Patricia</family>
+		                                      <given>Primary</given>
+		                                    </name>
+		                                  </playingEntity>
+		                                </participantRole>
+		                              </participant>                              
+		                            </observation>
+		                          </entryRelationship>		
 		                          
 		                          <!-- Comfort-Focused Treatement --> 
 		                          <entryRelationship typeCode="COMP">		                            		                           
@@ -708,9 +728,7 @@
 		                              <templateId root="2.16.840.1.113883.10.20.22.4.48.8888888" extension="2021-12-01"/>
 		                              <templateId root="2.16.840.1.113883.10.20.22.4.48.8888888"/>
 		                              <id root="af6ebdf2-d996-11e2-a5b8-f23c91lec05e"/>
-		                              <code code="TEMP-POLST-Treat" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" 
-		                                displayName="Initial Treatment Orders.  Follow these orders if patient has a pulse and/or is breathing">		                                  
-		                              </code>
+		                              <code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"/>
 		                              <statusCode code="completed"/>
 		                              <effectiveTime>
 		                                <low value="20110219"/>
@@ -754,10 +772,15 @@
 		                                </participantRole>
 		                              </participant>                              
 		                            </observation>
-		                          </entryRelationship>
-		                          
+		                          </entryRelationship>		                          
 		                        </act>
 		                      </component>
+		                  
+		                      
+		                          
+		                          
+		                          
+		                  
 		                      <!-- C.  Additional Orders or Instructions.
 		                      This component could be a text observation for a narrative text--> 
 		                 
@@ -765,9 +788,7 @@
 		                      This would look similar to parts A and B --> 
 		                      
 		                    </organizer>
-		                  </entryRelationship> 
-		              </act>
-		              </entry>		          
+		                </entry> 
 		    </section>
 		  </component>        
 		</structuredBody>
