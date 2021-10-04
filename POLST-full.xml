@@ -24,7 +24,7 @@
 <?xml-stylesheet type="text/xsl" href="CDA-POLST.xsl"?>
 
 <ClinicalDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="urn:hl7-org:v3 ../CDA/CDA%20Core%202.0%20GIT/schema/extensions/SDTC/infrastructure/cda/CDA_SDTC.xsd"
+	xsi:schemaLocation="urn:hl7-org:v3 ../HL7cda-core-2.0_SDTC/schema/extensions/SDTC/infrastructure/cda/CDA_SDTC.xsd"
 	xmlns="urn:hl7-org:v3" xmlns:sdtc="urn:hl7-org:sdtc" xmlns:voc="urn:hl7-org:v3/voc">
 	<realmCode code="US"/>
 	<typeId extension="POCD_HD000040" root="2.16.840.1.113883.1.3"/>
@@ -60,7 +60,7 @@
         langauge
         ********************************************************
     -->
-<!--	<languageCode code="en-US"/>-->
+	<!--	<languageCode code="en-US"/>-->
 	<!--
         ********************************************************
         Version of this document
@@ -68,7 +68,7 @@
 	     Add some guidance in a comment here too.
         ********************************************************
     -->
-<!--	<setId extension="sTT988" root="2.16.840.1.113883.19.5.99999.19"/>
+	<!--	<setId extension="sTT988" root="2.16.840.1.113883.19.5.99999.19"/>
 	<versionNumber value="1"/>-->
 	<!--
         ********************************************************
@@ -85,7 +85,7 @@
 						You can use an @nullFlavor.  At minimum, looks like we need City and Street but POLST only has state.  S
 						So, we'll want to discuss this with Amy. -->
 			<!-- HP is "primary home" from codeSystem 2.16.840.1.113883.5.1119 -->
-<!--			<addr use="HP">
+			<!--			<addr use="HP">
 				<streetAddressLine>2222 Home Street</streetAddressLine>
 				<city>Beaverton</city>
 				<state>OR</state>
@@ -95,7 +95,7 @@
 			</addr>-->
 			<!-- Tel in NOT on the National POLST Form 
 				ZG:  Mark as "Question for Amy".  We should ask her about this.-->
-<!--			<telecom value="tel:+1(555)555-2003" use="HP"/>-->
+			<!--			<telecom value="tel:+1(555)555-2003" use="HP"/>-->
 			<!-- HP is "primary home" from HL7 AddressUse 2.16.840.1.113883.5.1119 -->
 			<patient>
 				<name use="L">
@@ -111,10 +111,10 @@
 				<!-- Race in NOT on the National POLST Form 
 				ZG:  Let's check, I think they can send a null value. "NI" -->
 				<!-- CDC Race and Ethnicity code set contains the five minimum race and ethnicity categories defined by OMB Standards -->
-<!--				<raceCode code="2106-3" displayName="White" codeSystem="2.16.840.1.113883.6.238"
+				<!--				<raceCode code="2106-3" displayName="White" codeSystem="2.16.840.1.113883.6.238"
 					codeSystemName="Race &amp; Ethnicity - CDC"/>-->
 				<!-- The raceCode extension is only used if raceCode is valued -->
-<!--				<sdtc:raceCode code="2076-8" displayName="Hawaiian or Other Pacific Islander"
+				<!--				<sdtc:raceCode code="2076-8" displayName="Hawaiian or Other Pacific Islander"
 					codeSystem="2.16.840.1.113883.6.238" codeSystemName="Race &amp; Ethnicity - CDC"/>
 				<ethnicGroupCode code="2186-5" displayName="Not Hispanic or Latino"
 					codeSystem="2.16.840.1.113883.6.238" codeSystemName="Race &amp; Ethnicity - CDC"/>-->
@@ -144,7 +144,7 @@
 
 				<!-- Language in NOT on the National POLST Form. Is National POLST considering adding this ?
 				ZG:  Let's check, I think they can send a null value. "NI",  It says, The language, if present ...-->
-<!--				<languageCommunication>
+				<!--				<languageCommunication>
 					<languageCode code="en"/>
 					<!-\- "en" is ISO 639-1 alpha-2 code for "English" -\->
 					<modeCode code="ESP" displayName="Expressed spoken"
@@ -174,7 +174,7 @@
 				codeSystem="2.16.840.1.113883.6.101"
 				codeSystemName="Healthcare Provider Taxonomy (HIPAA)"/>
 			<!-- The National POLST Form does not have Health Care Provider address in p1,F., but this is SHALL in US Realm Header -->
-<!--			<addr>
+			<!--			<addr>
 				<streetAddressLine>1004 Healthcare Drive </streetAddressLine>
 				<city>Portland</city>
 				<state>OR</state>
@@ -210,7 +210,7 @@
 	<dataEnterer>
 		<assignedEntity>
 			<id extension="333777777" root="2.16.840.1.113883.4.6"/>
-<!--			<addr>
+			<!--			<addr>
 				<streetAddressLine>1007 Healthcare Drive</streetAddressLine>
 				<city>Portland</city>
 				<state>OR</state>
@@ -263,7 +263,7 @@
 			</representedOrganization>
 		</assignedEntity>
 	</informant>
-<!--	<informant>
+	<!--	<informant>
 		<assignedEntity>
 			<id extension="222223333" root="2.16.840.1.113883.4.6"/>
 			<addr>
@@ -286,7 +286,7 @@
 			</representedOrganization>
 		</assignedEntity>
 	</informant>-->
-<!--	<informant>
+	<!--	<informant>
 		<assignedEntity>
 			<id extension="333444444" root="2.16.840.1.113883.4.6"/>
 			<addr>
@@ -309,7 +309,7 @@
 			</representedOrganization>
 		</assignedEntity>
 	</informant>-->
-<!--	<informant>
+	<!--	<informant>
 		<assignedEntity>
 			<id extension="333222222" root="2.16.840.1.113883.4.6"/>
 			<addr>
@@ -332,7 +332,7 @@
 			</representedOrganization>
 		</assignedEntity>
 	</informant>-->
-<!--	<informant>
+	<!--	<informant>
 		<assignedEntity>
 			<id extension="222334444" root="2.16.840.1.113883.4.6"/>
 			<addr>
@@ -355,7 +355,7 @@
 			</representedOrganization>
 		</assignedEntity>
 	</informant>-->
-<!--	<informant>
+	<!--	<informant>
 		<relatedEntity classCode="PRS">
 			<!-\- classCode "PRS" represents a person with personal relationship with the patient -\->
 			<code code="SPS" displayName="SPOUSE" codeSystem="2.16.840.1.113883.1.11.19563"
@@ -407,7 +407,7 @@
 			<code code="207QA0505X" displayName="Adult Medicine"
 				codeSystem="2.16.840.1.113883.6.101"
 				codeSystemName="Healthcare Provider Taxonomy (HIPAA)"/>
-<!--			<addr>
+			<!--			<addr>
 				<streetAddressLine>1004 Healthcare Drive </streetAddressLine>
 				<city>Portland</city>
 				<state>OR</state>
@@ -443,7 +443,7 @@
 			<code code="207QA0505X" displayName="Adult Medicine"
 				codeSystem="2.16.840.1.113883.6.101"
 				codeSystemName="Healthcare Provider Taxonomy (HIPAA)"/>
-<!--			<addr>
+			<!--			<addr>
 				<streetAddressLine>1004 Healthcare Drive </streetAddressLine>
 				<city>Portland</city>
 				<state>OR</state>
@@ -492,7 +492,7 @@
 	<participant typeCode="IND">
 		<associatedEntity classCode="ECON">
 			<!-- classCode "ECON" represents an emergency contact -->
-<!--			<addr use="HP">
+			<!--			<addr use="HP">
 				<streetAddressLine>2222 Home Street</streetAddressLine>
 				<city>Beaverton</city>
 				<state>OR</state>
@@ -528,12 +528,122 @@
 					<code code="TEMP-POLST-ORDERS" codeSystem="2.16.840.1.113883.6.1"
 						codeSystemName="LOINC"/>
 					<title>POLST Portable Medical Orders</title>
-					<text>"This is a medical order, not an advance directive. For information about
-						POLST and to understand this document, visit: www.polst.org/form" </text>
 					
-					<!-- Add all text and form pieces here. -->
-					
-					
+					<!-- Mock-up of POLST Orders portion of the National POLST form. -->
+					<text>
+						<paragraph>This is a medical order, not an advance directive. For
+							information about POLST and to understand this document, visit:
+							www.polst.org/form </paragraph>
+						<paragraph styleCode="Bold">A. Cardiopulmonary Resuscitation Orders. </paragraph>
+						<paragraph>Follow these orders if patient has no pulse and is not breathing.(Pick 1)</paragraph>
+						<table border="1">
+							<thead>
+								<tr>
+									<td> </td>
+									<td>ORDER OPITIONS</td>	
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td> </td>
+									<td>YES CPR: Attempt Resuscitation, including mechanical
+										ventilation, defibrillation and cardioversion. (Requires
+										choosing Full Treatments in Section B)</td>
+								</tr>
+								<tr>
+									<td>SELECTED</td>
+									<td>NO CPR: Do Not Attempt Resuscitation. (May choose any option
+										in Section B) </td>
+								</tr>
+							</tbody>
+						</table> 
+						
+						<paragraph styleCode="Bold">B. Initial Treatment Orders.</paragraph>
+						<paragraph>Reassess and discuss interventions with patient or patient
+							representative regularly to ensure treatments are meeting patient’s care
+							goals. Consider a time-trial of interventions based on goals and specific
+							outcomes. </paragraph>
+						<paragraph>Follow these orders if patient has a pulse and/or is breathing. (Pick 1)</paragraph>
+						<table>
+							<thead>
+								<tr>
+									<td> </td>
+									<td>ORDER OPITIONS</td>	
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td> </td>
+									<td>Full Treatments (required if choose CPR in Section A). Goal:
+										Attempt to sustain life by all medically effective means.
+										Provide appropriate medical and surgical treatments as
+										indicated to attempt to prolong life, including intensive
+										care.)</td>
+								</tr>
+								<tr>
+									<td> </td>
+									<td>Selective Treatments. Goal: Attempt to restore function
+										while avoiding intensive care and resuscitation efforts
+										(ventilator, defibrillation and cardioversion). May use
+										non-invasive positive airway pressure, antibiotics and IV
+										fluids as indicated. Avoid intensive care. Transfer to
+										hospital if treatment needs cannot be met in current
+										location.</td>
+								</tr>
+								<tr>
+									<td>SELECTED</td>
+									<td>Comfort-focused Treatments. Goal: Maximize comfort through
+										symptom management; allow natural death. Use oxygen, suction
+										and manual treatment of airway obstruction as needed for
+										comfort. Avoid treatments listed in full or select
+										treatments unless consistent with comfort goal. Transfer to
+										hospital only if comfort cannot be achieved in current
+										setting. </td>
+								</tr>
+							</tbody>
+						</table><br/>
+						<paragraph styleCode="Bold">C. Additional Orders or Instructions</paragraph>
+						<paragraph>These orders are in addition to those above (e.g., blood
+							products, dialysis). [EMS protocols may limit emergency
+							responder ability to act on orders in this section.]</paragraph>
+						<table>
+							<tbody>
+								<tr>
+									<td> No additional orders given. </td>
+								</tr>
+							</tbody>
+						</table>
+						
+						<paragraph styleCode="Bold">D. Medically Assisted Nutrition</paragraph> 
+						<paragraph>Offer food by mouth if desired by patient, safe and tolerated. (Pick 1)</paragraph>
+						<table>
+							<thead>
+								<tr>
+									<td> </td>
+									<td>ORDER OPITIONS</td>	
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td> </td>
+									<td>Provide feeding through new or existing surgically-placed tubes</td>
+								</tr>
+								<tr>
+									<td> </td>
+									<td>Trial period for artificial nutrition but no surgically-placed tubes</td>
+								</tr>
+								<tr>
+									<td>SELECTED</td>
+									<td>No artificial means of nutrition desired</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td>Not discussed or no decision made (provide standard of care)</td>
+								</tr>
+							</tbody>
+						</table>
+					</text>
+
 					<entry>
 						<!-- Organizer groups the different orders on the form A,B,C,D.***
 							Organizer will be a SHALL*** -->
@@ -810,7 +920,7 @@
 												<low value="20110219"/>
 												<high nullFlavor="NA"/>
 											</effectiveTime>-->
-											
+
 											<!-- value is a response/answer LOINC code (order choice) -->
 											<value xsi:type="CD" code="TEMP-POLST-TREAT-SELECT"
 												codeSystem="2.16.840.1.113883.6.96"
@@ -945,8 +1055,7 @@
 									<templateId/>
 									<id root="af6ebdf2-d996-11e2-a5b8-f23c91aec05e"/>
 									<code code="TEMP-POLST-ADD-ORDERS"
-										codeSystem="2.16.840.1.113883.6.1" 
-										codeSystemName="LOINC"
+										codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"
 										displayName="Additional Orders or Instructions. These orders are in addition to those above (e.g., blood products, dialysis)."> </code>
 									<text>
 										<!--Text is a SHOULD 
@@ -1065,8 +1174,7 @@
 									<templateId/>
 									<id root="af6ebdf2-d996-11e2-a5b8-f23c91aec05e"/>
 									<code code="TEMP-POLST-MED-NUTR"
-										codeSystem="2.16.840.1.113883.6.1" 
-										codeSystemName="LOINC"
+										codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"
 										displayName="Medically Assisted Nutrition. Offer food by mouth if desired by patient, safe and tolerated."> </code>
 
 
@@ -1084,22 +1192,22 @@
 											<code code="ASSERTION"
 												codeSystem="2.16.840.1.113883.5.4"/>
 											<statusCode code="completed"/>
-											
+
 											<!--<effectiveTime> goes here if needed-->
-											
+
 											<!-- value is a response/answer LOINC code (order choice) -->
 											<value xsi:type="CD" code="TEMP-POLST-MED-NUTR-FEED"
-												codeSystem="2.16.840.1.113883.6.1" 
+												codeSystem="2.16.840.1.113883.6.1"
 												codeSystemName="LOINC"
 												displayName="Provide feeding through new or existing surgically-placed tubes."/>
-											
+
 											<!--<author> goes here if needed-->
 											<!--<participant typeCode="VRF"> goes here if needed-->
 											<!--<reference typeCode="REFR"> goes here if needed-->
 
 										</observation>
 									</entryRelationship>
-									
+
 									<!-- MED-NUTR: Trial period -->
 									<entryRelationship typeCode="COMP">
 										<observation classCode="OBS" moodCode="EVN">
@@ -1112,23 +1220,23 @@
 											<code code="ASSERTION"
 												codeSystem="2.16.840.1.113883.5.4"/>
 											<statusCode code="completed"/>
-											
+
 											<!--<effectiveTime> goes here if needed-->
-											
+
 											<!-- value is a response/answer LOINC code (order choice) -->
 											<value xsi:type="CD" code="TEMP-POLST-MED-NUTR-TRIAL"
 												codeSystem="2.16.840.1.113883.6.96"
 												codeSystemName="LOINC"
 												displayName="Trial period for artificial nutrition but no surgically-placed tubes"/>
-											
+
 											<!--<author> goes here if needed-->
 											<!--<participant typeCode="VRF"> goes here if needed-->
 											<!--<reference typeCode="REFR"> goes here if needed-->
 
 										</observation>
 									</entryRelationship>
-									
-									
+
+
 									<!-- MED-NUTR: No artificial feeding  -->
 									<entryRelationship typeCode="COMP">
 										<!-- Observation "asserts" either YES or NO -->
@@ -1143,23 +1251,23 @@
 											<code code="ASSERTION"
 												codeSystem="2.16.840.1.113883.5.4"/>
 											<statusCode code="completed"/>
-											
+
 											<!--<effectiveTime> goes here if needed-->
-											
+
 											<!-- value is a response/answer LOINC code (order choice) -->
 											<value xsi:type="CD" code="TEMP-POLST-MED-NUTR-NO"
-												codeSystem="2.16.840.1.113883.6.1" 
+												codeSystem="2.16.840.1.113883.6.1"
 												codeSystemName="LOINC"
 												displayName="No artificial means of nutrition desired."/>
-											
+
 											<!--<author> goes here if needed-->
 											<!--<participant typeCode="VRF"> goes here if needed-->
 											<!--<reference typeCode="REFR"> goes here if needed-->
-											
+
 										</observation>
 									</entryRelationship>
-									
-									
+
+
 									<!-- MED-NUTR: Not discussed  -->
 									<entryRelationship typeCode="COMP">
 										<!-- Observation "asserts" either YES or NO -->
@@ -1174,19 +1282,19 @@
 											<code code="ASSERTION"
 												codeSystem="2.16.840.1.113883.5.4"/>
 											<statusCode code="completed"/>
-											
+
 											<!--<effectiveTime> goes here if needed-->
-											
+
 											<!-- value is a response/answer LOINC code (order choice) -->
 											<value xsi:type="CD" code="TEMP-POLST-MED-NUTR-ND"
-												codeSystem="2.16.840.1.113883.6.1" 
+												codeSystem="2.16.840.1.113883.6.1"
 												codeSystemName="LOINC"
 												displayName="Not discussed or no decision made (provide standard of care)."/>
-											
+
 											<!--<author> goes here if needed-->
 											<!--<participant typeCode="VRF"> goes here if needed-->
 											<!--<reference typeCode="REFR"> goes here if needed-->
-											
+
 										</observation>
 									</entryRelationship>
 								</act>
