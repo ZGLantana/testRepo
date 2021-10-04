@@ -23,8 +23,8 @@
 
 <?xml-stylesheet type="text/xsl" href="../my_samples/CDA-Lantana.xsl"?>
 <ClinicalDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:schemaLocation="urn:hl7-org:v3 file:/C:/Users/Diana.TINKER/Documents/Lantana/SOURCE-CONTROL/CDA/HL7cda-core-2.0_SDTC/schema/extensions/SDTC/infrastructure/cda/CDA_SDTC.xsd"
- xmlns="urn:hl7-org:v3" xmlns:sdtc="urn:hl7-org:sdtc" xmlns:voc="urn:hl7-org:v3/voc">
+	xsi:schemaLocation="urn:hl7-org:v3 file:/C:/Users/Diana.TINKER/Documents/Lantana/SOURCE-CONTROL/CDA/HL7cda-core-2.0_SDTC/schema/extensions/SDTC/infrastructure/cda/CDA_SDTC.xsd"
+	xmlns="urn:hl7-org:v3" xmlns:sdtc="urn:hl7-org:sdtc" xmlns:voc="urn:hl7-org:v3/voc">
 	<realmCode code="US"/>
 	<typeId extension="POCD_HD000040" root="2.16.840.1.113883.1.3"/>
 	<!-- US Realm Header: 2.16.840.1.113883.10.20.22.1.1/2015-08-01-->
@@ -516,30 +516,35 @@
              ********************************************************
          -->
 		<structuredBody>
-			<!--Do we need to add in authorization xml? -->
 
 			<!-- ******************************************************** CDA Body ******************************************************** -->
 
 			<component>
+				<!--
+            	 ********************************************************
+             	POLST Orders Section
+             	********************************************************
+         	-->
 				<section>
 					<templateId root="2.16.840.1.113883.10.20.22.2.21.999999" extension="2021-12-01"/>
 					<templateId root="2.16.840.1.113883.10.20.22.2.21.99999999"/>
 					<code code="TEMP-POLST-ORDERS" codeSystem="2.16.840.1.113883.6.1"
 						codeSystemName="LOINC"/>
 					<title>POLST Portable Medical Orders</title>
-					
+
 					<!-- Mock-up of POLST Orders portion of the National POLST form. -->
 					<text>
 						<paragraph>This is a medical order, not an advance directive. For
 							information about POLST and to understand this document, visit:
 							www.polst.org/form </paragraph>
 						<paragraph styleCode="Bold">A. Cardiopulmonary Resuscitation Orders. </paragraph>
-						<paragraph>Follow these orders if patient has no pulse and is not breathing.(Pick 1)</paragraph>
+						<paragraph>Follow these orders if patient has no pulse and is not
+							breathing.(Pick 1)</paragraph>
 						<table border="1">
 							<thead>
 								<tr>
 									<td> </td>
-									<td>ORDER OPITIONS</td>	
+									<td>ORDER OPITIONS</td>
 								</tr>
 							</thead>
 							<tbody>
@@ -555,19 +560,19 @@
 										in Section B) </td>
 								</tr>
 							</tbody>
-						</table> 
-						
+						</table>
 						<paragraph styleCode="Bold">B. Initial Treatment Orders.</paragraph>
 						<paragraph>Reassess and discuss interventions with patient or patient
 							representative regularly to ensure treatments are meeting patient’s care
-							goals. Consider a time-trial of interventions based on goals and specific
-							outcomes. </paragraph>
-						<paragraph>Follow these orders if patient has a pulse and/or is breathing. (Pick 1)</paragraph>
+							goals. Consider a time-trial of interventions based on goals and
+							specific outcomes. </paragraph>
+						<paragraph>Follow these orders if patient has a pulse and/or is breathing.
+							(Pick 1)</paragraph>
 						<table>
 							<thead>
 								<tr>
 									<td> </td>
-									<td>ORDER OPITIONS</td>	
+									<td>ORDER OPITIONS</td>
 								</tr>
 							</thead>
 							<tbody>
@@ -603,8 +608,8 @@
 						</table><br/>
 						<paragraph styleCode="Bold">C. Additional Orders or Instructions</paragraph>
 						<paragraph>These orders are in addition to those above (e.g., blood
-							products, dialysis). [EMS protocols may limit emergency
-							responder ability to act on orders in this section.]</paragraph>
+							products, dialysis). [EMS protocols may limit emergency responder
+							ability to act on orders in this section.]</paragraph>
 						<table>
 							<tbody>
 								<tr>
@@ -612,32 +617,35 @@
 								</tr>
 							</tbody>
 						</table>
-						
-						<paragraph styleCode="Bold">D. Medically Assisted Nutrition</paragraph> 
-						<paragraph>Offer food by mouth if desired by patient, safe and tolerated. (Pick 1)</paragraph>
+						<paragraph styleCode="Bold">D. Medically Assisted Nutrition</paragraph>
+						<paragraph>Offer food by mouth if desired by patient, safe and tolerated.
+							(Pick 1)</paragraph>
 						<table>
 							<thead>
 								<tr>
 									<td> </td>
-									<td>ORDER OPITIONS</td>	
+									<td>ORDER OPITIONS</td>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
 									<td> </td>
-									<td>Provide feeding through new or existing surgically-placed tubes</td>
+									<td>Provide feeding through new or existing surgically-placed
+										tubes</td>
 								</tr>
 								<tr>
 									<td> </td>
-									<td>Trial period for artificial nutrition but no surgically-placed tubes</td>
+									<td>Trial period for artificial nutrition but no
+										surgically-placed tubes</td>
 								</tr>
 								<tr>
 									<td>SELECTED</td>
 									<td>No artificial means of nutrition desired</td>
 								</tr>
 								<tr>
-									<td></td>
-									<td>Not discussed or no decision made (provide standard of care)</td>
+									<td/>
+									<td>Not discussed or no decision made (provide standard of
+										care)</td>
 								</tr>
 							</tbody>
 						</table>
@@ -1300,6 +1308,45 @@
 							</component>
 						</organizer>
 					</entry>
+				</section>
+			</component>
+
+			<component>
+				<!--
+            	 ********************************************************
+             	POLST Instructions Section
+             	********************************************************
+         	-->
+
+				<section>
+					<templateId root="2.16.840.1.113883.10.20.22.2.21.999999" extension="2021-12-01"/>
+					<templateId root="2.16.840.1.113883.10.20.22.2.21.99999998"/>
+					<code code="TEMP-POLST-INSTR" codeSystem="2.16.840.1.113883.6.1"
+						codeSystemName="LOINC"/>
+					<title>POLST Document Instructions</title>
+
+					<!-- Mock-up of POLST Instructions portion of the National POLST form/document. -->
+
+					<text>
+						<paragraph styleCode="Bold">General Instructions </paragraph>
+						<content> Paragraph #1 </content><br/><br/>
+						<content>
+							<content styleCode="Bold"> Bold Sub-heading </content><br/><br/> If
+							Paragraph #2: </content><br/>
+						<list listType="ordered">
+							<item>Item</item>
+							<item>Item</item>
+							<item>Itemn</item>
+							<item>Item</item>
+							<item>Itemy</item>
+							<item>Item</item>
+						</list><br/>
+						<content> Paragraph #3 </content><br/><br/>
+						<content styleCode="Bold"> Bold content </content><br/><br/>
+						<content styleCode="Bold"> Bold content </content><br/><br/>
+						<content> Paragraph #4 </content><br/><br/>
+						<content> Paragraph #5 </content><br/><br/>
+					</text>
 				</section>
 			</component>
 		</structuredBody>
