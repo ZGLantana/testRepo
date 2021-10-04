@@ -1326,6 +1326,10 @@
 					<title>POLST Document Instructions</title>
 
 					<!-- Mock-up of POLST Instructions portion of the National POLST form/document. -->
+					<!--Healthcare Agent Authority 20200610 entry template in Personal Advance Care Plan (PACP) Document IG 
+					[observation: identifier urn:hl7ii:2.16.840.1.113883.4.823.1.4.4:2020-06-10 (open)]
+					Draft as part of Personal Advance Care Plan V2
+					...is an observation template-->
 
 					<text>
 						<paragraph styleCode="Bold">General Instructions </paragraph>
