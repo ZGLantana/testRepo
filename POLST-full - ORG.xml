@@ -23,7 +23,7 @@
 
 <?xml-stylesheet type="text/xsl" href="../my_samples/CDA-Lantana.xsl"?>
 <ClinicalDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="urn:hl7-org:v3 file:/C:/Users/Diana.TINKER/Documents/Lantana/SOURCE-CONTROL/CDA/HL7cda-core-2.0_SDTC/schema/extensions/SDTC/infrastructure/cda/CDA_SDTC.xsd"
+	xsi:schemaLocation="urn:hl7-org:v3 ../HL7cda-core-2.0_SDTC/schema/extensions/SDTC/infrastructure/cda/CDA_SDTC.xsd"
 	xmlns="urn:hl7-org:v3" xmlns:sdtc="urn:hl7-org:sdtc" xmlns:voc="urn:hl7-org:v3/voc">
 	<realmCode code="US"/>
 	<typeId extension="POCD_HD000040" root="2.16.840.1.113883.1.3"/>
@@ -509,6 +509,8 @@
 		</associatedEntity>
 	</participant>
 
+
+	<!-- ******************************************************** CDA Body ******************************************************** -->
 	<component>
 		<!--
              ********************************************************
@@ -517,22 +519,19 @@
          -->
 		<structuredBody>
 
-			<!-- ******************************************************** CDA Body ******************************************************** -->
-
 			<component>
 				<!--
             	 ********************************************************
-             	POLST Orders Section
+             	ePOLST Medical Orders Section
              	********************************************************
          	-->
 				<section>
-					<templateId root="2.16.840.1.113883.10.20.22.2.21.999999" extension="2021-12-01"/>
-					<templateId root="2.16.840.1.113883.10.20.22.2.21.99999999"/>
+					<templateId root="2.16.840.1.113883.9.275.2.1"/>
 					<code code="TEMP-POLST-ORDERS" codeSystem="2.16.840.1.113883.6.1"
 						codeSystemName="LOINC"/>
-					<title>POLST Portable Medical Orders</title>
 
 					<!-- Mock-up of POLST Orders portion of the National POLST form. -->
+					<title>ePOLST Portable Medical Orders</title>
 					<text>
 						<paragraph>This is a medical order, not an advance directive. For
 							information about POLST and to understand this document, visit:
@@ -650,28 +649,32 @@
 							</tbody>
 						</table>
 					</text>
-
+					<!--This Section has 1 Entry. The Entry is an Organizer template that groups the different orders on the form, using 4 components A,B,C,D.-->
 					<entry>
-						<!-- Organizer groups the different orders on the form A,B,C,D.***
-							Organizer will be a SHALL*** -->
+						<!-- Organizer is a SHALL  -->
+						<!-- Question: Why is moodCode="EVN" ?  -->
+						<!-- Question: Why is statusCode code="completed" ?  -->
 						<organizer classCode="CLUSTER" moodCode="EVN">
-							<templateId root="2.16.840.1.113883.10.20.22.4.108.999999999"
-								extension="2021-12-01"/>
+							<templateId root="2.16.840.1.113883.9.275.3.1"/>
 							<statusCode code="completed"/>
 
 							<!-- A. Cardiopulmonary Resuscitation Orders component will be a SHALL-->
 							<component typeCode="COMP">
-								<templateId root="2.16.840.1.113883.10.20.22.4.108.999"
-									extension="2021-12-01"/>
-								<!-- ZG Note: Use the ACT to bind to Planned Act for the Order -->
+								<!--Question: Do we need a templateId here?-->
+								<!--<templateId root="2.16.840.1.113883.10.20.22.4.108.999"
+									extension="2021-12-01"/>-->
 								<act classCode="ACT" moodCode="INT">
-									<templateId/>
-									<id root="af6ebdf2-d996-11e2-a5b8-f23c91aec05e"/>
+									<!--Question: Do we need a templateId here?-->
+									<!--<templateId/>
+									<id root="af6ebdf2-d996-11e2-a5b8-f23c91aec05e"/>-->
 									<code code="TEMP-POLST-CPR" codeSystem="2.16.840.1.113883.6.1"
 										codeSystemName="LOINC"
-										displayName="Cardiopulmonary Resuscitation Orders. Follow these orders if patient has no pulse and is not breathing."> </code>
+										displayName="Cardiopulmonary Resuscitation Orders."> </code>
 									<text>
-										<!--Text is a SHOULD 
+										<!--Question: Can we use the originalText convention here and refer to a "blob" of text specified elsewhere? -->
+										<!--Question: What does a primitive constrint look like in XML?
+											Text is a SHOULD 
+											"Follow these orders if patient has no pulse and is not breathing"
 											"Pick 1 CPR Order. YES CPR requires choosing Full Treatments in Initial Treatment Orders section.
 											NO CPR may choose any option in Initial Treatment Orders section."-->
 									</text>
@@ -680,89 +683,26 @@
 										<!-- Observation "asserts" the order choice of YES-->
 										<observation classCode="OBS" moodCode="EVN">
 											<!-- EVN becasue discussion happened and result of discussion is Y or N -->
-											<templateId
-												root="2.16.840.1.113883.10.20.22.4.48.999999999"
-												extension="2021-12-01"/>
-											<templateId
+											<!--Question: Do we need a templateId & ID here?-->
+											<!--											<templateId
 												root="2.16.840.1.113883.10.20.22.4.48.999999999"/>
-											<id root="af6ebdf2-d996-11e2-a5b8-f23c91lec05e"/>
+											<id root="af6ebdf2-d996-11e2-a5b8-f23c91lec05e"/>		-->
 											<code code="ASSERTION"
 												codeSystem="2.16.840.1.113883.5.4"/>
+											<!-- HL7 ActCode; code=ASSERTION (Code Description: Refines classCode OBS ...) -->
 											<statusCode code="completed"/>
 											<!--POLST does not need effectiveTime here-->
-											<!--<effectiveTime>
-		                                <low value="20110219"/>
-		                                <high nullFlavor="NA"/>
-		                              </effectiveTime>-->
+
 											<!-- value is a response/answer LOINC code (order choice) -->
 											<value xsi:type="CD" code="TEMP-POLST-CPR-YES"
 												codeSystem="2.16.840.1.113883.6.1"
 												codeSystemName="LOINC"
 												displayName="YES CPR: Attempt Resuscitation, including mechanical ventilation, defibrillation and cardioversion."/>
 											<!--POLST does not need Author here-->
-											<!-- <author>
-												<templateId root="2.16.840.1.113883.10.20.22.4.119"/>
-												<time value="201308011235-0800"/>
-												<assignedAuthor>
-												<id root="20cf14fb-b65c-4c8c-a54d-b0cca834c18c"/>
-												<code code="163W00000X"
-												displayName="Registered nurse"
-												codeSystem="2.16.840.1.113883.6.101"
-												codeSystemName="Healthcare Provider Taxonomy (HIPAA)"/>
-												<assignedPerson>
-												<name>
-												<given>Nurse</given>
-												<family>Nightingale</family>
-												<suffix>RN</suffix>
-												</name>
-												</assignedPerson>
-												<representedOrganization classCode="ORG">
-												<id root="2.16.840.1.113883.19.5"/>
-												<name>Good Health Hospital</name>
-												</representedOrganization>
-												</assignedAuthor>
-											</author>-->
+
 											<!--POLST does not need Participant here-->
-											<!--<participant typeCode="VRF">
-												<templateId root="2.16.840.1.113883.10.20.1.58"/>
-												<time value="201102019"/>
-												<participantRole>
-												<id root="20cf14fb-b65c-4c8c-a54d-b0cca834c18c"/>
-												<code code="207QA0505X"
-												displayName="Adult Medicine"
-												codeSystem="2.16.840.1.113883.6.101"
-												codeSystemName="Healthcare Provider Taxonomy (HIPAA)"/>
-												<playingEntity>
-												<name>
-												<prefix>Dr.</prefix>
-												<family>Patricia</family>
-												<given>Primary</given>
-												</name>
-												</playingEntity>
-												</participantRole>
-											</participant>-->
-											<!--POLST does not need Participant here-->
-											<!--											<participant typeCode="CST">
-												<participantRole classCode="AGNT">
-												<addr>
-												<streetAddressLine>1004 Health
-												Drive</streetAddressLine>
-												<city>Portland</city>
-												<state>OR</state>
-												<postalCode>99123</postalCode>
-												<country>US</country>
-												</addr>
-												<telecom use="WP" value="tel:+1(555)555-1004"/>
-												<playingEntity>
-												<name>
-												<prefix>Dr.</prefix>
-												<family>Patricia</family>
-												<given>Primary</given>
-												</name>
-												</playingEntity>
-												</participantRole>
-											</participant>-->
-											<!--POLST PDF option-->
+
+											<!--Question: Is this a viable POLST PDF option?-->
 											<reference typeCode="REFR">
 												<seperatableInd value="false"/>
 												<externalDocument>
@@ -779,272 +719,110 @@
 									<entryRelationship typeCode="COMP">
 										<!-- Observation "asserts" the order choice of NO -->
 										<observation classCode="OBS" moodCode="EVN">
-											<templateId
+											<!--Question: Do we need a templateId & ID here?-->
+											<!--											<templateId
 												root="2.16.840.1.113883.10.20.22.4.48.999999999"
 												extension="2021-12-01"/>
 											<templateId
 												root="2.16.840.1.113883.10.20.22.4.48.999999999"/>
-											<id root="af6ebdf2-d996-11e2-a5b8-f23c91lec05e"/>
+											<id root="af6ebdf2-d996-11e2-a5b8-f23c91lec05e"/>-->
 											<code code="ASSERTION"
 												codeSystem="2.16.840.1.113883.5.4"/>
 											<statusCode code="completed"/>
-											<effectiveTime>
-												<low value="20110219"/>
-												<high nullFlavor="NA"/>
-											</effectiveTime>
 											<!-- value is a response/answer LOINC code (order choice) -->
 											<value xsi:type="CD" code="TEMP-POLST-CPR-NO"
 												codeSystem="2.16.840.1.113883.6.1"
 												codeSystemName="LOINC"
 												displayName="NO CPR: Do Not Attempt Resuscitation."/>
 											<!--POLST does not need Author here-->
-											<!--											<author>
-												<templateId root="2.16.840.1.113883.10.20.22.4.119"/>
-												<time value="201308011235-0800"/>
-												<assignedAuthor>
-												<id root="20cf14fb-b65c-4c8c-a54d-b0cca834c18c"/>
-												<code code="163W00000X"
-												displayName="Registered nurse"
-												codeSystem="2.16.840.1.113883.6.101"
-												codeSystemName="Healthcare Provider Taxonomy (HIPAA)"/>
-												<assignedPerson>
-												<name>
-												<given>Nurse</given>
-												<family>Nightingale</family>
-												<suffix>RN</suffix>
-												</name>
-												</assignedPerson>
-												<representedOrganization classCode="ORG">
-												<id root="2.16.840.1.113883.19.5"/>
-												<name>Good Health Hospital</name>
-												</representedOrganization>
-												</assignedAuthor>
-											</author>-->
+
 										</observation>
 									</entryRelationship>
 								</act>
 							</component>
 
-
 							<!-- B. Initial Treatment Orders. 
 		                      	The contraints will be SHOULD with a primitive of PICK 1 of the 3 with the instructions
 		                      	on the form that will guide the user on what to select. -->
 							<component typeCode="COMP">
-								<templateId/>
-								<!-- ZG Note: Use the ACT to bind to Planned Act for the Order -->
+								<!--Question: Do we need a templateId & ID here?-->
+								<!--								<templateId/>-->
 								<act classCode="ACT" moodCode="INT">
-									<templateId/>
-									<id root="af6ebdf2-d996-11e2-a5b8-f23c91aec05e"/>
+									<!--Question: Do we need a templateId & ID here?-->
+									<!--									<templateId/>
+									<id root="af6ebdf2-d996-11e2-a5b8-f23c91aec05e"/>-->
 									<code code="TEMP-POLST-TREAT" codeSystem="2.16.840.1.113883.6.1"
 										codeSystemName="LOINC"
 										displayName="Initial Treatment Orders. Follow these orders if patient has a pulse and/or is breathing."> </code>
 									<text>
-										<!--Text is a SHOULD 
-											"Pick 1 CPR Order. Reassess and discuss interventions with patient or patient representative regularly 
-											to ensure treatments are meeting patient’s care goals. Consider a time-trial of interventions based on goals 
-											and specific outcomes."-->
+										<!--Question: Does recommended text go here? -->
 									</text>
 
 									<entryRelationship typeCode="COMP">
 										<!-- FULL Treatement order option-->
 										<observation classCode="OBS" moodCode="EVN">
-											<templateId
+											<!--Question: Do we need a templateId & ID here?-->
+											<!--											<templateId
 												root="2.16.840.1.113883.10.20.22.4.48.8888888"
 												extension="2021-12-01"/>
 											<templateId
 												root="2.16.840.1.113883.10.20.22.4.48.8888888"/>
-											<id root="af6ebdf2-d996-11e2-a5b8-f23c91lec05e"/>
+											<id root="af6ebdf2-d996-11e2-a5b8-f23c91lec05e"/>-->
 											<code code="ASSERTION"
 												codeSystem="2.16.840.1.113883.5.4"/>
 											<statusCode code="completed"/>
-											<!-- <effectiveTime>
-												<low value="20110219"/>
-												<high nullFlavor="NA"/>
-											</effectiveTime>-->
 											<!-- value is a response/answer LOINC code (order choice) -->
 											<value xsi:type="CD" code="TEMP-POLST-TREAT-FULL"
 												codeSystem="2.16.840.1.113883.6.96"
 												codeSystemName="LOINC"
 												displayName="Full Treatments (required if choose CPR in Section A). Goal: Attempt to sustain life by all medically effective means. Provide appropriate medical and surgical treatments as indicated to attempt to prolong life, including intensive care."/>
-											<!--<author>
-												<templateId root="2.16.840.1.113883.10.20.22.4.119"/>
-												<time value="201308011235-0800"/>
-												<assignedAuthor>
-												<id root="20cf14fb-b65c-4c8c-a54d-b0cca834c18c"/>
-												<code code="163W00000X"
-												displayName="Registered nurse"
-												codeSystem="2.16.840.1.113883.6.101"
-												codeSystemName="Healthcare Provider Taxonomy (HIPAA)"/>
-												<assignedPerson>
-												<name>
-												<given>Nurse</given>
-												<family>Nightingale</family>
-												<suffix>RN</suffix>
-												</name>
-												</assignedPerson>
-												<representedOrganization classCode="ORG">
-												<id root="2.16.840.1.113883.19.5"/>
-												<name>Good Health Hospital</name>
-												</representedOrganization>
-												</assignedAuthor>
-											</author>-->
 
-											<!--											<participant typeCode="VRF">
-												<templateId root="2.16.840.1.113883.10.20.1.58"/>
-												<time value="201102019"/>
-												<participantRole>
-												<id root="20cf14fb-b65c-4c8c-a54d-b0cca834c18c"/>
-												<code code="207QA0505X"
-												displayName="Adult Medicine"
-												codeSystem="2.16.840.1.113883.6.101"
-												codeSystemName="Healthcare Provider Taxonomy (HIPAA)"/>
-												<playingEntity>
-												<name>
-												<prefix>Dr.</prefix>
-												<family>Patricia</family>
-												<given>Primary</given>
-												</name>
-												</playingEntity>
-												</participantRole>
-											</participant>-->
 										</observation>
 									</entryRelationship>
 
 									<!-- Selective Treatement -->
 									<entryRelationship typeCode="COMP">
 										<observation classCode="OBS" moodCode="EVN">
-											<templateId
+											<!--Question: Do we need a templateId & ID here?-->
+											<!--											<templateId
 												root="2.16.840.1.113883.10.20.22.4.48.8888888"
 												extension="2021-12-01"/>
 											<templateId
 												root="2.16.840.1.113883.10.20.22.4.48.8888888"/>
-											<id root="af6ebdf2-d996-11e2-a5b8-f23c91lec05e"/>
+											<id root="af6ebdf2-d996-11e2-a5b8-f23c91lec05e"/>-->
 											<code code="ASSERTION"
 												codeSystem="2.16.840.1.113883.5.4"/>
 											<statusCode code="completed"/>
-
-											<!--											<effectiveTime>
-												<low value="20110219"/>
-												<high nullFlavor="NA"/>
-											</effectiveTime>-->
 
 											<!-- value is a response/answer LOINC code (order choice) -->
 											<value xsi:type="CD" code="TEMP-POLST-TREAT-SELECT"
 												codeSystem="2.16.840.1.113883.6.96"
 												codeSystemName="LOINC"
-												displayName="Selective Treatments. Goal: Attempt to restore function while avoiding intensive care and resuscitation efforts (ventilator, defibrillation and cardioversion). May use non-invasive positive airway pressure, antibiotics and IV fluids as indicated. Avoid intensive care. Transfer to hospital if treatment needs cannot be met in current location."/>
-
-											<!--											<author>
-												<templateId root="2.16.840.1.113883.10.20.22.4.119"/>
-												<time value="201308011235-0800"/>
-												<assignedAuthor>
-												<id root="20cf14fb-b65c-4c8c-a54d-b0cca834c18c"/>
-												<code code="163W00000X"
-												displayName="Registered nurse"
-												codeSystem="2.16.840.1.113883.6.101"
-												codeSystemName="Healthcare Provider Taxonomy (HIPAA)"/>
-												<assignedPerson>
-												<name>
-												<given>Nurse</given>
-												<family>Nightingale</family>
-												<suffix>RN</suffix>
-												</name>
-												</assignedPerson>
-												<representedOrganization classCode="ORG">
-												<id root="2.16.840.1.113883.19.5"/>
-												<name>Good Health Hospital</name>
-												</representedOrganization>
-												</assignedAuthor>
-											</author>-->
-
-											<!--											<participant typeCode="VRF">
-												<templateId root="2.16.840.1.113883.10.20.1.58"/>
-												<time value="201102019"/>
-												<participantRole>
-												<id root="20cf14fb-b65c-4c8c-a54d-b0cca834c18c"/>
-												<code code="207QA0505X"
-												displayName="Adult Medicine"
-												codeSystem="2.16.840.1.113883.6.101"
-												codeSystemName="Healthcare Provider Taxonomy (HIPAA)"/>
-												<playingEntity>
-												<name>
-												<prefix>Dr.</prefix>
-												<family>Patricia</family>
-												<given>Primary</given>
-												</name>
-												</playingEntity>
-												</participantRole>
-											</participant>-->
-
+												displayName="Selective Treatments. Goal: Attempt to restore function while avoiding intensive care and resuscitation efforts (ventilator, defibrillation and cardioversion). May use non-invasive positive airway pressure, antibiotics and IV fluids as indicated. Avoid intensive care. Transfer to hospital if treatment needs cannot be met in current location."
+											/>
 										</observation>
 									</entryRelationship>
 
 									<!-- Comfort-Focused Treatement -->
 									<entryRelationship typeCode="COMP">
 										<observation classCode="OBS" moodCode="EVN">
-											<templateId
+											<!--Question: Do we need a templateId & ID here?-->
+											<!--											<templateId
 												root="2.16.840.1.113883.10.20.22.4.48.8888888"
 												extension="2021-12-01"/>
 											<templateId
 												root="2.16.840.1.113883.10.20.22.4.48.8888888"/>
-											<id root="af6ebdf2-d996-11e2-a5b8-f23c91lec05e"/>
+											<id root="af6ebdf2-d996-11e2-a5b8-f23c91lec05e"/>-->
 											<code code="ASSERTION"
 												codeSystem="2.16.840.1.113883.5.4"/>
 											<statusCode code="completed"/>
-
-											<!--											<effectiveTime>
-												<low value="20110219"/>
-												<high nullFlavor="NA"/>
-											</effectiveTime>-->
 
 											<!-- value is a response/answer LOINC code (order choice) -->
 											<value xsi:type="CD" code="TEMP-POLST-TREAT-COMFORT"
 												codeSystem="2.16.840.1.113883.6.96"
 												codeSystemName="LOINC"
-												displayName="Comfort-focused Treatments. Goal: Maximize comfort through symptom management; allow natural death. Use oxygen, suction  and manual treatment of airway obstruction as needed for comfort. Avoid treatments listed in  full or select treatments unless consistent  with comfort goal. Transfer to hospital only if comfort cannot be achieved in current setting."/>
-
-											<!--<author>
-												<templateId root="2.16.840.1.113883.10.20.22.4.119"/>
-												<time value="201308011235-0800"/>
-												<assignedAuthor>
-												<id root="20cf14fb-b65c-4c8c-a54d-b0cca834c18c"/>
-												<code code="163W00000X"
-												displayName="Registered nurse"
-												codeSystem="2.16.840.1.113883.6.101"
-												codeSystemName="Healthcare Provider Taxonomy (HIPAA)"/>
-												<assignedPerson>
-												<name>
-												<given>Nurse</given>
-												<family>Nightingale</family>
-												<suffix>RN</suffix>
-												</name>
-												</assignedPerson>
-												<representedOrganization classCode="ORG">
-												<id root="2.16.840.1.113883.19.5"/>
-												<name>Good Health Hospital</name>
-												</representedOrganization>
-												</assignedAuthor>
-											</author>-->
-
-											<!--											<participant typeCode="VRF">
-												<templateId root="2.16.840.1.113883.10.20.1.58"/>
-												<time value="201102019"/>
-												<participantRole>
-												<id root="20cf14fb-b65c-4c8c-a54d-b0cca834c18c"/>
-												<code code="207QA0505X"
-												displayName="Adult Medicine"
-												codeSystem="2.16.840.1.113883.6.101"
-												codeSystemName="Healthcare Provider Taxonomy (HIPAA)"/>
-												<playingEntity>
-												<name>
-												<prefix>Dr.</prefix>
-												<family>Patricia</family>
-												<given>Primary</given>
-												</name>
-												</playingEntity>
-												</participantRole>
-											</participant>-->
-
+												displayName="Comfort-focused Treatments. Goal: Maximize comfort through symptom management; allow natural death. Use oxygen, suction  and manual treatment of airway obstruction as needed for comfort. Avoid treatments listed in  full or select treatments unless consistent  with comfort goal. Transfer to hospital only if comfort cannot be achieved in current setting."
+											/>
 										</observation>
 									</entryRelationship>
 								</act>
@@ -1055,12 +833,13 @@
 							<!-- C.  Additional Orders or Instructions.
 		                      This component could be a text observation for a narrative text-->
 							<component typeCode="COMP">
-								<templateId root="2.16.840.1.113883.10.20.22.4.108.999"
-									extension="2021-12-01"/>
-								<!-- ZG Note: Use the ACT to bind to Planned Act for the Order -->
+								<!--Question: Do we need a templateId & ID here?-->
+								<!--								<templateId root="2.16.840.1.113883.10.20.22.4.108.999"
+									extension="2021-12-01"/>-->
 								<act classCode="ACT" moodCode="INT">
-									<templateId/>
-									<id root="af6ebdf2-d996-11e2-a5b8-f23c91aec05e"/>
+									<!--Question: Do we need a templateId & ID here?-->
+									<!--									<templateId/>
+									<id root="af6ebdf2-d996-11e2-a5b8-f23c91aec05e"/>-->
 									<code code="TEMP-POLST-ADD-ORDERS"
 										codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"
 										displayName="Additional Orders or Instructions. These orders are in addition to those above (e.g., blood products, dialysis)."> </code>
@@ -1069,105 +848,23 @@
 											"EMS protocols may limit emergency responder ability to act on orders in this section."-->
 									</text>
 
-
 									<entryRelationship typeCode="COMP">
 										<!-- Observation "asserts" either YES or NO -->
 										<observation classCode="OBS" moodCode="EVN">
 											<!-- EVN becasue discussion happened and result of discussion is Y or N -->
-											<templateId
+											<!--Question: Do we need a templateId & ID here?-->
+											<!--											<templateId
 												root="2.16.840.1.113883.10.20.22.4.48.999999999"
 												extension="2021-12-01"/>
 											<templateId
 												root="2.16.840.1.113883.10.20.22.4.48.999999999"/>
-											<id root="af6ebdf2-d996-11e2-a5b8-f23c91lec05e"/>
+											<id root="af6ebdf2-d996-11e2-a5b8-f23c91lec05e"/>-->
 											<code code="ASSERTION"
 												codeSystem="2.16.840.1.113883.5.4"/>
 											<statusCode code="completed"/>
-											<!--<effectiveTime>
-		                                <low value="20110219"/>
-		                                <high nullFlavor="NA"/>
-		                              </effectiveTime>-->
 
 											<!--Need a free-text option here for POLST -->
 
-											<!--<value xsi:type="CD" code="TEMP-POLST-CPR-YES"
-												displayName="YES CPR: Attempt Resuscitation, including mechanical ventilation,  
-												defibrillation and cardioversion"
-												codeSystem="2.16.840.1.113883.6.96"
-												codeSystemName="LOINC"/> -->
-
-											<!--<author>
-												<templateId root="2.16.840.1.113883.10.20.22.4.119"/>
-												<time value="201308011235-0800"/>
-												<assignedAuthor>
-												<id root="20cf14fb-b65c-4c8c-a54d-b0cca834c18c"/>
-												<code code="163W00000X"
-												displayName="Registered nurse"
-												codeSystem="2.16.840.1.113883.6.101"
-												codeSystemName="Healthcare Provider Taxonomy (HIPAA)"/>
-												<assignedPerson>
-												<name>
-												<given>Nurse</given>
-												<family>Nightingale</family>
-												<suffix>RN</suffix>
-												</name>
-												</assignedPerson>
-												<representedOrganization classCode="ORG">
-												<id root="2.16.840.1.113883.19.5"/>
-												<name>Good Health Hospital</name>
-												</representedOrganization>
-												</assignedAuthor>
-											</author>-->
-
-											<!--<participant typeCode="VRF">
-												<templateId root="2.16.840.1.113883.10.20.1.58"/>
-												<time value="201102019"/>
-												<participantRole>
-												<id root="20cf14fb-b65c-4c8c-a54d-b0cca834c18c"/>
-												<code code="207QA0505X"
-												displayName="Adult Medicine"
-												codeSystem="2.16.840.1.113883.6.101"
-												codeSystemName="Healthcare Provider Taxonomy (HIPAA)"/>
-												<playingEntity>
-												<name>
-												<prefix>Dr.</prefix>
-												<family>Patricia</family>
-												<given>Primary</given>
-												</name>
-												</playingEntity>
-												</participantRole>
-											</participant>-->
-
-											<!--<participant typeCode="CST">
-												<participantRole classCode="AGNT">
-												<addr>
-												<streetAddressLine>1004 Health
-												Drive</streetAddressLine>
-												<city>Portland</city>
-												<state>OR</state>
-												<postalCode>99123</postalCode>
-												<country>US</country>
-												</addr>
-												<telecom use="WP" value="tel:+1(555)555-1004"/>
-												<playingEntity>
-												<name>
-												<prefix>Dr.</prefix>
-												<family>Patricia</family>
-												<given>Primary</given>
-												</name>
-												</playingEntity>
-												</participantRole>
-											</participant>-->
-
-											<reference typeCode="REFR">
-												<seperatableInd value="false"/>
-												<externalDocument>
-												<id root="b50b7910-7ffb-4f4c-bbe4-177ed68cbbf3"/>
-												<text mediaType="application/pdf">
-												<reference value="POLSTMedicalOrder.pdf"/>
-												</text>
-												</externalDocument>
-											</reference>
 										</observation>
 									</entryRelationship>
 								</act>
@@ -1175,11 +872,13 @@
 
 							<!-- D. Medically Assisted Nutrition -->
 							<component typeCode="COMP">
-								<templateId root="2.16.840.1.113883.10.20.22.4.108.999"
-									extension="2021-12-01"/>
+								<!--Question: Do we need a templateId & ID here?-->
+<!--								<templateId root="2.16.840.1.113883.10.20.22.4.108.999"
+									extension="2021-12-01"/>-->
 								<act classCode="ACT" moodCode="INT">
-									<templateId/>
-									<id root="af6ebdf2-d996-11e2-a5b8-f23c91aec05e"/>
+									<!--Question: Do we need a templateId & ID here?-->
+<!--									<templateId/>
+									<id root="af6ebdf2-d996-11e2-a5b8-f23c91aec05e"/>-->
 									<code code="TEMP-POLST-MED-NUTR"
 										codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"
 										displayName="Medically Assisted Nutrition. Offer food by mouth if desired by patient, safe and tolerated."> </code>
@@ -1190,12 +889,13 @@
 										<!-- Observation "asserts" either YES or NO -->
 										<observation classCode="OBS" moodCode="EVN">
 											<!-- EVN becasue discussion happened and result of discussion is Y or N -->
-											<templateId
+											<!--Question: Do we need a templateId & ID here?-->
+<!--											<templateId
 												root="2.16.840.1.113883.10.20.22.4.48.999999999"
 												extension="2021-12-01"/>
 											<templateId
 												root="2.16.840.1.113883.10.20.22.4.48.999999999"/>
-											<id root="af6ebdf2-d996-11e2-a5b8-f23c91lec05e"/>
+											<id root="af6ebdf2-d996-11e2-a5b8-f23c91lec05e"/>-->
 											<code code="ASSERTION"
 												codeSystem="2.16.840.1.113883.5.4"/>
 											<statusCode code="completed"/>
@@ -1218,17 +918,16 @@
 									<!-- MED-NUTR: Trial period -->
 									<entryRelationship typeCode="COMP">
 										<observation classCode="OBS" moodCode="EVN">
-											<templateId
+											<!--Question: Do we need a templateId & ID here?-->
+<!--											<templateId
 												root="2.16.840.1.113883.10.20.22.4.48.999999999"
 												extension="2021-12-01"/>
 											<templateId
 												root="2.16.840.1.113883.10.20.22.4.48.999999999"/>
-											<id root="af6ebdf2-d996-11e2-a5b8-f23c91lec05e"/>
+											<id root="af6ebdf2-d996-11e2-a5b8-f23c91lec05e"/>-->
 											<code code="ASSERTION"
 												codeSystem="2.16.840.1.113883.5.4"/>
 											<statusCode code="completed"/>
-
-											<!--<effectiveTime> goes here if needed-->
 
 											<!-- value is a response/answer LOINC code (order choice) -->
 											<value xsi:type="CD" code="TEMP-POLST-MED-NUTR-TRIAL"
@@ -1249,17 +948,16 @@
 										<!-- Observation "asserts" either YES or NO -->
 										<observation classCode="OBS" moodCode="EVN">
 											<!-- EVN becasue discussion happened and result of discussion is Y or N -->
-											<templateId
+											<!--Question: Do we need a templateId & ID here?-->
+<!--											<templateId
 												root="2.16.840.1.113883.10.20.22.4.48.999999999"
 												extension="2021-12-01"/>
 											<templateId
 												root="2.16.840.1.113883.10.20.22.4.48.999999999"/>
-											<id root="af6ebdf2-d996-11e2-a5b8-f23c91lec05e"/>
+											<id root="af6ebdf2-d996-11e2-a5b8-f23c91lec05e"/>-->
 											<code code="ASSERTION"
 												codeSystem="2.16.840.1.113883.5.4"/>
 											<statusCode code="completed"/>
-
-											<!--<effectiveTime> goes here if needed-->
 
 											<!-- value is a response/answer LOINC code (order choice) -->
 											<value xsi:type="CD" code="TEMP-POLST-MED-NUTR-NO"
@@ -1280,17 +978,16 @@
 										<!-- Observation "asserts" either YES or NO -->
 										<observation classCode="OBS" moodCode="EVN">
 											<!-- EVN becasue discussion happened and result of discussion is Y or N -->
-											<templateId
+											<!--Question: Do we need a templateId & ID here?-->
+<!--											<templateId
 												root="2.16.840.1.113883.10.20.22.4.48.999999999"
 												extension="2021-12-01"/>
 											<templateId
 												root="2.16.840.1.113883.10.20.22.4.48.999999999"/>
-											<id root="af6ebdf2-d996-11e2-a5b8-f23c91lec05e"/>
+											<id root="af6ebdf2-d996-11e2-a5b8-f23c91lec05e"/>-->
 											<code code="ASSERTION"
 												codeSystem="2.16.840.1.113883.5.4"/>
 											<statusCode code="completed"/>
-
-											<!--<effectiveTime> goes here if needed-->
 
 											<!-- value is a response/answer LOINC code (order choice) -->
 											<value xsi:type="CD" code="TEMP-POLST-MED-NUTR-ND"
@@ -1329,7 +1026,7 @@
 					<!--Healthcare Agent Authority 20200610 entry template in Personal Advance Care Plan (PACP) Document IG 
 					[observation: identifier urn:hl7ii:2.16.840.1.113883.4.823.1.4.4:2020-06-10 (open)]
 					Draft as part of Personal Advance Care Plan V2
-					...is an observation template-->
+					...is an **observation** template-->
 
 					<text>
 						<paragraph styleCode="Bold">General Instructions </paragraph>
