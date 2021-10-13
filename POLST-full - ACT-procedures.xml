@@ -671,43 +671,56 @@
 							"Pick 1 CPR Order. YES CPR requires choosing Full Treatments in Initial Treatment Orders section.
 											NO CPR may choose any option in Initial Treatment Orders section."-->
 
-								<!--If some of the human readable text is a representation of the code, we SHOULD include a reference to that text using the originalText/reference construct 
+							<!--If some of the human readable text is a representation of the code, we SHOULD include a reference to that text using the originalText/reference construct 
 									if, however, the code is bound to some constant by an Implementation Guide and it is not represented in the human readable text then the originalText/reference SHALL NOT be present
 								-->
-		
+
 							<text> </text>
 							<!-- CPR: YES -->
 							<entryRelationship typeCode="COMP">
 								<!-- Instead make this a Procedure (only 1 is allowed) 
 								OR always have a procedure required -->
-								
-								
+
+								<procedure classCode="PROC" moodCode="INT">
+									<!--	Question: moodcode="INT" or "EVN"?-->
+									<templateId root="1.1.1.1"/>
+									<!-- CPR Procedure (ePOLST) template -->
+									<id />
+									<code codeSystem="2.16.840.1.113883.6.1"
+										codeSystemName="LOINC">
+										<!-- Should look like this?
+										 <code code="73761001" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Colonoscopy" />
+        <statusCode code="active" /> -->
+									</code>
+									<statusCode code="completed"/>
+									<!-- Question: what should statusCode be? active? complete?-->
+								</procedure>
 								<!-- Observation "asserts" the order choice of YES-->
-								<observation classCode="OBS" moodCode="EVN">
-									<!-- EVN becasue discussion happened and result of discussion is Y or N -->
-									<!--Question: Do we need a templateId & ID here?-->
-<!--									<templateId root="2.16.840.1.113883.10.20.22.4.48.999999999"
+								<!--<observation classCode="OBS" moodCode="EVN">
+									<!-\- EVN becasue discussion happened and result of discussion is Y or N -\->
+									<!-\-Question: Do we need a templateId & ID here?-\->
+<!-\-									<templateId root="2.16.840.1.113883.10.20.22.4.48.999999999"
 										extension="2021-12-01"/>
 									<templateId root="2.16.840.1.113883.10.20.22.4.48.999999999"/>
-									<id root="af6ebdf2-d996-11e2-a5b8-f23c91lec05e"/>-->
+									<id root="af6ebdf2-d996-11e2-a5b8-f23c91lec05e"/>-\->
 									<code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"/>
 									<statusCode code="completed"/>
-									<!--POLST does not need effectiveTime here-->
-									<!--<effectiveTime>
+									<!-\-POLST does not need effectiveTime here-\->
+									<!-\-<effectiveTime>
 		                                <low value="20110219"/>
 		                                <high nullFlavor="NA"/>
-		                              </effectiveTime>-->
-									<!-- value is a response/answer LOINC code (order choice) -->
+		                              </effectiveTime>-\->
+									<!-\- value is a response/answer LOINC code (order choice) -\->
 									<value xsi:type="CD" code="TEMP-POLST-CPR-YES"
 										codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"
 										displayName="YES CPR: Attempt Resuscitation, including mechanical ventilation, defibrillation and cardioversion."/>
-									<!--POLST does not need Author here-->
+									<!-\-POLST does not need Author here-\->
 									
-									<!--POLST does not need Participant here-->
+									<!-\-POLST does not need Participant here-\->
 									
-									<!--POLST does not need Participant here-->
+									<!-\-POLST does not need Participant here-\->
 					
-									<!--POLST PDF option-->
+									<!-\-POLST PDF option-\->
 									<reference typeCode="REFR">
 										<seperatableInd value="false"/>
 										<externalDocument>
@@ -717,7 +730,7 @@
 											</text>
 										</externalDocument>
 									</reference>
-								</observation>
+								</observation>-->
 							</entryRelationship>
 
 							<!-- CPR: NO -->
@@ -725,7 +738,7 @@
 								<!-- Observation "asserts" the order choice of NO -->
 								<observation classCode="OBS" moodCode="EVN">
 									<!--Question: Do we need a templateId & ID here?-->
-<!--									<templateId root="2.16.840.1.113883.10.20.22.4.48.999999999"
+									<!--									<templateId root="2.16.840.1.113883.10.20.22.4.48.999999999"
 										extension="2021-12-01"/>
 									<templateId root="2.16.840.1.113883.10.20.22.4.48.999999999"/>
 									<id root="af6ebdf2-d996-11e2-a5b8-f23c91lec05e"/>-->
@@ -740,7 +753,7 @@
 							</entryRelationship>
 						</act>
 					</entry>
-					
+
 					<!-- National POLST form: B. Initial Treatment Orders (ePOLST) 
 						 Entry is required (SHALL).
 		                 The contraints will be SHOULD with a primitive of PICK 1 of the 3 with the instructions
@@ -749,7 +762,7 @@
 						<templateId root="2.16.840.1.113883.9.275.3.3"/>
 						<act classCode="ACT" moodCode="INT">
 							<!--Question: Do we need a templateId & ID here?-->
-<!--							<templateId/>
+							<!--							<templateId/>
 							<id root="af6ebdf2-d996-11e2-a5b8-f23c91aec05e"/>-->
 							<code code="TEMP-POLST-TREAT" codeSystem="2.16.840.1.113883.6.1"
 								codeSystemName="LOINC"
@@ -765,7 +778,7 @@
 								<!-- FULL Treatement order option-->
 								<observation classCode="OBS" moodCode="EVN">
 									<!--Question: Do we need a templateId & ID here?-->
-<!--									<templateId root="2.16.840.1.113883.10.20.22.4.48.8888888"
+									<!--									<templateId root="2.16.840.1.113883.10.20.22.4.48.8888888"
 										extension="2021-12-01"/>
 									<templateId root="2.16.840.1.113883.10.20.22.4.48.8888888"/>
 									<id root="af6ebdf2-d996-11e2-a5b8-f23c91lec05e"/>-->
@@ -774,7 +787,8 @@
 									<!-- value is a response/answer LOINC code (order choice) -->
 									<value xsi:type="CD" code="TEMP-POLST-TREAT-FULL"
 										codeSystem="2.16.840.1.113883.6.96" codeSystemName="LOINC"
-										displayName="Full Treatments (required if choose CPR in Section A). Goal: Attempt to sustain life by all medically effective means. Provide appropriate medical and surgical treatments as indicated to attempt to prolong life, including intensive care."/>
+										displayName="Full Treatments (required if choose CPR in Section A). Goal: Attempt to sustain life by all medically effective means. Provide appropriate medical and surgical treatments as indicated to attempt to prolong life, including intensive care."
+									/>
 								</observation>
 							</entryRelationship>
 
@@ -782,7 +796,7 @@
 							<entryRelationship typeCode="COMP">
 								<observation classCode="OBS" moodCode="EVN">
 									<!--Question: Do we need a templateId & ID here?-->
-<!--									<templateId root="2.16.840.1.113883.10.20.22.4.48.8888888"
+									<!--									<templateId root="2.16.840.1.113883.10.20.22.4.48.8888888"
 										extension="2021-12-01"/>
 									<templateId root="2.16.840.1.113883.10.20.22.4.48.8888888"/>
 									<id root="af6ebdf2-d996-11e2-a5b8-f23c91lec05e"/>-->
@@ -791,7 +805,8 @@
 									<!-- value is a response/answer LOINC code (order choice) -->
 									<value xsi:type="CD" code="TEMP-POLST-TREAT-SELECT"
 										codeSystem="2.16.840.1.113883.6.96" codeSystemName="LOINC"
-										displayName="Selective Treatments. Goal: Attempt to restore function while avoiding intensive care and resuscitation efforts (ventilator, defibrillation and cardioversion). May use non-invasive positive airway pressure, antibiotics and IV fluids as indicated. Avoid intensive care. Transfer to hospital if treatment needs cannot be met in current location."/>
+										displayName="Selective Treatments. Goal: Attempt to restore function while avoiding intensive care and resuscitation efforts (ventilator, defibrillation and cardioversion). May use non-invasive positive airway pressure, antibiotics and IV fluids as indicated. Avoid intensive care. Transfer to hospital if treatment needs cannot be met in current location."
+									/>
 								</observation>
 							</entryRelationship>
 
@@ -799,7 +814,7 @@
 							<entryRelationship typeCode="COMP">
 								<observation classCode="OBS" moodCode="EVN">
 									<!--Question: Do we need a templateId & ID here?-->
-<!--									<templateId root="2.16.840.1.113883.10.20.22.4.48.8888888"
+									<!--									<templateId root="2.16.840.1.113883.10.20.22.4.48.8888888"
 										extension="2021-12-01"/>
 									<templateId root="2.16.840.1.113883.10.20.22.4.48.8888888"/>
 									<id root="af6ebdf2-d996-11e2-a5b8-f23c91lec05e"/>-->
@@ -809,11 +824,12 @@
 									<!-- value is a response/answer LOINC code (order choice) -->
 									<value xsi:type="CD" code="TEMP-POLST-TREAT-COMFORT"
 										codeSystem="2.16.840.1.113883.6.96" codeSystemName="LOINC"
-										displayName="Comfort-focused Treatments. Goal: Maximize comfort through symptom management; allow natural death. Use oxygen, suction  and manual treatment of airway obstruction as needed for comfort. Avoid treatments listed in  full or select treatments unless consistent  with comfort goal. Transfer to hospital only if comfort cannot be achieved in current setting."/>
+										displayName="Comfort-focused Treatments. Goal: Maximize comfort through symptom management; allow natural death. Use oxygen, suction  and manual treatment of airway obstruction as needed for comfort. Avoid treatments listed in  full or select treatments unless consistent  with comfort goal. Transfer to hospital only if comfort cannot be achieved in current setting."
+									/>
 								</observation>
 							</entryRelationship>
 						</act>
-					
+
 					</entry>
 
 					<!-- National POLST form: C.  Additional Orders or Instructions (ePOLST)
@@ -835,7 +851,7 @@
 								<observation classCode="OBS" moodCode="EVN">
 									<!-- EVN becasue discussion happened and result of discussion is Y or N -->
 									<!--Question: Do we need a templateId & ID here?-->
-<!--									<templateId root="2.16.840.1.113883.10.20.22.4.48.999999999"
+									<!--									<templateId root="2.16.840.1.113883.10.20.22.4.48.999999999"
 										extension="2021-12-01"/>
 									<templateId root="2.16.840.1.113883.10.20.22.4.48.999999999"/>
 									<id root="af6ebdf2-d996-11e2-a5b8-f23c91lec05e"/>-->
@@ -853,7 +869,7 @@
 					<entry>
 						<templateId root="2.16.840.1.113883.9.275.3.5"/>
 						<act classCode="ACT" moodCode="INT">
-<!--							<templateId/>
+							<!--							<templateId/>
 							<id root="af6ebdf2-d996-11e2-a5b8-f23c91aec05e"/>-->
 							<code code="TEMP-POLST-MED-NUTR" codeSystem="2.16.840.1.113883.6.1"
 								codeSystemName="LOINC"
@@ -889,7 +905,7 @@
 							<entryRelationship typeCode="COMP">
 								<observation classCode="OBS" moodCode="EVN">
 									<!--Question: Do we need a templateId & ID here?-->
-<!--									<templateId root="2.16.840.1.113883.10.20.22.4.48.999999999"
+									<!--									<templateId root="2.16.840.1.113883.10.20.22.4.48.999999999"
 										extension="2021-12-01"/>
 									<templateId root="2.16.840.1.113883.10.20.22.4.48.999999999"/>
 									<id root="af6ebdf2-d996-11e2-a5b8-f23c91lec05e"/>-->
@@ -915,7 +931,7 @@
 								<observation classCode="OBS" moodCode="EVN">
 									<!-- EVN becasue discussion happened and result of discussion is Y or N -->
 									<!--Question: Do we need a templateId & ID here?-->
-<!--									<templateId root="2.16.840.1.113883.10.20.22.4.48.999999999"
+									<!--									<templateId root="2.16.840.1.113883.10.20.22.4.48.999999999"
 										extension="2021-12-01"/>
 									<templateId root="2.16.840.1.113883.10.20.22.4.48.999999999"/>
 									<id root="af6ebdf2-d996-11e2-a5b8-f23c91lec05e"/>-->
@@ -940,7 +956,7 @@
 								<observation classCode="OBS" moodCode="EVN">
 									<!-- EVN becasue discussion happened and result of discussion is Y or N -->
 									<!--Question: Do we need a templateId & ID here?-->
-<!--									<templateId root="2.16.840.1.113883.10.20.22.4.48.999999999"
+									<!--									<templateId root="2.16.840.1.113883.10.20.22.4.48.999999999"
 										extension="2021-12-01"/>
 									<templateId root="2.16.840.1.113883.10.20.22.4.48.999999999"/>
 									<id root="af6ebdf2-d996-11e2-a5b8-f23c91lec05e"/>-->
