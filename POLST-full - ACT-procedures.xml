@@ -6,7 +6,7 @@
  Created by:   Lantana Consulting Group, Inc.
  Updated by:   Lantana Consulting Group, Inc. 
  
- LastChangedDate: 10/14/2021
+ LastChangedDate: 10/15/2021, Diana Wright
   
  ********************************************************
  Disclaimer: This sample file contains representative data elements for an ePOLST: Resuscitation and Treatment Portable Medical Orders document (ePOLST). 
@@ -15,10 +15,6 @@
  The data in this sample file are not intended to represent real patients, people or clinical events. 
  ********************************************************
  -->
-
-<!-- [ZG], please start 10/15 US Realm Header review here -->
-
-
 <!--
         ********************************************************
         CDA Header
@@ -31,58 +27,46 @@
 	xmlns="urn:hl7-org:v3" xmlns:sdtc="urn:hl7-org:sdtc" xmlns:voc="urn:hl7-org:v3/voc">
 	<!-- realmCode is required by the US Realm Header and SHALL be realmCode="US".-->
 	<realmCode code="US"/>
+	<!--The following typeID describes an HL7 registered Refined Message Information Models (RMIMs) [root="2.16.840.1.113883.1.3"] 
+		CDA specification [typeId extension="POCD_HD000040"]-->
 	<typeId extension="POCD_HD000040" root="2.16.840.1.113883.1.3"/>
 
 	<!-- US Realm Header current template and previous versions-->
 	<templateId root="2.16.840.1.113883.10.20.22.1.2" extension="2015-08-01"/>
 	<templateId root="2.16.840.1.113883.10.20.22.1.2"/>
 
-	<!-- Globally unique identifier for the document
-		Question: Do I need to update this for POLST?-->
-	<id extension="TT988" root="2.16.840.1.113883.19.5.99999.1"/>
+	<!-- Globally unique identifier for this document (can be a randomly generated GUID (Globally Unique Identifier) or UUID (Universally Unique Identifier). -->
+	<id root="03b48f86-6216-47ae-822b-2581db2568a3"/>
 
-	<!-- Code needs updating for POLST-->
-	<code code="34133-9" displayName="Summarization of Episode Note"
+	<!-- Code for this document type (NOT the template OID)-->
+	<code code="TEMP-POLST-ORDERS" displayName="National ePOLST Form: A Portable Medical Order"
 		codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+
 	<!--
         ********************************************************
         Title of this document
         ********************************************************
     -->
-	<title>ePOLST Form: Resuscitation and Treatment Portable Medical Orders</title>
-	<!--
-        ********************************************************
-        effectiveTime
-        ********************************************************
-    -->
+	<title>National ePOLST Form: A Portable Medical Order</title>
+	<!-- The "National ePOLST Form: A Portable Medical Order" is a CDA electronic specification of the National POLST Form: A Portable Medical Order, available at www.polst.org/form-->
+	<!-- The following example illustrate how the "National ePOLST Form: A Portable Medical Order" applies and further constrains the CDA US Realm Header.-->
+
+
+	<!-- effectiveTime is not used by the National POLST form -->
 	<!-- Example of how to have a Null value for thise element-->
 	<effectiveTime nullFlavor="NA"/>
-	<!--
-        ********************************************************
-        confidentiality
-        ********************************************************
-    -->
-	<!-- Example of how to have a Null value for thise element. 
-		Question: Is it correct to say (here in comments) that... Another option is:
+
+	<!-- confidentiality is not used by the National POLST form -->
+	<!-- Example of how to have a Null value for thise element. -->
+	<!-- Question: Is it correct to say (here in comments) that... Another option is:
 	<confidentialityCode code="N" displayName="normal" codeSystem="2.16.840.1.113883.5.25"
 		codeSystemName="Confidentiality"/>-->
 	<confidentialityCode nullFlavor="NA"/>
-	<!--
-        ********************************************************
-        langauge
-        ********************************************************
-    -->
+
+	<!-- langauge is not used by the National POLST form -->
 	<!-- Example of how to have a Null value for thise element-->
 	<languageCode nullFlavor="NA"/>
-	<!--
-        ********************************************************
-        Version of this document
-	     We will address versioning in Volume 1.  
-	     Add some guidance in a comment here too.
-        ********************************************************
-    Question: Do we want to provide a version example for POLST?-->
-	<!--	<setId extension="sTT988" root="2.16.840.1.113883.19.5.99999.19"/>
-	<versionNumber value="1"/>-->
+
 	<!--
         ********************************************************
         recordTarget is the medical record (patient chart) that this document belongs to.
@@ -96,18 +80,20 @@
 			This example is available at http://hl7-c-cda-examples.herokuapp.com/examples/view/Header/
 			Note: When recording SSN in the extension, dashes (-) are permitted but not required.
 			Note: An id with a nullFlavor of "MSK" SHALL NOT be used for matching or indexing -->
+
 			<!-- Question: Would that last Note be a problem for POLST registries and for queries? -->
 			<id assigningAuthorityName="US Social Security Administration"
 				root="2.16.840.1.113883.4.1" extension="***-**-2222" nullFlavor="MSK"/>
 
 			<!-- Example of the patient's Medical Record Number.
-				This example was created by Lisa Nelson, MaxMD.
-				This example is available at http://hl7-c-cda-examples.herokuapp.com/examples/view/Header/
-				Note: This examples assumes the OID 2.16.840.1.113883.1.111.12345
-				uniquely identifies the encompassed Provider Organization's local medical record number assigning system.
-				Note: A receiving system only knows this is an MRN by looking up the root oid in a repository. -->
-			<id root="2.16.840.1.113883.4.6" extension="321CX"
-				assigningAuthorityName="Good Health HIE Locally-assigned Medical Record Number"/>
+				 This example was created by Lisa Nelson, MaxMD.
+				 This example is available at http://hl7-c-cda-examples.herokuapp.com-->
+			<!-- This examples assumes the OID 2.16.840.1.113883.1.111.12345 
+                 uniquely identifies the encompassed Provider Organization's local 
+                 medical record number assigning system.
+                 Note: A receiving system only knows this is an MRN by looking up the root oid in a repository. -->
+			<id root="2.16.840.1.113883.1.111.12345" extension="12345"
+				assigningAuthorityName="River Valley Health Services Locally-assigned Medical Record Number"/>
 
 			<!-- Patient Address and Telephone are not on the National POLST Form-->
 			<!-- Examples of how to have a Null value for these elements-->
@@ -123,10 +109,12 @@
 				</name>
 				<!-- Recommended way to send patient aliases; note @use='P' (pseudonym) and given/@qualifier='CL' (callme) -->
 				<name use="P">
-					<given qualifier="CL">Eve</given>	
+					<given qualifier="CL">Eve</given>
 				</name>
+
 				<administrativeGenderCode code="F" displayName="Female"
 					codeSystem="2.16.840.1.113883.5.1" codeSystemName="AdministrativeGender"/>
+
 				<!-- Date of birth need only be precise to the day -->
 				<birthTime value="19750501"/>
 
@@ -135,7 +123,7 @@
 				<raceCode nullFlavor="NA"/>
 				<ethnicGroupCode nullFlavor="NA"/>
 
-				<!-- Use the guardian for "Patient Representative" on the National POLST Form, section E. SIGNATURE: Patient or Patient Representative. -->
+				<!-- For the ePOLST, use the guardian for "Patient Representative" on the National POLST Form, section E. SIGNATURE: Patient or Patient Representative. -->
 				<guardian>
 					<!-- Use the code element to specify the "Authority" of the Patient Representative in section E. SIGNATURE: Patient or Patient Representative. -->
 					<code code="POWATT" displayName="Power of Attorney"
@@ -161,10 +149,11 @@
 	<!--
         ********************************************************
         author: The person who provides the content in the document.
-        The author SHOULD be the Health Care Provider listed in section F. SIGNATURE: Health Care Provider of the National POLST Form.  
+        For the ePOLST, the author SHOULD be the Health Care Provider listed in section F. SIGNATURE: Health Care Provider of the National POLST Form.  
 		The author and legal authenticator could be the same or different.
         ********************************************************
     -->
+
 	<author>
 		<time value="201308151030-0800"/>
 		<assignedAuthor>
@@ -192,166 +181,26 @@
         ********************************************************
         dataEnterer: Person who transferred the content created by the author into the document.
         The dataEnterer is optional, but if used SHALL have an id, which SHOULD be a United States National Provider Identifier OID "2.16.840.1.113883.4.6".
-        The dataEnterer could be the Health Care Provider listed in section F. SIGNATURE: Health Care Provider of the National POLST Form.  
+        For the ePOLST, the dataEnterer could be the Health Care Provider listed in section F. SIGNATURE: Health Care Provider of the National POLST Form.  
         ********************************************************
     -->
-	<!--	<dataEnterer>
+	<dataEnterer>
 		<assignedEntity>
 			<id/>
 			<addr/>
 			<telecom/>
-			<assignedPerson></assignedPerson>
+			<assignedPerson/>
 		</assignedEntity>
-	</dataEnterer>-->
+	</dataEnterer>
+
 	<!--
         ********************************************************
-        informant: any sources of information for document content (Can have multiple informatns)
-		Consider for p2 Form Completion Information, Check everyone who participated in discussion
-			If so, need: "Patient with decision-making capacity", "Court Appointed Guardian", "Parent of Minor", "Legal Surrogate / Health Care Agent", "Other: " 
-			Note that these choices may be specified differently in each state.
-				These may need to map to different places:
-				"Patient with decision making capaicity" = Legal Representative - guardian
-				"Court Appointed Guardian" - would be under guardian
-				"Legal Surrogate / Health Care Agent" - 
-		Review how this is done in PACP
-		Address is NOT on the National POLST Form for this person, but is SHALL in US Realm Header informat\ 
+        custodian: Organization charged with maintaining the original source document 
+        This is not specified in the National POLST Form and may be different from the author.
+        Implementers of the ePOLST may want to use the custodian for a POLST registry organization.
         ********************************************************
     -->
-	<!--	<informant>
-		<assignedEntity>
-			<id extension="888888888" root="2.16.840.1.113883.4.6"/>
-			<addr>
-				<streetAddressLine>1007 Healthcare Drive</streetAddressLine>
-				<city>Portland</city>
-				<state>OR</state>
-				<postalCode>99123</postalCode>
-				<country>US</country>
-			</addr>
-			<telecom use="WP" value="tel:+1(555)555-1003"/>
-			<assignedPerson>
-				<name>
-					<given>Harold</given>
-					<family>Hippocrates</family>
-					<suffix qualifier="AC">M.D.</suffix>
-				</name>
-			</assignedPerson>
-			<representedOrganization>
-				<name>The DoctorsApart Physician Group</name>
-			</representedOrganization>
-		</assignedEntity>
-	</informant>-->
-	<!--	<informant>
-		<assignedEntity>
-			<id extension="222223333" root="2.16.840.1.113883.4.6"/>
-			<addr>
-				<streetAddressLine>1025 Health Drive</streetAddressLine>
-				<city>Portland</city>
-				<state>OR</state>
-				<postalCode>99123</postalCode>
-				<country>US</country>
-			</addr>
-			<telecom use="WP" value="tel:+1(555)555-1025"/>
-			<assignedPerson>
-				<name>
-					<given>Ramsey</given>
-					<family>Reaction</family>
-					<suffix qualifier="AC">M.D.</suffix>
-				</name>
-			</assignedPerson>
-			<representedOrganization>
-				<name>The DoctorsApart Physician Group</name>
-			</representedOrganization>
-		</assignedEntity>
-	</informant>-->
-	<!--	<informant>
-		<assignedEntity>
-			<id extension="333444444" root="2.16.840.1.113883.4.6"/>
-			<addr>
-				<streetAddressLine>1017 Health Drive</streetAddressLine>
-				<city>Portland</city>
-				<state>OR</state>
-				<postalCode>99123</postalCode>
-				<country>US</country>
-			</addr>
-			<telecom use="WP" value="tel:+1(555)555-1017"/>
-			<assignedPerson>
-				<name>
-					<given>William</given>
-					<given qualifier="CL">Bill</given>
-					<family>Beaker</family>
-				</name>
-			</assignedPerson>
-			<representedOrganization>
-				<name>Good Health Laboratory</name>
-			</representedOrganization>
-		</assignedEntity>
-	</informant>-->
-	<!--	<informant>
-		<assignedEntity>
-			<id extension="333222222" root="2.16.840.1.113883.4.6"/>
-			<addr>
-				<streetAddressLine>1016 Health Drive</streetAddressLine>
-				<city>Portland</city>
-				<state>OR</state>
-				<postalCode>99123</postalCode>
-				<country>US</country>
-			</addr>
-			<telecom use="WP" value="tel:+1(555)555-1016"/>
-			<assignedPerson>
-				<name>
-					<given>Susan</given>
-					<family>Script</family>
-					<suffix qualifier="AC">Pharm.D.</suffix>
-				</name>
-			</assignedPerson>
-			<representedOrganization>
-				<name>People's Pharmacy</name>
-			</representedOrganization>
-		</assignedEntity>
-	</informant>-->
-	<!--	<informant>
-		<assignedEntity>
-			<id extension="222334444" root="2.16.840.1.113883.4.6"/>
-			<addr>
-				<streetAddressLine>1027 Health Drive</streetAddressLine>
-				<city>Portland</city>
-				<state>OR</state>
-				<postalCode>99123</postalCode>
-				<country>US</country>
-			</addr>
-			<telecom use="WP" value="tel:+1(555)555-1027"/>
-			<assignedPerson>
-				<name>
-					<given>Patrick</given>
-					<family>Pump</family>
-					<suffix qualifier="AC">M.D.</suffix>
-				</name>
-			</assignedPerson>
-			<representedOrganization>
-				<name>The DoctorsApart Physician Group</name>
-			</representedOrganization>
-		</assignedEntity>
-	</informant>-->
-	<!--	<informant>
-		<relatedEntity classCode="PRS">
-			<!-\- classCode "PRS" represents a person with personal relationship with the patient -\->
-			<code code="SPS" displayName="SPOUSE" codeSystem="2.16.840.1.113883.1.11.19563"
-				codeSystemName="Personal Relationship Role Type Value Set"/>
-			<relatedPerson>
-				<name>
-					<given>Boris</given>
-					<given qualifier="CL">Bo</given>
-					<family>Betterhalf</family>
-				</name>
-			</relatedPerson>
-		</relatedEntity>
-	</informant>-->
-	<!--
-        ********************************************************
-        custodian: organization charged with maintaining the original source document 
-        This is not specified in the National POLST Form and may be different from the authoring systems, e.g., a state registry?
-        ********************************************************
-    -->
+	<!-- Question: Is the above statement about registries OK to include? -->
 	<custodian>
 		<assignedCustodian>
 			<representedCustodianOrganization>
@@ -369,21 +218,13 @@
 		</assignedCustodian>
 	</custodian>
 
-	<!-- [ZG], please stop 10/15 US Realm Header review here -->
-	<!-- Question for ZG & DW to discuss: Do we represent our POLST constraints (i.e., the document tmeplate) here as well? If so, these elements need Polst-specific examples  
-			legalAuthenticator
-			authenticator
-			participants (many)-->
-
-
 	<!--
         ********************************************************
-        legalAuthenticator: individual who is responsible for the document
-        Use for "Section F. Signature: Health Care Provider"
-        Address is NOT on the National POLST Form for this person, but is SHALL in US Realm Header legalAuthenticator
-        Note: POLST only allows for ONE legal person to sign, so need to note this and make this constraint stronger [1...1].
+        legalAuthenticator: Individual who is responsible for the document.
+        For the ePOLST, use legalAuthenticator for the signer in "Section F. Signature: Health Care Provider" of the National POLST Form (either the "Health Care Provider" or the "Supervising physician". 
+        Note: POLST only allows for ONE person to sign in "Section F. Signature: Health Care Provider", so this specification futher constarins the US Realm Header legalAuthenticator to SHALL [1..1].
         ********************************************************
-    -->
+	-->
 	<legalAuthenticator>
 		<time value="20130815223615-0800"/>
 		<signatureCode code="S"/>
@@ -392,14 +233,10 @@
 			<code code="207QA0505X" displayName="Adult Medicine"
 				codeSystem="2.16.840.1.113883.6.101"
 				codeSystemName="Healthcare Provider Taxonomy (HIPAA)"/>
-			<!--			<addr>
-				<streetAddressLine>1004 Healthcare Drive </streetAddressLine>
-				<city>Portland</city>
-				<state>OR</state>
-				<postalCode>99123</postalCode>
-				<country>US</country>
-			</addr>-->
-			<telecom use="WP" value="tel:+1(555)555-1004"/>
+			<!--The National POLST Form section "F. Signature: Health Care Provider" does not use address or telecom.-->
+			<!-- Examples of how to have a Null value for these elements-->
+			<addr nullFlavor="NA"/>
+			<telecom nullFlavor="NA"/>
 			<assignedPerson>
 				<name>
 					<given>Patricia</given>
@@ -412,83 +249,85 @@
 	</legalAuthenticator>
 	<!--
         ********************************************************
-        authenticator: individual ttesting to the accuracy of information in the document
-		Consider this for "p2 Form Completion Information, Check everyone who participated in discussion"
-			If so, need: "Patient with decision-making capacity", "Court Appointed Guardian", "Parent of Minor", "Legal Surrogate / Health Care Agent", "Other: " 
-			Note that these choices may be specified differently in each state.
-
+        authenticator: Individual attesting to the accuracy of information in the document
+		For the ePOLST, use authenticator for the signer in section "E. Signature: Patient or Patient Representative" of the National POLST Form (either the Patient or Patient's Representative). 
         ********************************************************
 	-->
+	<!-- In this example, the auithenticator is the spouse, who has Power of Attorney ("POWATT") -->
 	<authenticator>
-		<time value="20130815221545-0800"/>
+		<!--authenticator time is not on the National POLST Form-->
+		<!--Examples of how to have a Null value for these elements-->
+		<time nullFlavor="NA"/>
 		<signatureCode code="S"/>
 		<assignedEntity>
-			<id extension="5555555555" root="2.16.840.1.113883.4.6"/>
-			<code code="207QA0505X" displayName="Adult Medicine"
-				codeSystem="2.16.840.1.113883.6.101"
-				codeSystemName="Healthcare Provider Taxonomy (HIPAA)"/>
-			
-			
+			<id root="5e75fff9-f3d9-423f-854a-a648b05cdaf9"/>
+			<code code="POWATT" displayName="Power of Attorney"
+				codeSystem="2.16.840.1.113883.1.11.19830" codeSystemName="ResponsibleParty"/>
 			<!-- authenticator Address and Telephone are not on the National POLST Form-->
 			<!-- Examples of how to have a Null value for these elements-->
 			<addr nullFlavor="NA"/>
 			<telecom nullFlavor="NA"/>
-			
 			<assignedPerson>
-				<name>
-					<given>Patricia</given>
-					<given qualifier="CL">Patty</given>
-					<family>Primary</family>
-					<suffix qualifier="AC">M.D.</suffix>
-				</name>
-			</assignedPerson>
-		</assignedEntity>
-	</authenticator>
-	<!--
-        ********************************************************
-        participant: ANY supporting entities
-		Question: Consider Participant VS. Informant since the contraints are looser for Participant.
-		Se: https://terminology.hl7.org/2.1.0/CodeSystem-v3-ParticipationType.html
-		
-        ********************************************************
-	-->
-	<participant typeCode="IND">
-		<!-- typeCode "IND" represents an individual -->
-		<associatedEntity classCode="NOK">
-			<!-- classCode "NOK" represents the patient's next of kin-->
-			<addr use="HP">
-				<streetAddressLine>2222 Home Street</streetAddressLine>
-				<city>Beaverton</city>
-				<state>OR</state>
-				<postalCode>97867</postalCode>
-				<country>US</country>
-			</addr>
-			<telecom value="tel:+1(555)555-2008" use="MC"/>
-			<associatedPerson>
 				<name>
 					<given>Boris</given>
 					<given qualifier="CL">Bo</given>
 					<family>Betterhalf</family>
 				</name>
-			</associatedPerson>
-		</associatedEntity>
-	</participant>
-	<!-- Entities playing multiple roles are recorded in multiple participants -->
+			</assignedPerson>
+		</assignedEntity>
+	</authenticator>
+
+	<!--
+        ********************************************************
+        participant: Any supporting entities or individuals
+        
+        Question: Is this the right element for these roles from POLST Form?
+        INDIVIDUALS
+        	- Patient Representative
+        	- Emergency Contact
+        	- Other emergency contact
+        	- Legal Representative
+        	- Primary Care Provider
+        	- Professional Assisting Health Care Provider w/ Form Completion
+        	- Everyone who participated in discussion (check list):
+				• Patient with decision-making capacity
+				• Court Appointed Guardian
+				• Parent of Minor
+				• Legal Surrogate / Health Care Agent
+        ORGANIZATION
+        	- Hospice Name of Agency
+		Ex: 
+		https://terminology.hl7.org/2.1.0/CodeSystem-v3-ParticipationType.html
+		https://terminology.hl7.org/CodeSystem-v3-RoleCode.html
+        ********************************************************
+	-->
+
 	<participant typeCode="IND">
+		<!-- classCode "ECON" represents an emergency contact -->
 		<associatedEntity classCode="ECON">
-			<!-- classCode "ECON" represents an emergency contact -->
-			<!--			<addr use="HP">
-				<streetAddressLine>2222 Home Street</streetAddressLine>
-				<city>Beaverton</city>
-				<state>OR</state>
-				<postalCode>97867</postalCode>
-				<country>US</country>
-			</addr>-->
+			<!-- Patient Address and Telephone are not on the National POLST Form-->
+			<!-- Examples of how to have a Null value for these elements-->
+			<addr nullFlavor="NA"/>
 			<telecom value="tel:+1(555)555-2008" use="MC"/>
 			<associatedPerson>
 				<name>
-					<given>Boris</given>
-					<given qualifier="CL">Bo</given>
+					<given>Charles</given>
+					<family>Betterhalf</family>
+				</name>
+			</associatedPerson>
+		</associatedEntity>
+	</participant>
+	
+	<participant typeCode="IND">
+		<!-- classCode "RESPRSN" represents a party who has legal responsibility for another. -->
+		<associatedEntity classCode="RESPRSN">
+			<!-- Patient Address and Telephone are not on the National POLST Form-->
+			<!-- Examples of how to have a Null value for these elements-->
+			<addr nullFlavor="NA"/>
+			<telecom value="tel:+1(555)555-2008" use="MC"/>
+			<associatedPerson>
+				<name>
+					<given>Charles</given>
 					<family>Betterhalf</family>
 				</name>
 			</associatedPerson>
@@ -665,7 +504,8 @@
 									If not, use COMP -->
 								<procedure classCode="PROC" moodCode="INT">
 									<!-- Planned CPR Procedure entry template -->
-									<templateId root="2.16.840.1.113883.9.275.3.1.1" extension="2021-12-01"/>
+									<templateId root="2.16.840.1.113883.9.275.3.1.1"
+										extension="2021-12-01"/>
 									<id root="457e2f35-b765-4621-9813-937ae102772f"/>
 
 									<!-- Code must be selected from the value set defined in the guidance and a translation is allowed-->
@@ -702,17 +542,19 @@
 							<entryRelationship typeCode="COMP">
 								<procedure classCode="PROC" moodCode="INT">
 									<!-- Planned Initial Treatment Procedure entry template -->
-									<templateId root="2.16.840.1.113883.9.275.3.2.1" extension="2021-12-01"/>
+									<templateId root="2.16.840.1.113883.9.275.3.2.1"
+										extension="2021-12-01"/>
 									<id root="98b10d9a-40eb-4cb9-97f8-c323f24b9af0"/>
-									
+
 									<!-- Code must be selected from the value set defined in the guidance and a translation is allowed-->
 									<!-- In this example, the Initial Treatment Orders option "Full Treatments" has been selected.-->
 									<code code="TEMP-POLST-TREAT-FULL" displayName="Full Treatments"
 										codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC">
-										<originalText>Full Treatments (required if choose CPR in Section A). 
-											Goal: Attempt to sustain life by all medically effective means. 
-											Provide appropriate medical and surgical treatments as indicated to attempt to prolong life, 
-											including intensive care.</originalText>
+										<originalText>Full Treatments (required if choose CPR in
+											Section A). Goal: Attempt to sustain life by all
+											medically effective means. Provide appropriate medical
+											and surgical treatments as indicated to attempt to
+											prolong life, including intensive care.</originalText>
 										<translation nullFlavor="NA"/>
 									</code>
 									<statusCode code="active"/>
@@ -742,12 +584,13 @@
 							<entryRelationship typeCode="COMP">
 								<procedure classCode="PROC" moodCode="INT">
 									<!-- Planned Additional Orders Procedure entry template -->
-									<templateId root="2.16.840.1.113883.9.275.3.3.1" extension="2021-12-01"/>
+									<templateId root="2.16.840.1.113883.9.275.3.3.1"
+										extension="2021-12-01"/>
 									<id root="1b2f6703-dd07-416c-9cf0-9b7ff8fc4fcc"/>
-									
+
 									<!-- This is entry allows free text and coded entries. A Null entry is allowed. -->
 									<!-- In this example, free text was used, but no code was included.-->
-									<code nullFlavor="NA"></code>
+									<code nullFlavor="NA"/>
 									<text>Do not provide blood products.</text>
 									<statusCode code="active"/>
 								</procedure>
@@ -763,24 +606,25 @@
 						<act classCode="ACT" moodCode="INT">
 							<id root="c45f21b3-a25a-4209-8969-a644e63850fa"/>
 							<code code="TEMP-POLST-MED-NUTR" codeSystem="2.16.840.1.113883.6.1"
-								codeSystemName="LOINC"
-								displayName="Medically Assisted Nutrition"> 
-								<originalText>D. Medically Assisted Nutrition (Offer food by mouth if desired by patient, safe and tolerated)</originalText>
+								codeSystemName="LOINC" displayName="Medically Assisted Nutrition">
+								<originalText>D. Medically Assisted Nutrition (Offer food by mouth
+									if desired by patient, safe and tolerated)</originalText>
 								<translation nullFlavor="NA"/>
 							</code>
 
 							<entryRelationship typeCode="COMP">
 								<procedure classCode="PROC" moodCode="INT">
 									<!-- Planned Medically Assisted Nutrition Orders Procedure entry template -->
-									<templateId root="2.16.840.1.113883.9.275.3.4.1" extension="2021-12-01"/>
+									<templateId root="2.16.840.1.113883.9.275.3.4.1"
+										extension="2021-12-01"/>
 									<id root="562483dc-ee8c-4973-92a3-27f40b6183c3"/>
-									
+
 									<!-- Code must be selected from the value set defined in the guidance and a translation is allowed-->
 									<!-- In this example, the Medically Assisted Nutrition Orders option "No artificial means of nutrition desired" has been selected.-->
-									<code code="TEMP-POLST-MED-NUTR-X" codeSystem="2.16.840.1.113883.6.1"
-										codeSystemName="LOINC"
+									<code code="TEMP-POLST-MED-NUTR-X"
+										codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"
 										displayName="No artificial means of nutrition desired">
-										<originalText></originalText>
+										<originalText/>
 										<translation nullFlavor="NA"/>
 									</code>
 									<statusCode code="active"/>
@@ -791,14 +635,14 @@
 				</section>
 			</component>
 
-			<component>
-				<!--
+<!--			<component>
+				<!-\-
             	 ********************************************************
              	POLST Instructions Section
              	********************************************************
-         	-->
-				<!-- Question: This is an experimental section and does not yet agree with Trifolia. Some of this content may become useful. -->
-
+         	-\->
+				<!-\- Question: This is an experimental section and does not yet agree with Trifolia. Some of this content may become useful. -\->
+<!-\-
 				<section>
 					<templateId root="2.16.840.1.113883.10.20.22.2.21.999999" extension="2021-12-01"/>
 					<templateId root="2.16.840.1.113883.10.20.22.2.21.99999998"/>
@@ -806,11 +650,11 @@
 						codeSystemName="LOINC"/>
 					<title>POLST Document Instructions</title>
 
-					<!-- Mock-up of POLST Instructions portion of the National POLST form/document. -->
-					<!--Healthcare Agent Authority 20200610 entry template in Personal Advance Care Plan (PACP) Document IG 
+					<!-\\- Mock-up of POLST Instructions portion of the National POLST form/document. -\\->
+					<!-\\-Healthcare Agent Authority 20200610 entry template in Personal Advance Care Plan (PACP) Document IG 
 					[observation: identifier urn:hl7ii:2.16.840.1.113883.4.823.1.4.4:2020-06-10 (open)]
 					Draft as part of Personal Advance Care Plan V2
-					...is an observation template-->
+					...is an observation template-\\->
 
 					<text>
 						<paragraph styleCode="Bold">General Instructions </paragraph>
@@ -832,8 +676,8 @@
 						<content> Paragraph #4 </content><br/><br/>
 						<content> Paragraph #5 </content><br/><br/>
 					</text>
-				</section>
-			</component>
+				</section>-\->
+			</component>-->
 		</structuredBody>
 	</component>
 </ClinicalDocument>
