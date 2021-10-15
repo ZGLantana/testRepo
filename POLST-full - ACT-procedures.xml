@@ -6,15 +6,19 @@
  Created by:   Lantana Consulting Group, Inc.
  Updated by:   Lantana Consulting Group, Inc. 
  
- LastChangedDate: 09/30/2021
+ LastChangedDate: 10/14/2021
   
  ********************************************************
- Disclaimer: This sample file contains representative data elements to represent an ePOLST: Resuscitation and Treatment Portable Medical Orders document (ePOLST). 
+ Disclaimer: This sample file contains representative data elements for an ePOLST: Resuscitation and Treatment Portable Medical Orders document (ePOLST). 
  The file depicts a fictional character's health data. Any resemblance to a real person is coincidental. 
  To illustrate as many data elements as possible, the clinical scenario may not be plausible. 
- The data in this sample file is not intended to represent real patients, people or clinical events. 
+ The data in this sample file are not intended to represent real patients, people or clinical events. 
  ********************************************************
  -->
+
+<!-- [ZG], please start 10/15 US Realm Header review here -->
+
+
 <!--
         ********************************************************
         CDA Header
@@ -23,15 +27,20 @@
 
 <?xml-stylesheet type="text/xsl" href="../my_samples/CDA-Lantana.xsl"?>
 <ClinicalDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="urn:hl7-org:v3 ../CDA/CDA%20Core%202.0%20GIT/schema/extensions/SDTC/infrastructure/cda/CDA_SDTC.xsd"
+	xsi:schemaLocation="urn:hl7-org:v3 ../HL7cda-core-2.0_SDTC/schema/extensions/SDTC/infrastructure/cda/CDA_SDTC.xsd"
 	xmlns="urn:hl7-org:v3" xmlns:sdtc="urn:hl7-org:sdtc" xmlns:voc="urn:hl7-org:v3/voc">
+	<!-- realmCode is required by the US Realm Header and SHALL be realmCode="US".-->
 	<realmCode code="US"/>
 	<typeId extension="POCD_HD000040" root="2.16.840.1.113883.1.3"/>
-	<!-- US Realm Header: 2.16.840.1.113883.10.20.22.1.1/2015-08-01-->
+
+	<!-- US Realm Header current template and previous versions-->
 	<templateId root="2.16.840.1.113883.10.20.22.1.2" extension="2015-08-01"/>
 	<templateId root="2.16.840.1.113883.10.20.22.1.2"/>
-	<!-- Globally unique identifier for the document; needs updating for POLST-->
+
+	<!-- Globally unique identifier for the document
+		Question: Do I need to update this for POLST?-->
 	<id extension="TT988" root="2.16.840.1.113883.19.5.99999.1"/>
+
 	<!-- Code needs updating for POLST-->
 	<code code="34133-9" displayName="Summarization of Episode Note"
 		codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
@@ -40,33 +49,38 @@
         Title of this document
         ********************************************************
     -->
-	<title>ePOLST: Resuscitation and Treatment Portable Medical Orders</title>
+	<title>ePOLST Form: Resuscitation and Treatment Portable Medical Orders</title>
 	<!--
         ********************************************************
         effectiveTime
         ********************************************************
     -->
-	<effectiveTime value="201308151030-0800"/>
+	<!-- Example of how to have a Null value for thise element-->
+	<effectiveTime nullFlavor="NA"/>
 	<!--
         ********************************************************
         confidentiality
         ********************************************************
     -->
+	<!-- Example of how to have a Null value for thise element. 
+		Question: Is it correct to say (here in comments) that... Another option is:
 	<confidentialityCode code="N" displayName="normal" codeSystem="2.16.840.1.113883.5.25"
-		codeSystemName="Confidentiality"/>
+		codeSystemName="Confidentiality"/>-->
+	<confidentialityCode nullFlavor="NA"/>
 	<!--
         ********************************************************
         langauge
         ********************************************************
     -->
-	<!--	<languageCode code="en-US"/>-->
+	<!-- Example of how to have a Null value for thise element-->
+	<languageCode nullFlavor="NA"/>
 	<!--
         ********************************************************
         Version of this document
 	     We will address versioning in Volume 1.  
 	     Add some guidance in a comment here too.
         ********************************************************
-    -->
+    Question: Do we want to provide a version example for POLST?-->
 	<!--	<setId extension="sTT988" root="2.16.840.1.113883.19.5.99999.19"/>
 	<versionNumber value="1"/>-->
 	<!--
@@ -76,62 +90,62 @@
     -->
 	<recordTarget>
 		<patientRole>
-			<id extension="444222222" root="2.16.840.1.113883.4.1"/>
-			<!-- Example Social Security Number using the actual SSN OID; needs updating for POLST; see Lisa Nelson's "Masked SSN" example-->
-			<!-- Address in NOT on the National POLST Form
-						ZG:  Take a look at the use of US Realm Address template 
-						(https://trifolia.lantanagroup.com/TemplateManagement/View/OID/2.16.840.1.113883.10.20.22.5.2).  
-						You can use an @nullFlavor.  At minimum, looks like we need City and Street but POLST only has state.  S
-						So, we'll want to discuss this with Amy. -->
-			<!-- HP is "primary home" from codeSystem 2.16.840.1.113883.5.1119 -->
-			<!--			<addr use="HP">
-				<streetAddressLine>2222 Home Street</streetAddressLine>
-				<city>Beaverton</city>
-				<state>OR</state>
-				<postalCode>97867</postalCode>
-				<country>US</country>
-				<!-\- US is "United States" from ISO 3166-1 Country Codes: 1.0.3166.1 -\->
-			</addr>-->
-			<!-- Tel in NOT on the National POLST Form 
-				ZG:  Mark as "Question for Amy".  We should ask her about this.-->
-			<!--			<telecom value="tel:+1(555)555-2003" use="HP"/>-->
-			<!-- HP is "primary home" from HL7 AddressUse 2.16.840.1.113883.5.1119 -->
+			<!-- Example of a Masked Social Security Number example of id using the root for the Social Security Administion assigningAuthority.
+			This example was created by Lisa Nelson, MaxMD.
+			It represent a social security number (SSN) that has been masked to show only the last four digits.
+			This example is available at http://hl7-c-cda-examples.herokuapp.com/examples/view/Header/
+			Note: When recording SSN in the extension, dashes (-) are permitted but not required.
+			Note: An id with a nullFlavor of "MSK" SHALL NOT be used for matching or indexing -->
+			<!-- Question: Would that last Note be a problem for POLST registries and for queries? -->
+			<id assigningAuthorityName="US Social Security Administration"
+				root="2.16.840.1.113883.4.1" extension="***-**-2222" nullFlavor="MSK"/>
+
+			<!-- Example of the patient's Medical Record Number.
+				This example was created by Lisa Nelson, MaxMD.
+				This example is available at http://hl7-c-cda-examples.herokuapp.com/examples/view/Header/
+				Note: This examples assumes the OID 2.16.840.1.113883.1.111.12345
+				uniquely identifies the encompassed Provider Organization's local medical record number assigning system.
+				Note: A receiving system only knows this is an MRN by looking up the root oid in a repository. -->
+			<id root="2.16.840.1.113883.4.6" extension="321CX"
+				assigningAuthorityName="Good Health HIE Locally-assigned Medical Record Number"/>
+
+			<!-- Patient Address and Telephone are not on the National POLST Form-->
+			<!-- Examples of how to have a Null value for these elements-->
+			<addr nullFlavor="NA"/>
+			<telecom nullFlavor="NA"/>
+
 			<patient>
 				<name use="L">
-					<given>Eve</given>
+					<given>Evelyn</given>
+					<given>M</given>
 					<!-- The "SP" is "Spouse" from HL7 Code System EntityNamePartQualifier 2.16.840.1.113883.5.43 -->
 					<family qualifier="SP">Betterhalf</family>
+				</name>
+				<!-- Recommended way to send patient aliases; note @use='P' (pseudonym) and given/@qualifier='CL' (callme) -->
+				<name use="P">
+					<given qualifier="CL">Eve</given>	
 				</name>
 				<administrativeGenderCode code="F" displayName="Female"
 					codeSystem="2.16.840.1.113883.5.1" codeSystemName="AdministrativeGender"/>
 				<!-- Date of birth need only be precise to the day -->
 				<birthTime value="19750501"/>
 
-				<!-- Race in NOT on the National POLST Form 
-				ZG:  Let's check, I think they can send a null value. "NI" -->
-				<!-- CDC Race and Ethnicity code set contains the five minimum race and ethnicity categories defined by OMB Standards -->
-				<!--				<raceCode code="2106-3" displayName="White" codeSystem="2.16.840.1.113883.6.238"
-					codeSystemName="Race &amp; Ethnicity - CDC"/>-->
-				<!-- The raceCode extension is only used if raceCode is valued -->
-				<!--				<sdtc:raceCode code="2076-8" displayName="Hawaiian or Other Pacific Islander"
-					codeSystem="2.16.840.1.113883.6.238" codeSystemName="Race &amp; Ethnicity - CDC"/>
-				<ethnicGroupCode code="2186-5" displayName="Not Hispanic or Latino"
-					codeSystem="2.16.840.1.113883.6.238" codeSystemName="Race &amp; Ethnicity - CDC"/>-->
+				<!-- Race and ethnicity are not on the National POLST Form. -->
+				<!-- Examples of how to have a Null value for these elements-->
+				<raceCode nullFlavor="NA"/>
+				<ethnicGroupCode nullFlavor="NA"/>
 
-				<!-- Use this for "Patient Representative" p1,E. on National POLST Form ? 
-				ZG:  Yes, we will want to describe here in the XML and in Volume 1 that the patient representative would be found in the guardian element. 
-				I  would include in your comment the reference in POLST to  "Section E. Patient or Patient Representative" to help with the mapping. -->
+				<!-- Use the guardian for "Patient Representative" on the National POLST Form, section E. SIGNATURE: Patient or Patient Representative. -->
 				<guardian>
+					<!-- Use the code element to specify the "Authority" of the Patient Representative in section E. SIGNATURE: Patient or Patient Representative. -->
 					<code code="POWATT" displayName="Power of Attorney"
 						codeSystem="2.16.840.1.113883.1.11.19830" codeSystemName="ResponsibleParty"/>
-					<addr use="HP">
-						<streetAddressLine>2222 Home Street</streetAddressLine>
-						<city>Beaverton</city>
-						<state>OR</state>
-						<postalCode>97867</postalCode>
-						<country>US</country>
-					</addr>
-					<telecom value="tel:+1(555)555-2008" use="MC"/>
+
+					<!-- Patient Representative Address and Telephone are not on the National POLST Form-->
+					<!-- Examples of how to have a Null value for these elements-->
+					<addr nullFlavor="NA"/>
+					<telecom nullFlavor="NA"/>
+					<!-- This is the Patient Representative name in "If other than patient, print full name:" field of E. SIGNATURE: Patient or Patient Representative. -->
 					<guardianPerson>
 						<name>
 							<given>Boris</given>
@@ -141,45 +155,28 @@
 					</guardianPerson>
 				</guardian>
 
-				<!-- Language in NOT on the National POLST Form. Is National POLST considering adding this ?
-				ZG:  Let's check, I think they can send a null value. "NI",  It says, The language, if present ...-->
-				<!--				<languageCommunication>
-					<languageCode code="en"/>
-					<!-\- "en" is ISO 639-1 alpha-2 code for "English" -\->
-					<modeCode code="ESP" displayName="Expressed spoken"
-						codeSystem="2.16.840.1.113883.5.60" codeSystemName="LanguageAbilityMode"/>
-					<proficiencyLevelCode code="G" displayName="Good"
-						codeSystem="2.16.840.1.113883.5.61"
-						codeSystemName="LanguageAbilityProficiency"/>
-					<!-\- Patient's preferred language -\->
-					<preferenceInd value="true"/>
-				</languageCommunication>-->
 			</patient>
 		</patientRole>
 	</recordTarget>
 	<!--
         ********************************************************
-        author: the person who provides the content in the document.
-        For POLST, this could be the Health Care Provider (p1,F.) or the scribe. It is the person who actually fills out the form 
-        (not the one who signs it).    
+        author: The person who provides the content in the document.
+        The author SHOULD be the Health Care Provider listed in section F. SIGNATURE: Health Care Provider of the National POLST Form.  
 		The author and legal authenticator could be the same or different.
         ********************************************************
     -->
 	<author>
 		<time value="201308151030-0800"/>
 		<assignedAuthor>
+			<!-- The id captures the License/Cert. # in section F. SIGNATURE: Health Care Provider.-->
 			<id extension="5555555555" root="2.16.840.1.113883.4.6"/>
 			<code code="207QA0505X" displayName="Adult Medicine"
 				codeSystem="2.16.840.1.113883.6.101"
 				codeSystemName="Healthcare Provider Taxonomy (HIPAA)"/>
-			<!-- The National POLST Form does not have Health Care Provider address in p1,F., but this is SHALL in US Realm Header -->
-			<!--			<addr>
-				<streetAddressLine>1004 Healthcare Drive </streetAddressLine>
-				<city>Portland</city>
-				<state>OR</state>
-				<postalCode>99123</postalCode>
-				<country>US</country>
-			</addr>-->
+			<!-- The National POLST Form does not have Health Care Provider address in section F. SIGNATURE: Health Care Provider. -->
+			<!-- Examples of how to have a Null value for these elements-->
+			<addr nullFlavor="NA"/>
+
 			<telecom use="WP" value="tel:+1(555)555-1004"/>
 			<assignedPerson>
 				<name>
@@ -193,38 +190,19 @@
 	</author>
 	<!--
         ********************************************************
-        dataEnterer: person who transferred the content created by the author into the document
-        For POLST, this could be the Professional Assisting Health Care Provider w/ Form Completion (p2 Form Completion Information)
-        If so, need: Full Name; Date (mm/dd/yyyy); Phone #: (This individual is the patient’s:	Social Worker	Nurse	Clergy	Other:)  
-		We can add the information above as futher constraints to the US Realm header.
-		Review existing value sets: Healthcare Provider Taxonomy urn:oid:2.16.840.1.114222.4.11.1066 DYNAMIC 
-			Codes that exist in this value set are: 
-			101YP1600X  Behavioral Health & Social Service Providers; Counselor, Pastoral
-			104100000X  Behavioral Health & Social Service Providers; Social Worker
-			163W00000X  Nursing Service Providers; Registered Nurse
-
-		Address is NOT on the National POLST Form for this person, but is SHALL in US Realm Header dataEnterer
+        dataEnterer: Person who transferred the content created by the author into the document.
+        The dataEnterer is optional, but if used SHALL have an id, which SHOULD be a United States National Provider Identifier OID "2.16.840.1.113883.4.6".
+        The dataEnterer could be the Health Care Provider listed in section F. SIGNATURE: Health Care Provider of the National POLST Form.  
         ********************************************************
     -->
-	<dataEnterer>
+	<!--	<dataEnterer>
 		<assignedEntity>
-			<id extension="333777777" root="2.16.840.1.113883.4.6"/>
-			<!--			<addr>
-				<streetAddressLine>1007 Healthcare Drive</streetAddressLine>
-				<city>Portland</city>
-				<state>OR</state>
-				<postalCode>99123</postalCode>
-				<country>US</country>
-			</addr>-->
-			<telecom use="WP" value="tel:+1(555)555-1050"/>
-			<assignedPerson>
-				<name>
-					<given>Ellen</given>
-					<family>Enter</family>
-				</name>
-			</assignedPerson>
+			<id/>
+			<addr/>
+			<telecom/>
+			<assignedPerson></assignedPerson>
 		</assignedEntity>
-	</dataEnterer>
+	</dataEnterer>-->
 	<!--
         ********************************************************
         informant: any sources of information for document content (Can have multiple informatns)
@@ -239,7 +217,7 @@
 		Address is NOT on the National POLST Form for this person, but is SHALL in US Realm Header informat\ 
         ********************************************************
     -->
-	<informant>
+	<!--	<informant>
 		<assignedEntity>
 			<id extension="888888888" root="2.16.840.1.113883.4.6"/>
 			<addr>
@@ -261,7 +239,7 @@
 				<name>The DoctorsApart Physician Group</name>
 			</representedOrganization>
 		</assignedEntity>
-	</informant>
+	</informant>-->
 	<!--	<informant>
 		<assignedEntity>
 			<id extension="222223333" root="2.16.840.1.113883.4.6"/>
@@ -390,6 +368,14 @@
 			</representedCustodianOrganization>
 		</assignedCustodian>
 	</custodian>
+
+	<!-- [ZG], please stop 10/15 US Realm Header review here -->
+	<!-- Question for ZG & DW to discuss: Do we represent our POLST constraints (i.e., the document tmeplate) here as well? If so, these elements need Polst-specific examples  
+			legalAuthenticator
+			authenticator
+			participants (many)-->
+
+
 	<!--
         ********************************************************
         legalAuthenticator: individual who is responsible for the document
@@ -430,8 +416,7 @@
 		Consider this for "p2 Form Completion Information, Check everyone who participated in discussion"
 			If so, need: "Patient with decision-making capacity", "Court Appointed Guardian", "Parent of Minor", "Legal Surrogate / Health Care Agent", "Other: " 
 			Note that these choices may be specified differently in each state.
-		Address is NOT on the National POLST Form for this person, but is SHALL in US Realm Header authenticator
-		Generic question to Rick about Nulls
+
         ********************************************************
 	-->
 	<authenticator>
@@ -442,14 +427,13 @@
 			<code code="207QA0505X" displayName="Adult Medicine"
 				codeSystem="2.16.840.1.113883.6.101"
 				codeSystemName="Healthcare Provider Taxonomy (HIPAA)"/>
-			<!--			<addr>
-				<streetAddressLine>1004 Healthcare Drive </streetAddressLine>
-				<city>Portland</city>
-				<state>OR</state>
-				<postalCode>99123</postalCode>
-				<country>US</country>
-			</addr>-->
-			<telecom use="WP" value="tel:+1(555)555-1004"/>
+			
+			
+			<!-- authenticator Address and Telephone are not on the National POLST Form-->
+			<!-- Examples of how to have a Null value for these elements-->
+			<addr nullFlavor="NA"/>
+			<telecom nullFlavor="NA"/>
+			
 			<assignedPerson>
 				<name>
 					<given>Patricia</given>
@@ -463,7 +447,9 @@
 	<!--
         ********************************************************
         participant: ANY supporting entities
-		Consider Participant VS. Informant since the contraints are looser for Participant.
+		Question: Consider Participant VS. Informant since the contraints are looser for Participant.
+		Se: https://terminology.hl7.org/2.1.0/CodeSystem-v3-ParticipationType.html
+		
         ********************************************************
 	-->
 	<participant typeCode="IND">
@@ -516,10 +502,7 @@
              structuredBody
              ********************************************************
          -->
-		
-		<!-- [ZG], please start 10/14 review here, but skip the text for rendering (lines 541-658) -->
-		
-		
+
 		<structuredBody>
 
 
@@ -527,18 +510,19 @@
 				<!--
             	 ********************************************************
              	ePOLST Medical Orders Section 
+             	This Section has 4 entries, 1 for each order type on the National POLST form (A,B,C,D.).
+             	These entry templates are Acts and each is related to a Procedure entry template.
              	********************************************************
          	-->
 				<section>
-					<!--This Section has 4 entries, 1 for each order type on the National POLST form (A,B,C,D.). These entry templates are Acts and each is related to a Procedure entry template.-->
-					<!-- TO DW:  If you add the Planned Procedure Section as Implied, then you will also add the templateID here -->
+					<!-- Planned Procedure Section (V2) section template is Implied-->
+					<templateId root="2.16.840.1.113883.10.20.22.2.30" extension="2014-06-09"/>
 					<!-- ePOLST Medical Orders Section section template -->
 					<templateId root="2.16.840.1.113883.9.275.2.1" extension="2021-12-01"/>
-<!--					<code code="TEMP-POLST-ORDERS" codeSystem="2.16.840.1.113883.6.1"
-						codeSystemName="LOINC"/>-->
 
-					<!-- Illustration of POLST Orders portion of the National POLST form. -->
-					<title>POLST Portable Medical Orders</title>
+					<!-- Provide a title for the orders portion of the form here. -->
+					<title>ePOLST Portable Medical Orders </title>
+					<!-- Provide text that renders the content of the orders portion -->
 					<text>
 						<paragraph>This is a medical order, not an advance directive. For
 							information about POLST and to understand this document, visit:
@@ -664,150 +648,75 @@
 						<templateId root="2.16.840.1.113883.9.275.3.1" extension="2021-12-01"/>
 						<act classCode="ACT" moodCode="INT">
 							<!-- The ACT moodCode="INT", meaning this is an order for an unspecified future time and unspecified order recipient.-->
-
-							<!-- Question: This template MAY have 0..* id. 
-								How do I represent that here?
-								And how do I describe it in the comment here?
-								Ex: "Locally unique identifier for order act."  -->
-							<!-- TO DW: you can just add the "id" element and use the "GUID generator" to add the id OR you can leave it out since it is a MAY.  
-							You don't need to represent everything that is in Trifolia in the xml except the SHOULD and SHALLs-->
-							<!-- <id  root="631F0E95-F055-4FA2-AF10-3AE036CAD2EC" extension="1"/>-->
-							
+							<id root="1b976f98-7f53-4b29-8a42-a3e2291d4911"/>
 							<code code="TEMP-POLST-CPR" codeSystem="2.16.840.1.113883.6.1"
 								codeSystemName="LOINC"
-								displayName="Cardiopulmonary Resuscitation Orders."> 
-							<originalText></originalText>
+								displayName="Cardiopulmonary Resuscitation Orders">
+								<originalText>A. Cardiopulmonary Resuscitation Orders. Follow these
+									orders if patient has no pulse and is not
+									breathing.</originalText>
 							</code>
-							
-							
-							<!--Question: The constraints have a narrative note here:
-									When asserting this code, the implementer SHOULD provide instructional text as originalText, indicating "Follow these orders if patient has no pulse and is not breathing."
-								Should I have that here in the XML also? And just a sa comment like this?-->
-							<!-- TO DW:  I would leave out the comment and just put it in between the original text element I added above. -->
 
-							<!--Question: Is the next XML the "originalText" constraint?-->
-							<!-- TO DW:  Yes, delete the "text" element here. -->
-							<text> </text>
-							
 							<entryRelationship typeCode="COMP">
-								<!-- Question: Is "COMP" the correct typeCode for this entryRelationship? Please confim.
-								COMP ("has component")= The target act is a component of the source act, with no semantics regarding composition or aggregation implied.-->
-								<!-- TO DW:  Ideally, should be "DRIV" but need to find out from Rick if we need to put something in the XML to make
-									the narrative render automatically from the coded entries.  Otherwise,we would use COMP -->
+								<!-- Question: "COMP" (has component) is valid. It means the target act is a component of the source act, with no semantics regarding composition or aggregation implied.-->
+								<!-- Ideally, this should be "DRIV" (derived) but that is not valid. DRIV means the narrative was rendered from the CDA Entries, and contains no clinical content not derived from the entries.
+									Question: Can we put something in the XML to make the narrative render automatically from the coded entries?
+									Would DRIV be valid here if we did?.  
+									If not, use COMP -->
 								<procedure classCode="PROC" moodCode="INT">
-									<!--Question: Is "INT" the correct moodcode for this and the other 3 Procedures? Please confim.-->
-									<!-- TO DW:  Yes -->
 									<!-- Planned CPR Procedure entry template -->
 									<templateId root="2.16.840.1.113883.9.275.3.1.1" extension="2021-12-01"/>
+									<id root="457e2f35-b765-4621-9813-937ae102772f"/>
 
-									<id />
-									
-									<!-- Question: How do I represent the following code content about a value set in XML? This is what we have in Trifolia:
-									Pick 1 order code from the following value set.
-									5.	SHALL contain exactly one [1..1] code, which SHALL be selected from ValueSet ePOLST CPR Values urn:oid:2.16.840.1.113883.9.275.4.1 STATIC 2021-12-01 (CONF:4511-31976).
-									State-specific text on form SHOULD be included here to further describe the code.
-										a.	This code MAY contain zero or one [0..1] originalText (CONF:4511-32956).
-									Implementers MAY use a translation, in addition to the above code.
-										b.	This code MAY contain zero or more [0..*] translation (CodeSystem: SNOMED CT urn:oid:2.16.840.1.113883.6.96) (CONF:4511-32957).
-									6.	SHALL contain exactly one [1..1] statusCode (CONF:4511-30446).
-										a.	This statusCode SHALL contain exactly one [1..1] @code="active" Active (CodeSystem: HL7ActStatus urn:oid:2.16.840.1.113883.5.14) (CONF:4511-31978).
-
-								-->
-									<!--TO DW:  Note I updated the LOINC codeSystem OID.  Also, here is how we would represent 5-6 above -->
-									<code code="TEMP-POLST-CPR-YES" displayName="YES CPR" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC">
-										<originalText>YES CPR: Attempt Resuscitation, including mechanical ventilation</originalText>
-										<translation code="441893003" displayName="Active compression decompression cardiopulmonary 
-											resuscitation with use of inspiratory impedance threshold device " codeSystem="2.16.840.1.113883.6.96" codeSystemName="LOINC"/>	
+									<!-- Code must be selected from the value set defined in the guidance and a translation is allowed-->
+									<!-- In this example, the Cardiopulmonary Resuscitation Order option "YES CPR" has been selected.-->
+									<code code="TEMP-POLST-CPR-YES" displayName="YES CPR"
+										codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC">
+										<originalText>YES CPR: Attempt Resuscitation, including
+											mechanical ventilation</originalText>
+										<translation code="441893003"
+											displayName="Active compression decompression cardiopulmonary 
+											resuscitation with use of inspiratory impedance threshold device "
+											codeSystem="2.16.840.1.113883.6.96"
+											codeSystemName="SNOMEDCT"/>
 									</code>
 									<statusCode code="active"/>
-									<!-- Question: Is statusCode useful here? If so, what should it be? active? complete?-->
-									<!--TO DW: Active. I changed it -->
 								</procedure>
 							</entryRelationship>
 						</act>
 					</entry>
-<!-- [ZG], please stop 10/14 review here -->
-					
-					
-					
-					
-					
+
 					<!-- National POLST form: B. Initial Treatment Orders
 						Entry is required (SHALL). -->
 					<entry>
 						<!-- Initial Treatment Orders Act (ePOLST) entry template -->
 						<templateId root="2.16.840.1.113883.9.275.3.2" extension="2021-12-01"/>
 						<act classCode="ACT" moodCode="INT">
-
-							<!-- Question: This template MAY have 0..* id. 
-								How do I represent that here?
-								And how do I desscribe it in the comment here?
-								Ex: "Locally unique identifier for order act."  -->
-							<!-- <id  root="631F0E95-F055-4FA2-AF10-3AE036CAD2EC" extension="1"/>-->
-
+							<id root="b60a9a02-5c62-4ccf-810b-e876132493ad"/>
 							<code code="TEMP-POLST-TREAT" codeSystem="2.16.840.1.113883.6.1"
-								codeSystemName="LOINC"
-								displayName="Initial Treatment Orders. Follow these orders if patient has a pulse and/or is breathing."> </code>
-							<text>
-								<!--Text is a SHOULD 
-											"Pick 1 CPR Order. Reassess and discuss interventions with patient or patient representative regularly 
-											to ensure treatments are meeting patient’s care goals. Consider a time-trial of interventions based on goals 
-											and specific outcomes."-->
-							</text>
+								codeSystemName="LOINC" displayName="Initial Treatment Orders">
+								<originalText>B. Initial Treatment Orders. Follow these orders if
+									patient has a pulse and/or is breathing.</originalText>
+							</code>
 
 							<entryRelationship typeCode="COMP">
-								<!-- FULL Treatement order option-->
-								<observation classCode="OBS" moodCode="EVN">
-									<!--Question: Do we need a templateId & ID here?-->
-									<!--									<templateId root="2.16.840.1.113883.10.20.22.4.48.8888888"
-										extension="2021-12-01"/>
-									<templateId root="2.16.840.1.113883.10.20.22.4.48.8888888"/>
-									<id root="af6ebdf2-d996-11e2-a5b8-f23c91lec05e"/>-->
-									<code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"/>
-									<statusCode code="completed"/>
-									<!-- value is a response/answer LOINC code (order choice) -->
-									<value xsi:type="CD" code="TEMP-POLST-TREAT-FULL"
-										codeSystem="2.16.840.1.113883.6.96" codeSystemName="LOINC"
-										displayName="Full Treatments (required if choose CPR in Section A). Goal: Attempt to sustain life by all medically effective means. Provide appropriate medical and surgical treatments as indicated to attempt to prolong life, including intensive care."
-									/>
-								</observation>
-							</entryRelationship>
-
-							<!-- Selective Treatement -->
-							<entryRelationship typeCode="COMP">
-								<observation classCode="OBS" moodCode="EVN">
-									<!--Question: Do we need a templateId & ID here?-->
-									<!--									<templateId root="2.16.840.1.113883.10.20.22.4.48.8888888"
-										extension="2021-12-01"/>
-									<templateId root="2.16.840.1.113883.10.20.22.4.48.8888888"/>
-									<id root="af6ebdf2-d996-11e2-a5b8-f23c91lec05e"/>-->
-									<code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"/>
-									<statusCode code="completed"/>
-									<!-- value is a response/answer LOINC code (order choice) -->
-									<value xsi:type="CD" code="TEMP-POLST-TREAT-SELECT"
-										codeSystem="2.16.840.1.113883.6.96" codeSystemName="LOINC"
-										displayName="Selective Treatments. Goal: Attempt to restore function while avoiding intensive care and resuscitation efforts (ventilator, defibrillation and cardioversion). May use non-invasive positive airway pressure, antibiotics and IV fluids as indicated. Avoid intensive care. Transfer to hospital if treatment needs cannot be met in current location."
-									/>
-								</observation>
-							</entryRelationship>
-
-							<!-- Comfort-Focused Treatement -->
-							<entryRelationship typeCode="COMP">
-								<observation classCode="OBS" moodCode="EVN">
-									<!--Question: Do we need a templateId & ID here?-->
-									<!--									<templateId root="2.16.840.1.113883.10.20.22.4.48.8888888"
-										extension="2021-12-01"/>
-									<templateId root="2.16.840.1.113883.10.20.22.4.48.8888888"/>
-									<id root="af6ebdf2-d996-11e2-a5b8-f23c91lec05e"/>-->
-									<code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"/>
-									<statusCode code="completed"/>
-
-									<!-- value is a response/answer LOINC code (order choice) -->
-									<value xsi:type="CD" code="TEMP-POLST-TREAT-COMFORT"
-										codeSystem="2.16.840.1.113883.6.96" codeSystemName="LOINC"
-										displayName="Comfort-focused Treatments. Goal: Maximize comfort through symptom management; allow natural death. Use oxygen, suction  and manual treatment of airway obstruction as needed for comfort. Avoid treatments listed in  full or select treatments unless consistent  with comfort goal. Transfer to hospital only if comfort cannot be achieved in current setting."
-									/>
-								</observation>
+								<procedure classCode="PROC" moodCode="INT">
+									<!-- Planned Initial Treatment Procedure entry template -->
+									<templateId root="2.16.840.1.113883.9.275.3.2.1" extension="2021-12-01"/>
+									<id root="98b10d9a-40eb-4cb9-97f8-c323f24b9af0"/>
+									
+									<!-- Code must be selected from the value set defined in the guidance and a translation is allowed-->
+									<!-- In this example, the Initial Treatment Orders option "Full Treatments" has been selected.-->
+									<code code="TEMP-POLST-TREAT-FULL" displayName="Full Treatments"
+										codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC">
+										<originalText>Full Treatments (required if choose CPR in Section A). 
+											Goal: Attempt to sustain life by all medically effective means. 
+											Provide appropriate medical and surgical treatments as indicated to attempt to prolong life, 
+											including intensive care.</originalText>
+										<translation nullFlavor="NA"/>
+									</code>
+									<statusCode code="active"/>
+								</procedure>
 							</entryRelationship>
 						</act>
 
@@ -819,38 +728,29 @@
 						<!-- Additional Orders Act (ePOLST) entry template -->
 						<templateId root="2.16.840.1.113883.9.275.3.3" extension="2021-12-01"/>
 						<act classCode="ACT" moodCode="INT">
-							
-							<!-- Question: This template MAY have 0..* id. 
-								How do I represent that here?
-								And how do I desscribe it in the comment here?
-								Ex: "Locally unique identifier for order act."  -->
-							<!-- <id  root="631F0E95-F055-4FA2-AF10-3AE036CAD2EC" extension="1"/>-->
-							
-							
-							<templateId/>
-							<id root="af6ebdf2-d996-11e2-a5b8-f23c91aec05e"/>
+							<id root="a08584fd-f75b-452b-a39d-61b9f7aba3c9"/>
 							<code code="TEMP-POLST-ADD-ORDERS" codeSystem="2.16.840.1.113883.6.1"
 								codeSystemName="LOINC"
-								displayName="Additional Orders or Instructions. These orders are in addition to those above (e.g., blood products, dialysis)."> </code>
-							<text>
-								<!--Text is a SHOULD: "EMS protocols may limit emergency responder ability to act on orders in this section."-->
-							</text>
+								displayName="Additional Orders or Instructions">
+								<originalText>C. Additional Orders or Instructions. These orders are
+									in addition to those above (e.g., blood products, dialysis).
+									[EMS protocols may limit emergency responder ability to act on
+									orders in this section.]</originalText>
+								<translation nullFlavor="NA"/>
+							</code>
 
 							<entryRelationship typeCode="COMP">
-								<!-- Observation "asserts" either YES or NO -->
-								<observation classCode="OBS" moodCode="EVN">
-									<!-- EVN becasue discussion happened and result of discussion is Y or N -->
-									<!--Question: Do we need a templateId & ID here?-->
-									<!--									<templateId root="2.16.840.1.113883.10.20.22.4.48.999999999"
-										extension="2021-12-01"/>
-									<templateId root="2.16.840.1.113883.10.20.22.4.48.999999999"/>
-									<id root="af6ebdf2-d996-11e2-a5b8-f23c91lec05e"/>-->
-									<code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"/>
-									<statusCode code="completed"/>
-
-									<!--Need a free-text option here for POLST -->
-
-								</observation>
+								<procedure classCode="PROC" moodCode="INT">
+									<!-- Planned Additional Orders Procedure entry template -->
+									<templateId root="2.16.840.1.113883.9.275.3.3.1" extension="2021-12-01"/>
+									<id root="1b2f6703-dd07-416c-9cf0-9b7ff8fc4fcc"/>
+									
+									<!-- This is entry allows free text and coded entries. A Null entry is allowed. -->
+									<!-- In this example, free text was used, but no code was included.-->
+									<code nullFlavor="NA"></code>
+									<text>Do not provide blood products.</text>
+									<statusCode code="active"/>
+								</procedure>
 							</entryRelationship>
 						</act>
 					</entry>
@@ -861,115 +761,30 @@
 						<!-- Medically Assisted Nutrition Orders Act entry template -->
 						<templateId root="2.16.840.1.113883.9.275.3.4" extension="2021-12-01"/>
 						<act classCode="ACT" moodCode="INT">
-							
-							<!-- Question: This template MAY have 0..* id. 
-								How do I represent that here?
-								And how do I desscribe it in the comment here?
-								Ex: "Locally unique identifier for order act."  -->
-<!--							<id  root="631F0E95-F055-4FA2-AF10-3AE036CAD2EC" extension="1"/>-->
-							
+							<id root="c45f21b3-a25a-4209-8969-a644e63850fa"/>
 							<code code="TEMP-POLST-MED-NUTR" codeSystem="2.16.840.1.113883.6.1"
 								codeSystemName="LOINC"
-								displayName="Medically Assisted Nutrition. Offer food by mouth if desired by patient, safe and tolerated."> </code>
+								displayName="Medically Assisted Nutrition"> 
+								<originalText>D. Medically Assisted Nutrition (Offer food by mouth if desired by patient, safe and tolerated)</originalText>
+								<translation nullFlavor="NA"/>
+							</code>
 
-							<!-- MED-NUTR: Provide feeding  -->
 							<entryRelationship typeCode="COMP">
-								<!-- Observation "asserts" either YES or NO -->
-								<observation classCode="OBS" moodCode="EVN">
-									<!-- EVN becasue discussion happened and result of discussion is Y or N -->
-									<!--Question: Do we need a templateId & ID here?-->
-									<templateId root="2.16.840.1.113883.10.20.22.4.48.999999999"
-										extension="2021-12-01"/>
-									<templateId root="2.16.840.1.113883.10.20.22.4.48.999999999"/>
-									<id root="af6ebdf2-d996-11e2-a5b8-f23c91lec05e"/>
-									<code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"/>
-									<statusCode code="completed"/>
-
-									<!-- value is a response/answer LOINC code (order choice) -->
-									<value xsi:type="CD" code="TEMP-POLST-MED-NUTR-FEED"
-										codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"
-										displayName="Provide feeding through new or existing surgically-placed tubes."/>
-
-									<!--<effectiveTime> goes here if needed-->
-									<!--<author> goes here if needed-->
-									<!--<participant typeCode="VRF"> goes here if needed-->
-									<!--<reference typeCode="REFR"> goes here if needed-->
-
-								</observation>
-							</entryRelationship>
-
-							<!-- MED-NUTR: Trial period -->
-							<entryRelationship typeCode="COMP">
-								<observation classCode="OBS" moodCode="EVN">
-									<!--Question: Do we need a templateId & ID here?-->
-									<!--									<templateId root="2.16.840.1.113883.10.20.22.4.48.999999999"
-										extension="2021-12-01"/>
-									<templateId root="2.16.840.1.113883.10.20.22.4.48.999999999"/>
-									<id root="af6ebdf2-d996-11e2-a5b8-f23c91lec05e"/>-->
-									<code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"/>
-									<statusCode code="completed"/>
-
-									<!-- value is a response/answer LOINC code (order choice) -->
-									<value xsi:type="CD" code="TEMP-POLST-MED-NUTR-TRIAL"
-										codeSystem="2.16.840.1.113883.6.96" codeSystemName="LOINC"
-										displayName="Trial period for artificial nutrition but no surgically-placed tubes"/>
-
-									<!--<author> goes here if needed-->
-									<!--<participant typeCode="VRF"> goes here if needed-->
-									<!--<reference typeCode="REFR"> goes here if needed-->
-
-								</observation>
-							</entryRelationship>
-
-
-							<!-- MED-NUTR: No artificial feeding  -->
-							<entryRelationship typeCode="COMP">
-								<!-- Observation "asserts" either YES or NO -->
-								<observation classCode="OBS" moodCode="EVN">
-									<!-- EVN becasue discussion happened and result of discussion is Y or N -->
-									<!--Question: Do we need a templateId & ID here?-->
-									<!--									<templateId root="2.16.840.1.113883.10.20.22.4.48.999999999"
-										extension="2021-12-01"/>
-									<templateId root="2.16.840.1.113883.10.20.22.4.48.999999999"/>
-									<id root="af6ebdf2-d996-11e2-a5b8-f23c91lec05e"/>-->
-									<code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"/>
-									<statusCode code="completed"/>
-
-									<!-- value is a response/answer LOINC code (order choice) -->
-									<value xsi:type="CD" code="TEMP-POLST-MED-NUTR-NO"
-										codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"
-										displayName="No artificial means of nutrition desired."/>
-
-									<!--<author> goes here if needed-->
-									<!--<participant typeCode="VRF"> goes here if needed-->
-									<!--<reference typeCode="REFR"> goes here if needed-->
-
-								</observation>
-							</entryRelationship>
-
-							<!-- MED-NUTR: Not discussed  -->
-							<entryRelationship typeCode="COMP">
-								<!-- Observation "asserts" either YES or NO -->
-								<observation classCode="OBS" moodCode="EVN">
-									<!-- EVN becasue discussion happened and result of discussion is Y or N -->
-									<!--Question: Do we need a templateId & ID here?-->
-									<!--									<templateId root="2.16.840.1.113883.10.20.22.4.48.999999999"
-										extension="2021-12-01"/>
-									<templateId root="2.16.840.1.113883.10.20.22.4.48.999999999"/>
-									<id root="af6ebdf2-d996-11e2-a5b8-f23c91lec05e"/>-->
-									<code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"/>
-									<statusCode code="completed"/>
-
-									<!-- value is a response/answer LOINC code (order choice) -->
-									<value xsi:type="CD" code="TEMP-POLST-MED-NUTR-ND"
-										codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"
-										displayName="Not discussed or no decision made (provide standard of care)."/>
-
-									<!--<author> goes here if needed-->
-									<!--<participant typeCode="VRF"> goes here if needed-->
-									<!--<reference typeCode="REFR"> goes here if needed-->
-
-								</observation>
+								<procedure classCode="PROC" moodCode="INT">
+									<!-- Planned Medically Assisted Nutrition Orders Procedure entry template -->
+									<templateId root="2.16.840.1.113883.9.275.3.4.1" extension="2021-12-01"/>
+									<id root="562483dc-ee8c-4973-92a3-27f40b6183c3"/>
+									
+									<!-- Code must be selected from the value set defined in the guidance and a translation is allowed-->
+									<!-- In this example, the Medically Assisted Nutrition Orders option "No artificial means of nutrition desired" has been selected.-->
+									<code code="TEMP-POLST-MED-NUTR-X" codeSystem="2.16.840.1.113883.6.1"
+										codeSystemName="LOINC"
+										displayName="No artificial means of nutrition desired">
+										<originalText></originalText>
+										<translation nullFlavor="NA"/>
+									</code>
+									<statusCode code="active"/>
+								</procedure>
 							</entryRelationship>
 						</act>
 					</entry>
@@ -982,6 +797,7 @@
              	POLST Instructions Section
              	********************************************************
          	-->
+				<!-- Question: This is an experimental section and does not yet agree with Trifolia. Some of this content may become useful. -->
 
 				<section>
 					<templateId root="2.16.840.1.113883.10.20.22.2.21.999999" extension="2021-12-01"/>
